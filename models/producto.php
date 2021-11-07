@@ -32,7 +32,6 @@ class Producto {
         $sql = $conexion->query("SELECT * FROM item ORDER BY cod_item ASC");
 
         foreach ($sql->fetchAll() as $producto){
-
             $listaProductos[] = new Producto($producto['cod_item'],$producto['nom_item'],$producto['unid_item'],$producto['precio_item'],$producto['caja_item'],$producto['exi_max'],$producto['existencia'],$producto['exi_min'],$producto['deta_item']);
         }
 

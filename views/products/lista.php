@@ -2,7 +2,7 @@
     <a href="?controller=products&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Producto</a>
 </div>
 <br>
-<table class="table" id="listaProductos">
+<table class="display compact" id="listaProductos">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -21,7 +21,7 @@
     foreach ($productos as $row){//$productos viene de productController
     ?>
     <tr>
-        <th scope="row"><?php echo $cont ?></th>
+        <th><?php echo $cont ?></th>
         <td><?php echo $row->codigo ?></td>
         <td><?php echo $row->producto ?></td>
         <td><?php echo $row->unidad ?></td>
@@ -29,7 +29,9 @@
         <td><?php echo $row->existencia ?></td>
         <td>
             <div class="btn-group" role="group" aria-label>
-                <a href="?controller=products&action=editar&codigo=<?php echo $row->codigo; ?>" type="button" class="btn btn-primary"><i class="fas fa-edit"></i></a> &nbsp; <a href="javascript:void(0)" onclick="eliminarProducto('<?php echo $row->codigo ?>'); return false;" type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                <a href="?controller=products&action=editar&codigo=<?php echo $row->codigo; ?>" type="button" class="btn btn-primary" title="Editar"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="eliminarProducto('<?php echo $row->codigo ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+                <a href="?controller=movimientos&action=lista&cod_prod=<?php echo $row->codigo; ?>" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>
             </div>
         </td>
     </tr>
@@ -43,6 +45,7 @@
 <script>
     $(document).ready(function() {
         $('#listaProductos').DataTable({
+            stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",
                 "zeroRecords":    "No hay registros que coincidan",

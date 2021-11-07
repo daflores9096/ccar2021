@@ -5,9 +5,15 @@ include_once "conexion.php";
 BD::crearInstancia();
 
 class ProductsController {
+
     public function lista(){
         $productos = Producto::listar();
         include_once "views/products/lista.php";
+    }
+
+    public function listaMov(){
+        $productos = Producto::listarMov();
+        include_once "views/products/listaMov.php";
     }
 
     public function crear(){
