@@ -14,6 +14,10 @@
     <link href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet"/>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<!--    <script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <style>
         .loader-background {
             position: fixed;
@@ -81,6 +85,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="?controller=products&action=lista">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?controller=compras&action=lista">Compras</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Ventas</a>
