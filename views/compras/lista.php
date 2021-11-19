@@ -1,3 +1,5 @@
+<br>
+<h1 class="bd-title" id="content">Lista de Compras</h1>
 <div class="mt-3">
     <a href="?controller=compras&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Compra</a>
 </div>
@@ -27,8 +29,8 @@
             <td><?php echo $row->total_fac ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=products&action=editar&codigo=<?php echo $row->codigo; ?>" type="button" class="btn btn-primary" title="Editar"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="eliminarProducto('<?php echo $row->codigo ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=compras&action=editar&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Editar"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="javascript:void(0)" onclick="eliminarCompra('<?php echo $row->cod_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
                 </div>
             </td>
         </tr>
@@ -42,6 +44,7 @@
 <script>
     $(document).ready(function() {
         $('#listaCompras').DataTable({
+            stateSave: true,
             stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",
@@ -61,8 +64,8 @@
         });
     } );
 
-    function eliminarProducto(id){
-        swal("¿Está seguro que desea eliminar el producto "+id+"?", {
+    function eliminarCompra(id){
+        swal("¿Está seguro que desea eliminar la Compra "+id+"?", {
             buttons: {
                 aceptar: "Aceptar",
                 cancel: "Cancelar",
@@ -72,7 +75,7 @@
                 switch (value) {
 
                     case "aceptar":
-                        this.location.href = './?controller=products&action=borrar&codigo='+id;
+                        this.location.href = './?controller=compras&action=borrar&cod_fac='+id;
                         break;
 
                     default:

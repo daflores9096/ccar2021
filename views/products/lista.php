@@ -1,3 +1,5 @@
+<br>
+<h1 class="bd-title" id="content">Lista de Productos</h1>
 <div class="mt-3">
     <a href="?controller=products&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Producto</a>
 </div>
@@ -45,6 +47,7 @@
 <script>
     $(document).ready(function() {
         $('#listaProductos').DataTable({
+            stateSave: true,
             stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",

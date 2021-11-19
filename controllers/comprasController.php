@@ -1,4 +1,5 @@
 <?php
+include_once "utils/helpers.php";
 include_once "models/compra.php";
 include_once "conexion.php";
 
@@ -13,7 +14,6 @@ class ComprasController {
 
     public function crear(){
         if ($_POST){
-            //print_r($_POST);
             $cod_fac = $_POST['cod_fac'];
             $fecha_fac = $_POST['fecha_fac'];
             $cod_pro = $_POST['cod_pro'];
@@ -21,40 +21,36 @@ class ComprasController {
             $total_fac = $_POST['total_fac'];
 
             Compra::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
-            header('Location:?controller=compras&action=lista');
+            redirect('./?controller=compras&action=lista');
         }
         include_once "views/compras/crear.php";
 
     }
-    /*
+
         public function borrar(){
-            $codigo = $_GET['codigo'];
-            Producto::borrar($codigo);
-            header('Location:?controller=products&action=lista');
+            $cod_fac = $_GET['cod_fac'];
+            Compra::borrar($cod_fac);
+            redirect('./?controller=compras&action=lista');
         }
 
         public function editar(){
-            $codigo = $_GET['codigo'];
-            $producto = Producto::buscar($codigo);
+            $cod_fac = $_GET['cod_fac'];
+            $compra = Compra::buscar($cod_fac);
+            $compraList = Compra::getListaProductos($cod_fac);
 
             if ($_POST){
-                $codigo = $_POST['cod_item'];
-                $producto = $_POST['nom_item'];
-                $unidad = $_POST['unid_item'];
-                $precio = $_POST['precio_item'];
-                $caja = $_POST['caja_item'];
-                $exi_max = $_POST['exi_max'];
-                $existencia = $_POST['existencia'];
-                $exi_min = $_POST['exi_min'];
-                $detalle = $_POST['deta_item'];
+                $codfac = $_POST['cod_item'];
+                $fecha_fac = $_POST['fecha_fac'];
+                $cod_pro = $_POST['cod_pro'];
+                $nom_pro = $_POST['nom_pro'];
+                $total_fac = $_POST['total_fac'];
 
-                Producto::editar($codigo, $producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle);
-                //header('Location:?controller=products&action=editar&codigo='.$codigo);//quedarse en el form de editar
-                header('Location:?controller=products&action=lista');//redireccionar a la lista
+                Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+                redirect('?controller=compras&action=lista');
             }
 
-            include_once "views/products/editar.php";
+            include_once "./views/compras/editar.php";
         }
-    */
+
 
 }
