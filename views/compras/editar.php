@@ -17,7 +17,7 @@
             <h4><strong>COMPRA NRO: <?php echo $compra->cod_fac ?></strong></h4>
         </div>
         <div class="text-right">
-            <a href="">Editar</a> <a href="">Imprimir</a>
+            <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
         </div>
 
     </div>
@@ -37,7 +37,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
-                    <label class="form-label" for="unid_item">Proveedor:</label>
+                    <label class="form-label" for="unid_item">ID Proveedor:</label>
                     <input class="form-control" type="text" id="cod_pro" name="cod_pro" disabled value="<?php echo $compra->cod_pro ?>">
                 </div>
                 <div class="col-md-6 form-group">
@@ -81,16 +81,9 @@
                 </div>
             </div>
 
-<!--            <div class="row mt-3">-->
-<!--                <div class="col-md-6 form-group">-->
-<!--                    <label class="form-label" for="caja_item">Total Compra:</label>-->
-<!--                    <input class="form-control" type="text" id="total_fac" name="total_fac" value="--><?php //echo $compra->total_fac ?><!--">-->
-<!--                </div>-->
-<!--            </div>-->
-
             <div class="text-center mt-3">
-                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                <a class="btn btn-danger" onclick="history.back()" >Cancelar</a>
+<!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
+                <a class="btn btn-danger" onclick="history.back()" >Volver</a>
             </div>
 
         </form>

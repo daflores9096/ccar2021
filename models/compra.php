@@ -37,9 +37,17 @@ class Compra {
         $res = $sql->fetchAll();
 
         foreach ($res as $compra){
+
+            //obtener el nombre del item/producto
+            $cod_prod = $compra['cod_item'];
+            $sql1 = $conexion->prepare("SELECT * FROM item WHERE cod_item=? LIMIT 1");
+            $sql1->execute([$cod_prod]);
+            $producto = $sql1->fetch();
+
             $compraList[] = array(
                                 "cod_fac" => $compra['cod_fac'],
                                 "cod_item" => $compra['cod_item'],
+                                "nom_item" => $producto["nom_item"],
                                 "cant_fac" => $compra['cant_fac'],
                                 "precio_uni" => $compra['precio_uni'],
                                 "precio_ven" => $compra['precio_ven'],
