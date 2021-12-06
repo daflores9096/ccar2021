@@ -29,7 +29,7 @@
             <td><?php echo $row->total_fac ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Ver detalle" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
                     <a href="javascript:void(0)" onclick="eliminarCompra('<?php echo $row->cod_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
                 </div>
             </td>
