@@ -1,3 +1,6 @@
+<?php
+//var_dump($proveedorList);
+?>
 <div class="card mt-5">
     <div class="card-header">
         <h4><strong>AGREGAR NUEVA COMPRA</strong></h4>
@@ -20,17 +23,15 @@
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="select_pro">Proveedor:</label>
                     <br>
-                    <select class="chosen-select" id="select_pro" name="select_pro">
-                        <option value="1">DEEPAK INTERNATIONAL</option>
-                        <option value="2">ANHUI GENSUM</option>
-                        <option value="3">FINE FINE</option>
-                        <option value="4">QINGDAO LEAGLE</option>
-                        <option value="5">KENLIGHT TRADING</option>
-                        <option value="7">QINGDAO HUANGHAIWANG</option>
-                        <option value="8">KENDA MOTO</option>
-                        <option value="10">PANANDINO</option>
-                        <option value="11">SEASTONE</option>
-                        <option value="12">RONGER</option>
+                    <select class="chosen-select" id="select_pro" name="select_pro" data-placeholder="Seleccione un Proveedor" required="true">
+                        <option value=""></option>
+                        <?php 
+                        foreach ($proveedorList as $row){
+                        ?>
+                            <option value="<?php echo $row->cod_pro ?>"><?php echo $row->nom_pro ?></option>
+                        <?php
+                        }
+                        ?>
                     </select>
                     <br>
                     <input type="hidden" id="cod_pro" name="cod_pro">
@@ -76,12 +77,14 @@
 
         $(".chosen-select").chosen({no_results_text:'No hay resultados para '});
         $('.chosen-select').on('change', function(evt, params) {
-            let chosenSelectedItem = $(".chosen-select").find(":selected").text();
-            //console.log("cambiando... " + params.selected + ' ' + chosenSelectedItem);
-            $("#nom_pro").val(chosenSelectedItem);
-            $("#cod_pro").val(params.selected);
+            let valueSelected = params.selected;
+            let textSelected = $(".chosen-select").find(":selected").text();
+            $("#nom_pro").val(textSelected);
+            $("#cod_pro").val(valueSelected);
 
         });
+
+
 
     });
 </script>

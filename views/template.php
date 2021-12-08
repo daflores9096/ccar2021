@@ -17,11 +17,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <!--    <script src="//code.jquery.com/jquery-1.12.4.js"></script>-->
     <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <link rel="stylesheet" href="js/jq-chosen/chosen.css">
-    <script src="js/jq-chosen/chosen.proto.js" type="text/javascript"></script>
-    <script src="js/jq-chosen/chosen.jquery.js" type="text/javascript"></script>
-
+    <link rel="stylesheet" href="js/chosen.css">
+    <script src="js/chosen.jquery.js" type="text/javascript"></script>
 
     <style>
         .loader-background {

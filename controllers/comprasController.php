@@ -1,6 +1,7 @@
 <?php
 include_once "utils/helpers.php";
 include_once "models/compra.php";
+include_once "models/proveedor.php";
 include_once "conexion.php";
 
 BD::crearInstancia();
@@ -13,6 +14,7 @@ class ComprasController {
     }
 
     public function crear(){
+        $proveedorList = Proveedor::listar();
         if ($_POST){
             $cod_fac = $_POST['cod_fac'];
             $fecha_fac = $_POST['fecha_fac'];
