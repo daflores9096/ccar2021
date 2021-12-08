@@ -18,13 +18,25 @@
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
-                    <label class="form-label" for="unid_item">Proveedor:</label>
-                    <input class="form-control" type="text" id="cod_pro" name="cod_pro" placeholder="Codigo Proveedor">
+                    <label class="form-label" for="select_pro">Proveedor:</label>
+                    <br>
+                    <select class="chosen-select" id="select_pro" name="select_pro">
+                        <option value="1">DEEPAK INTERNATIONAL</option>
+                        <option value="2">ANHUI GENSUM</option>
+                        <option value="3">FINE FINE</option>
+                        <option value="4">QINGDAO LEAGLE</option>
+                        <option value="5">KENLIGHT TRADING</option>
+                        <option value="7">QINGDAO HUANGHAIWANG</option>
+                        <option value="8">KENDA MOTO</option>
+                        <option value="10">PANANDINO</option>
+                        <option value="11">SEASTONE</option>
+                        <option value="12">RONGER</option>
+                    </select>
+                    <br>
+                    <input type="hidden" id="cod_pro" name="cod_pro">
+                    <input type="hidden" id="nom_pro" name="nom_pro">
                 </div>
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="precio_item">Nombre Proveedor:</label>
-                    <input class="form-control" type="text" id="nom_pro" name="nom_pro" placeholder="Nombre Proveedor">
-                </div>
+
             </div>
 
             <div class="row mt-3">
@@ -44,7 +56,7 @@
 
 </div>
 
-<script>
+<script type="text/javascript">
     $(document).ready(function() {
 
         $("#fecha_fac").datepicker({
@@ -61,5 +73,15 @@
                 }
             }
         });
+
+        $(".chosen-select").chosen({no_results_text:'No hay resultados para '});
+        $('.chosen-select').on('change', function(evt, params) {
+            let chosenSelectedItem = $(".chosen-select").find(":selected").text();
+            //console.log("cambiando... " + params.selected + ' ' + chosenSelectedItem);
+            $("#nom_pro").val(chosenSelectedItem);
+            $("#cod_pro").val(params.selected);
+
+        });
+
     });
 </script>
