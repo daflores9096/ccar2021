@@ -2,6 +2,7 @@
 include_once "utils/helpers.php";
 include_once "models/compra.php";
 include_once "models/proveedor.php";
+include_once "models/producto.php";
 include_once "conexion.php";
 
 BD::crearInstancia();
@@ -14,8 +15,12 @@ class ComprasController {
     }
 
     public function crear(){
+
+        var_dump($_POST);
+
         $proveedorList = Proveedor::listar();
-        if ($_POST){
+        $productList = Producto::listar();
+        if ($_POST['cod_fac']){
             $cod_fac = $_POST['cod_fac'];
             $fecha_fac = $_POST['fecha_fac'];
             $cod_pro = $_POST['cod_pro'];
@@ -23,8 +28,11 @@ class ComprasController {
             $total_fac = $_POST['total_fac'];
 
             Compra::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
-            redirect('./?controller=compras&action=lista');
+            //redirect('./?controller=compras&action=lista');
+        } else {
+            $lastId = Compra::getIdUltimacompra();
         }
+
         include_once "views/compras/crear.php";
 
     }

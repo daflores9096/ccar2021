@@ -57,6 +57,17 @@ class Compra {
         return $compraList;
     }
 
+    public static function getIdUltimacompra(){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT cod_fac FROM compra ORDER BY fecha_fac DESC LIMIT 1");
+        $res = $sql->fetchAll();
+
+        foreach ($res as $row){
+            $lastId = $row['cod_fac'];
+        }
+        return $lastId;
+    }
+
     public static function crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
 
         $conexion = BD::crearInstancia();
@@ -64,25 +75,25 @@ class Compra {
         $sql->execute(array($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac));
     }
 
-        public static function borrar($codigo){
-            $conexion = BD::crearInstancia();
-            $sql = $conexion->prepare("DELETE FROM compra WHERE cod_fac=?");
-            $sql->execute(array($codigo));
-        }
+    public static function borrar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM compra WHERE cod_fac=?");
+        $sql->execute(array($codigo));
+    }
 
-        public static function buscar($codigo){
-            $conexion = BD::crearInstancia();
-            $sql = $conexion->prepare("SELECT * FROM compra WHERE cod_fac=?");
-            $sql->execute(array($codigo));
-            $compra = $sql->fetch();
-            return new Compra($compra['cod_fac'],$compra['fecha_fac'],$compra['cod_pro'],$compra['nom_pro'], $compra['total_fac']);
-        }
+    public static function buscar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("SELECT * FROM compra WHERE cod_fac=?");
+        $sql->execute(array($codigo));
+        $compra = $sql->fetch();
+        return new Compra($compra['cod_fac'],$compra['fecha_fac'],$compra['cod_pro'],$compra['nom_pro'], $compra['total_fac']);
+    }
 
-        public static function editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
-            $conexion = BD::crearInstancia();
-            $sql = $conexion->prepare("UPDATE item SET fecha_fac=?, cod_pro=?, nom_pro=?, total_pro=? WHERE cod_cod_fac=?");
-            $sql->execute(array($fecha_fac, $cod_pro, $nom_pro, $total_fac, $cod_fac));
-        }
+    public static function editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET fecha_fac=?, cod_pro=?, nom_pro=?, total_pro=? WHERE cod_cod_fac=?");
+        $sql->execute(array($fecha_fac, $cod_pro, $nom_pro, $total_fac, $cod_fac));
+    }
 
 
 }
