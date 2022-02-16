@@ -1,6 +1,13 @@
 <?php
 //var_dump($proveedorList);
 //var_dump($lastId);
+if (isset($compraList)){
+
+    $cont = count($compraList);
+    echo "<br>compraList (".$cont." items ): <br>";
+    var_dump($compraList);
+}
+
 if (!isset($_REQUEST['cod_fac'])){
     $cod_fac = $lastId + 1;
     $cod_pro = "";
@@ -17,7 +24,9 @@ if (!isset($_REQUEST['fecha_fac'])){
     $fecha_fac = $_REQUEST['fecha_fac'];
 }
 
+$total_compra = 0;
 ?>
+<div class="container-fluid">
 <div class="card mt-5">
     <div class="card-header">
         <h4><strong>AGREGAR NUEVA COMPRA</strong></h4>
@@ -40,7 +49,7 @@ if (!isset($_REQUEST['fecha_fac'])){
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="select_pro">Proveedor:</label>
                     <br>
-                    <select class="chosen-select" id="select_pro" name="select_pro" data-placeholder="Seleccione un Proveedor" required="true">
+                    <select class="chosen-select" id="select_pro" name="select_pro" data-placeholder="Seleccione un Proveedor">
                         <option value=""></option>
                         <?php 
                         foreach ($proveedorList as $row){
@@ -51,8 +60,8 @@ if (!isset($_REQUEST['fecha_fac'])){
                         ?>
                     </select>
                     <br>
-                    <input type="text" id="cod_pro" name="cod_pro" value="<?php echo $cod_pro ?>">
-                    <input type="text" id="nom_pro" name="nom_pro" value="<?php echo $nom_pro ?>">
+                    <input type="text" id="cod_pro" name="cod_pro" value="<?php echo $cod_pro ?>" required>
+                    <input type="text" id="nom_pro" name="nom_pro" value="<?php echo $nom_pro ?>" required>
                 </div>
 
             </div>
@@ -61,7 +70,7 @@ if (!isset($_REQUEST['fecha_fac'])){
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="select_pro">Agregar Producto:</label>
                     <br>
-                    <select class="chosen-select" id="select_item" name="select_item" data-placeholder="Seleccione un Producto" required="true">
+                    <select class="chosen-select" id="select_item" name="select_item" data-placeholder="Seleccione un Producto">
                         <option value=""></option>
                         <?php
                         foreach ($productList as $row){
@@ -78,19 +87,80 @@ if (!isset($_REQUEST['fecha_fac'])){
 
             <div class="row mt-3">
                 <div class="form-group">
-                    <input type="text" name="cod_item" id="cod_item">
-                    <input type="text" name="nom_item" id="nom_item">
-                    <input type="text" name="cant_item" id="cant_item">
-                    <input type="text" name="precio_uni" id="precio_uni">
-                    <input type="text" name="precio_ven" id="precio_ven">
-                    <input type="text" name="importe_fac" id="importe_fac">
+                    <table>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Costo</th>
+                            <th>Precio Venta</th>
+                            <th>Importe</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="cod_item" id="cod_item"></td>
+                            <td><input type="text" name="nom_item" id="nom_item"></td>
+                            <td><input type="text" name="cant_item" id="cant_item" value="0"></td>
+                            <td><input type="text" name="precio_uni" id="precio_uni" value="0"></td>
+                            <td><input type="text" name="precio_ven" id="precio_ven" value="0"></td>
+                            <td><input type="text" name="importe_fac" id="importe_fac" value="0"></td>
+                        </tr>
+                    </table>
+
                 </div>
             </div>
 
+            <?php
+            if (isset($compraList)) {
+            ?>
+            <div class="row mt-3">
+                <table class="table">
+                    <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Codigo</th>
+                        <th>Detalle</th>
+                        <th class="text-right">Cantidad</th>
+                        <th class="text-right">P. Compra</th>
+                        <th class="text-right">P. Venta</th>
+                        <th class="text-right">Sub Total</th>
+                    </tr>
+                    </thead>
+                    <?php
+                    echo "<br>";
+                    $indice = 0;
+                    foreach ($compraList as $row){
+                        ?>
+                        <tr>
+                            <td><input type="text" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>"></td>
+                            <td><input type="text" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
+                            <td><input type="text" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
+                            <td class="text-right""><input type="text" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>"></td>
+                            <td class="text-right"><input type="text" name="precio_uni<?php echo $indice ?>" value="<?php echo $row['precio_uni']; ?>"></td>
+                            <td class="text-right"><input type="text" name="precio_ven<?php echo $indice ?>" value="<?php echo $row['precio_ven']; ?>"></td>
+                            <td class="text-right"><input type="text" name="importe_fac<?php echo $indice ?>" value="<?php echo $row['importe_fac']; ?>"></td>
+                        </tr>
+
+                        <?php
+                        $total_compra = $total_compra + $row['importe_fac'];
+                        $indice++;
+                    }
+                    ?>
+                    <input type="hidden" name="cont" value="<?php echo $cont; ?>">
+                    <tfoot>
+                    <tr>
+                        <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
+                        <td class="text-right"><strong><?php echo $total_compra ?></strong></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <?php
+            }
+            ?>
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="caja_item">Total Compra:</label>
-                    <input class="form-control" type="text" id="total_fac" name="total_fac" placeholder="Total en Bolivianos">
+                    <input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
                 </div>
             </div>
 
@@ -103,7 +173,7 @@ if (!isset($_REQUEST['fecha_fac'])){
     </div>
 
 </div>
-
+</div>
 <script type="text/javascript">
     $(document).ready(function() {
 
