@@ -116,13 +116,13 @@ $total_compra = 0;
                 <table class="table">
                     <thead class="table-light">
                     <tr>
-                        <th>ID</th>
+<!--                        <th>ID</th>-->
                         <th>Codigo</th>
                         <th>Detalle</th>
-                        <th class="text-right">Cantidad</th>
-                        <th class="text-right">P. Compra</th>
-                        <th class="text-right">P. Venta</th>
-                        <th class="text-right">Sub Total</th>
+                        <th class="text-right" style="width: 20px">Cantidad</th>
+                        <th class="text-right" style="width: 20px">P. Compra</th>
+                        <th class="text-right" style="width: 20px">P. Venta</th>
+                        <th class="text-right" style="width: 20px">Sub Total</th>
                     </tr>
                     </thead>
                     <?php
@@ -131,13 +131,13 @@ $total_compra = 0;
                     foreach ($compraList as $row){
                         ?>
                         <tr>
-                            <td><input type="text" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>"></td>
-                            <td><input type="text" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
-                            <td><input type="text" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
-                            <td class="text-right""><input type="text" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>"></td>
-                            <td class="text-right"><input type="text" name="precio_uni<?php echo $indice ?>" value="<?php echo $row['precio_uni']; ?>"></td>
-                            <td class="text-right"><input type="text" name="precio_ven<?php echo $indice ?>" value="<?php echo $row['precio_ven']; ?>"></td>
-                            <td class="text-right"><input type="text" name="importe_fac<?php echo $indice ?>" value="<?php echo $row['importe_fac']; ?>"></td>
+                            <input type="hidden" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>">
+                            <td><?php echo $row['cod_item']; ?><input type="hidden" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
+                            <td><?php echo $row['nom_item']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
+                            <td class="text-right""><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>" onchange="subtotal(<?php echo $indice ?>)"></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" value="<?php echo $row['precio_uni']; ?>"></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" value="<?php echo $row['precio_ven']; ?>"></td>
+                            <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" value="<?php echo $row['importe_fac']; ?>"></td>
                         </tr>
 
                         <?php
@@ -166,7 +166,7 @@ $total_compra = 0;
 
             <div class="text-center mt-3">
                 <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                <a class="btn btn-danger" onclick="history.back()" >Cancelar</a>
+                <a class="btn btn-danger" href="?controller=compras&action=lista" >Cancelar</a>
             </div>
 
         </form>
@@ -216,7 +216,18 @@ $total_compra = 0;
 
         });
 
-
-
     });
+
+    function subtotal(x){
+
+        let add_porcent = $("#precio_uni"+x).val() * 0.40;
+        let precio_ven = Math.round(parseFloat($("#precio_uni"+x).val()) + parseFloat(add_porcent));
+        console.log('porcentaje: ' + add_porcent);
+        console.log('precio venta: ' + precio_ven);
+        $("#precio_ven"+x).val(precio_ven);
+        let imp = Math.round($("#cant_fac"+x).val() * precio_ven);
+
+
+        $("#importe_fac"+x).val(imp);
+    }
 </script>

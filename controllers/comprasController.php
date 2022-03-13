@@ -58,7 +58,7 @@ class ComprasController {
                     if ($cont > 0){
                         echo "<script>console.log('contador_: '+".$cont.")</script>";
                         for ($i=0; $i < $cont; $i++) {
-                            echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
+                            //echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
                             CompraAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['precio_ven'.$i], $_POST['importe_fac'.$i]);
                         }
                     }
