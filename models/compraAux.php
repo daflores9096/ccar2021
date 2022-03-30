@@ -28,7 +28,7 @@ class CompraAux {
 
     public static function borrar($codigo){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("DELETE FROM compra_aux WHERE cod_fac=?");
+        $sql = $conexion->prepare("DELETE FROM compra_aux WHERE Id=?");
         $sql->execute(array($codigo));
     }
 

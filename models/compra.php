@@ -60,11 +60,11 @@ class Compra {
 
     public static function getIdUltimacompra(){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT cod_fac FROM compra ORDER BY fecha_fac DESC LIMIT 1");
+        $sql = $conexion->query("SELECT MAX(cod_fac) max_id FROM compra ORDER BY fecha_fac DESC LIMIT 1");
         $res = $sql->fetchAll();
 
         foreach ($res as $row){
-            $lastId = $row['cod_fac'];
+            $lastId = $row['max_id'];
         }
         return $lastId;
     }
@@ -82,6 +82,12 @@ class Compra {
         $sql->execute(array($codigo));
         $sql2 = $conexion->prepare("DELETE FROM compra_aux WHERE cod_fac=?");
         $sql2->execute(array($codigo));
+    }
+
+    public static function borrarItem($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM compra_aux WHERE id=?");
+        $sql->execute(array($codigo));
     }
 
     public static function buscar($codigo){

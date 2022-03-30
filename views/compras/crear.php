@@ -1,11 +1,13 @@
 <?php
 //var_dump($proveedorList);
 //var_dump($lastId);
+
+var_dump($_POST);
 if (isset($compraList)){
 
     $cont = count($compraList);
-    echo "<br>compraList (".$cont." items ): <br>";
-    var_dump($compraList);
+    //echo "<br>compraList (".$cont." items ): <br>";
+    //var_dump($compraList);
 }
 
 if (!isset($_REQUEST['cod_fac'])){
@@ -123,33 +125,38 @@ $total_compra = 0;
                         <th class="text-right" style="width: 20px">P. Compra</th>
                         <th class="text-right" style="width: 20px">P. Venta</th>
                         <th class="text-right" style="width: 20px">Sub Total</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <?php
                     echo "<br>";
                     $indice = 0;
+                    $cantidad = count($compraList);
                     foreach ($compraList as $row){
                         ?>
                         <tr>
                             <input type="hidden" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>">
                             <td><?php echo $row['cod_item']; ?><input type="hidden" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
                             <td><?php echo $row['nom_item']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
-                            <td class="text-right""><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>" onchange="subtotal(<?php echo $indice ?>)"></td>
-                            <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" value="<?php echo $row['precio_uni']; ?>"></td>
-                            <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" value="<?php echo $row['precio_ven']; ?>"></td>
-                            <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" value="<?php echo $row['importe_fac']; ?>"></td>
+                            <td class="text-right""><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>" onchange="subtotal(<?php echo $indice ?>); sumarTotalCompra(<?php echo $cantidad; ?>)"></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>"></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $row['precio_ven']; ?>"></td>
+                            <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>"></td>
+                            <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $cod_pro ?>,'<?php echo $nom_pro ?>','<?php echo $fecha_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
 
                         <?php
                         $total_compra = $total_compra + $row['importe_fac'];
                         $indice++;
                     }
+                    echo 'Cantidad de items: '.$indice;
                     ?>
+
                     <input type="hidden" name="cont" value="<?php echo $cont; ?>">
                     <tfoot>
                     <tr>
                         <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
-                        <td class="text-right"><strong><?php echo $total_compra ?></strong></td>
+                        <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>"></td>
                     </tr>
                     </tfoot>
                 </table>
@@ -157,12 +164,6 @@ $total_compra = 0;
             <?php
             }
             ?>
-            <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="caja_item">Total Compra:</label>
-                    <input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
-                </div>
-            </div>
 
             <div class="text-center mt-3">
                 <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
@@ -220,14 +221,69 @@ $total_compra = 0;
 
     function subtotal(x){
 
-        let add_porcent = $("#precio_uni"+x).val() * 0.40;
-        let precio_ven = Math.round(parseFloat($("#precio_uni"+x).val()) + parseFloat(add_porcent));
-        console.log('porcentaje: ' + add_porcent);
-        console.log('precio venta: ' + precio_ven);
-        $("#precio_ven"+x).val(precio_ven);
-        let imp = Math.round($("#cant_fac"+x).val() * precio_ven);
+        let add_porcent = parseFloat($("#precio_uni"+x).val() * 0.40);
+        let precio_ven = parseFloat($("#precio_uni"+x).val()) + add_porcent;
+        //console.log('porcentaje: ' + add_porcent);
+        //console.log('precio venta: ' + precio_ven);
+        $("#precio_ven"+x).val(precio_ven.toFixed(2));
+        let imp = $("#cant_fac"+x).val() * precio_ven;
 
 
-        $("#importe_fac"+x).val(imp);
+        $("#importe_fac"+x).val(imp.toFixed(2));
     }
+
+    function sumarTotalCompra(x){
+        let total = 0;
+
+
+        for (i=0;i<x;i++){
+            subtot = $("#importe_fac"+i).val();
+            total = total + parseFloat(subtot);
+            console.log('cantidad items: ' + x);
+            console.log('total: ' + subtot + ' - ' + total);
+        }
+        $("#total_fac").val(total);
+
+    }
+
+    function eliminarItem(id, cod_fac, cod_pro, nom_pro, fecha_fac){
+        swal("¿Está seguro que desea eliminar el Item "+id+"?", {
+            buttons: {
+                aceptar: "Aceptar",
+                cancel: "Cancelar",
+            },
+        })
+            .then((value) => {
+                switch (value) {
+
+                    case "aceptar":
+                        this.location.href = './?controller=compras&action=borrarItem&id='+id;
+                        //sendData('./?controller=compras&action=borrarItem',{id:id});
+                        sendData('./?controller=compras&action=crear', {cod_fac: cod_fac, cod_pro: cod_pro, nom_pro: ''+nom_pro+'', fecha_fac: ''+fecha_fac+'' });
+                        break;
+
+                    default:
+                        return false;
+                }
+            });
+    }
+
+    function sendData(path, parameters, method='post') {
+
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = path;
+        document.body.appendChild(form);
+
+        for (const key in parameters) {
+            const formField = document.createElement('input');
+            formField.type = 'hidden';
+            formField.name = key;
+            formField.value = parameters[key];
+
+            form.appendChild(formField);
+        }
+        form.submit();
+    }
+
 </script>

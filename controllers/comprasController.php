@@ -22,25 +22,39 @@ class ComprasController {
 
         if (isset($_POST['cod_fac'])){
 
-            echo "contenido POST: ";
-            var_dump($_POST);
+            //echo "contenido POST: ";
+            //var_dump($_POST);
 
             $cod_fac = $_POST['cod_fac'];
             $fecha_fac = $_POST['fecha_fac'];
             $cod_pro = $_POST['cod_pro'];
             $nom_pro = $_POST['nom_pro'];
-            $total_fac = $_POST['total_fac'];
 
+            if (isset($_POST['total_fac'])){
+                $total_fac = $_POST['total_fac'];
+            } else {
+                $total_fac = 0;
+            }
+
+
+            $cod_item = (isset($_POST['cod_item'])) ? $_POST['cod_item'] : '';
+            $cant_fac = (isset($_POST['cant_fac'])) ? $_POST['cant_fac'] : 0;
+            $precio_uni = (isset($_POST['precio_uni'])) ? $_POST['precio_uni'] : 0;
+            $precio_ven = (isset($_POST['precio_ven'])) ? $_POST['precio_ven'] : 0;
+            $importe_fac = (isset($_POST['importe_fac'])) ? $_POST['importe_fac'] : 0;
+
+            /*
             $cod_item = $_POST['cod_item'];
             $cant_fac = $_POST['cant_item'];
             $precio_uni = $_POST['precio_uni'];
             $precio_ven = $_POST['precio_ven'];
             $importe_fac = $_POST['importe_fac'];
+            */
 
             $compra = Compra::buscar($cod_fac);
 
-            echo "<br><br>";
-            var_dump($compra);
+            //echo "<br><br>";
+            //var_dump($compra);
 
             if (is_null($compra->cod_fac)){
                 Compra::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
@@ -84,6 +98,13 @@ class ComprasController {
             $cod_fac = $_GET['cod_fac'];
             Compra::borrar($cod_fac);
             redirect('./?controller=compras&action=lista');
+        }
+
+        public function borrarItem(){
+            $id = $_REQUEST['id'];
+            Compra::borrarItem($id);
+            //redirect('./?controller=compras&action=lista');
+            //echo "Item ".$id." borrado !!!";
         }
 
         public function editar(){
