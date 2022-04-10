@@ -274,6 +274,8 @@ $total_compra = 0;
         form.method = method;
         form.action = path;
         document.body.appendChild(form);
+        //alert('formulario creado...');
+        esperar(250);
 
         for (const key in parameters) {
             const formField = document.createElement('input');
@@ -284,6 +286,14 @@ $total_compra = 0;
             form.appendChild(formField);
         }
         form.submit();
+    }
+
+    function esperar(ms){
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + ms) {
+            end = new Date().getTime();
+        }
     }
 
 </script>

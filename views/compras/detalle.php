@@ -11,13 +11,18 @@
         text-align: left;
     }
 </style>
+
+<?php
+//$path = '/?controller=compras&action=crear';
+//$params = '{cod_fac:'.$compra->cod_fac.', cod_pro:'. $compra->cod_pro.', nom_pro:'.$compra->nom_pro.', fecha_fac:'.$compra->fecha_fac.' }';
+?>
 <div class="card mt-5">
     <div class="card-header">
         <div class="text-left">
             <h4><strong>COMPRA NRO: <?php echo $compra->cod_fac ?></strong></h4>
         </div>
         <div class="text-right">
-            <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
+            <a href="./?controller=compras&action=crear&cod_fac=<?php echo $compra->cod_fac ?>&cod_pro=<?php echo  $compra->cod_pro ?>&nom_pro=<?php echo  $compra->nom_pro ?>&fecha_fac=<?php echo  $compra->fecha_fac ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
         </div>
 
     </div>
@@ -112,4 +117,24 @@
             }
         });
     });
+
+    function sendData(parameters, method='post') {
+
+        const form = document.createElement('form');
+        form.method = method;
+        form.action = './?controller=compras&action=crear';
+        document.body.appendChild(form);
+        //alert('formulario creado...');
+        esperar(250);
+
+        for (const key in parameters) {
+            const formField = document.createElement('input');
+            formField.type = 'hidden';
+            formField.name = key;
+            formField.value = parameters[key];
+
+            form.appendChild(formField);
+        }
+        form.submit();
+    }
 </script>
