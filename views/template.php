@@ -92,7 +92,7 @@
                     <a class="nav-link" href="?controller=compras&action=lista">Compras</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Ventas</a>
+                    <a class="nav-link" href="?controller=ventas&action=lista">Ventas</a>
                 </li>
 
             </ul>

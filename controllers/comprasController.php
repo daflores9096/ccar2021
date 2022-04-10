@@ -20,36 +20,28 @@ class ComprasController {
         $proveedorList = Proveedor::listar();
         $productList = Producto::listar();
 
-        if (isset($_POST['cod_fac'])){
+        if (isset($_REQUEST['cod_fac'])){
 
             //echo "contenido POST: ";
             //var_dump($_POST);
 
-            $cod_fac = $_POST['cod_fac'];
-            $fecha_fac = $_POST['fecha_fac'];
-            $cod_pro = $_POST['cod_pro'];
-            $nom_pro = $_POST['nom_pro'];
+            $cod_fac = $_REQUEST['cod_fac'];
+            $fecha_fac = $_REQUEST['fecha_fac'];
+            $cod_pro = $_REQUEST['cod_pro'];
+            $nom_pro = $_REQUEST['nom_pro'];
 
-            if (isset($_POST['total_fac'])){
-                $total_fac = $_POST['total_fac'];
+            if (isset($_REQUEST['total_fac'])){
+                $total_fac = $_REQUEST['total_fac'];
             } else {
                 $total_fac = 0;
             }
 
 
-            $cod_item = (isset($_POST['cod_item'])) ? $_POST['cod_item'] : '';
-            $cant_fac = (isset($_POST['cant_fac'])) ? $_POST['cant_fac'] : 0;
-            $precio_uni = (isset($_POST['precio_uni'])) ? $_POST['precio_uni'] : 0;
-            $precio_ven = (isset($_POST['precio_ven'])) ? $_POST['precio_ven'] : 0;
-            $importe_fac = (isset($_POST['importe_fac'])) ? $_POST['importe_fac'] : 0;
-
-            /*
-            $cod_item = $_POST['cod_item'];
-            $cant_fac = $_POST['cant_item'];
-            $precio_uni = $_POST['precio_uni'];
-            $precio_ven = $_POST['precio_ven'];
-            $importe_fac = $_POST['importe_fac'];
-            */
+            $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
+            $cant_fac = (isset($_REQUEST['cant_fac'])) ? $_REQUEST['cant_fac'] : 0;
+            $precio_uni = (isset($_REQUEST['precio_uni'])) ? $_REQUEST['precio_uni'] : 0;
+            $precio_ven = (isset($_REQUEST['precio_ven'])) ? $_REQUEST['precio_ven'] : 0;
+            $importe_fac = (isset($_REQUEST['importe_fac'])) ? $_REQUEST['importe_fac'] : 0;
 
             $compra = Compra::buscar($cod_fac);
 
@@ -66,8 +58,8 @@ class ComprasController {
                 CompraAux::crear($cod_fac, $cod_item, $cant_fac, $precio_uni, $precio_ven, $importe_fac);
             } else {
 
-                if (isset($_POST['cont'])){
-                    $cont = $_POST['cont'];
+                if (isset($_REQUEST['cont'])){
+                    $cont = $_REQUEST['cont'];
 
                     if ($cont > 0){
                         echo "<script>console.log('contador_: '+".$cont.")</script>";

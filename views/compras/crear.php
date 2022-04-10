@@ -2,7 +2,7 @@
 //var_dump($proveedorList);
 //var_dump($lastId);
 
-var_dump($_POST);
+//var_dump($_POST);
 if (isset($compraList)){
 
     $cont = count($compraList);
