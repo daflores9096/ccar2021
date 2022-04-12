@@ -36,36 +36,43 @@ class Venta {
         return $listaVentas;
     }
 
-    /*
-    public static function getListaProductos ($cod_fac) {
-        $compraList = [];
+    public static function buscar($codigo){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT * FROM compra_aux WHERE cod_fac=$cod_fac");
+        $sql = $conexion->prepare("SELECT * FROM venta WHERE cod_fac=?");
+        $sql->execute(array($codigo));
+        $venta = $sql->fetch();
+        return new Venta($venta['cod_fac'],$venta['fecha_fac'],$venta['cod_cli'],$venta['nom_cli'], $venta['dire_cli'], $venta['traspaso'], $venta['total_fac'], $venta['tot_bul']);
+    }
+
+    public static function getListaProductos ($cod_fac) {
+        $ventaList = [];
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT * FROM venta_aux WHERE cod_fac=$cod_fac");
         $res = $sql->fetchAll();
 
-        foreach ($res as $compra){
+        foreach ($res as $venta){
 
             //obtener el nombre del item/producto
-            $cod_prod = $compra['cod_item'];
+            $cod_prod = $venta['cod_item'];
             $sql1 = $conexion->prepare("SELECT * FROM item WHERE cod_item=? LIMIT 1");
             $sql1->execute([$cod_prod]);
             $producto = $sql1->fetch();
 
-            $compraList[] = array(
-                "id" => $compra['Id'],
-                "cod_fac" => $compra['cod_fac'],
-                "cod_item" => $compra['cod_item'],
-                "nom_item" => $producto["nom_item"],
-                "cant_fac" => $compra['cant_fac'],
-                "precio_uni" => $compra['precio_uni'],
-                "precio_ven" => $compra['precio_ven'],
-                "importe_fac" => $compra['importe_fac']);
+            $ventaList[] = array(
+                "id" => $venta['Id'],
+                "cod_fac" => $venta['cod_fac'],
+                "cod_item" => $venta['cod_item'],
+                "producto" => $producto['nom_item'],
+                "bultos" => $venta["bultos"],
+                "cant_fac" => $venta['cant_fac'],
+                "precio_uni" => $venta['precio_uni'],
+                "importe_fac" => $venta['importe_fac']);
         }
 
-        return $compraList;
+        return $ventaList;
     }
 
-
+/*
     public static function getIdUltimacompra(){
         $conexion = BD::crearInstancia();
         $sql = $conexion->query("SELECT MAX(cod_fac) max_id FROM compra ORDER BY fecha_fac DESC LIMIT 1");
@@ -98,13 +105,7 @@ class Venta {
         $sql->execute(array($codigo));
     }
 
-    public static function buscar($codigo){
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("SELECT * FROM compra WHERE cod_fac=?");
-        $sql->execute(array($codigo));
-        $compra = $sql->fetch();
-        return new Compra($compra['cod_fac'],$compra['fecha_fac'],$compra['cod_pro'],$compra['nom_pro'], $compra['total_fac']);
-    }
+
 
     public static function editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
         $conexion = BD::crearInstancia();

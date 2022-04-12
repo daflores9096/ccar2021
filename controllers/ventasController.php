@@ -118,14 +118,15 @@ class VentasController {
 
         include_once "./views/compras/editar.php";
     }
+*/
 
     public function detalle(){
         $cod_fac = $_GET['cod_fac'];
-        $compra = Compra::buscar($cod_fac);
-        $compraList = Compra::getListaProductos($cod_fac);
+        $venta = Venta::buscar($cod_fac);
+        $ventaList = Venta::getListaProductos($cod_fac);
 
-        include_once "./views/compras/detalle.php";
+        include_once "./views/ventas/detalle.php";
     }
-    */
+
 
 }
