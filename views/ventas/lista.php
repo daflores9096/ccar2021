@@ -1,7 +1,7 @@
 <br>
 <h1 class="bd-title" id="content">Lista de Ventas</h1>
 <div class="mt-3">
-    <a href="?controller=compras&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Venta</a>
+    <a href="?controller=ventas&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Venta</a>
 </div>
 <br>
 <table class="display compact" id="listaVentas">
@@ -75,7 +75,7 @@
                 switch (value) {
 
                     case "aceptar":
-                        this.location.href = './?controller=compras&action=borrar&cod_fac='+id;
+                        this.location.href = './?controller=ventas&action=borrar&cod_fac='+id;
                         break;
 
                     default:

@@ -36,6 +36,13 @@ class Venta {
         return $listaVentas;
     }
 
+    public static function crear($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul){
+
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("INSERT INTO venta (cod_fac, fecha_fac, cod_cli, nom_cli, dire_cli, traspaso, total_fac, tot_bul) VALUES (?,?,?,?,?,?,?,?)");
+        $sql->execute(array($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul));
+    }
+
     public static function buscar($codigo){
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("SELECT * FROM venta WHERE cod_fac=?");
@@ -72,6 +79,37 @@ class Venta {
         return $ventaList;
     }
 
+    public static function borrar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM venta WHERE cod_fac=?");
+        $sql->execute(array($codigo));
+        $sql2 = $conexion->prepare("DELETE FROM venta_aux WHERE cod_fac=?");
+        $sql2->execute(array($codigo));
+    }
+
+    public static function getIdUltimaVenta(){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT MAX(cod_fac) max_id FROM venta ORDER BY fecha_fac DESC LIMIT 1");
+        $res = $sql->fetchAll();
+
+        foreach ($res as $row){
+            $lastId = $row['max_id'];
+        }
+        return $lastId;
+    }
+
+    public static function editar($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE venta SET fecha_fac=?, cod_cli=?, nom_cli=?, dire_cli=?, traspaso=?, total_fac=?, tot_bul=? WHERE cod_fac=?");
+        $sql->execute(array($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul));
+    }
+
+    public static function borrarItem($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM venta_aux WHERE id=?");
+        $sql->execute(array($codigo));
+    }
+
 /*
     public static function getIdUltimacompra(){
         $conexion = BD::crearInstancia();
@@ -84,34 +122,6 @@ class Venta {
         return $lastId;
     }
 
-    public static function crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
-
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("INSERT INTO compra (cod_fac, fecha_fac, cod_pro, nom_pro, total_fac) VALUES (?,?,?,?,?)");
-        $sql->execute(array($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac));
-    }
-
-    public static function borrar($codigo){
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("DELETE FROM compra WHERE cod_fac=?");
-        $sql->execute(array($codigo));
-        $sql2 = $conexion->prepare("DELETE FROM compra_aux WHERE cod_fac=?");
-        $sql2->execute(array($codigo));
-    }
-
-    public static function borrarItem($codigo){
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("DELETE FROM compra_aux WHERE id=?");
-        $sql->execute(array($codigo));
-    }
-
-
-
-    public static function editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac){
-        $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("UPDATE compra SET fecha_fac=?, cod_pro=?, nom_pro=?, total_fac=? WHERE cod_fac=?");
-        $sql->execute(array($fecha_fac, $cod_pro, $nom_pro, $total_fac, $cod_fac));
-    }
     */
 
 }

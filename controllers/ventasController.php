@@ -1,9 +1,9 @@
 <?php
 include_once "utils/helpers.php";
 include_once "models/venta.php";
-//include_once "models/ventaAux.php";
-//include_once "models/proveedor.php";
-//include_once "models/producto.php";
+include_once "models/ventaAux.php";
+include_once "models/cliente.php";
+include_once "models/producto.php";
 include_once "conexion.php";
 
 BD::crearInstancia();
@@ -15,10 +15,15 @@ class VentasController {
         include_once "views/ventas/lista.php";
     }
 
-    /*
+    public function borrar(){
+        $cod_fac = $_GET['cod_fac'];
+        Venta::borrar($cod_fac);
+        redirect('./?controller=ventas&action=lista');
+    }
+
     public function crear(){
 
-        $proveedorList = Proveedor::listar();
+        $clienteList = Cliente::listar();
         $productList = Producto::listar();
 
         if (isset($_REQUEST['cod_fac'])){
@@ -40,23 +45,23 @@ class VentasController {
 
             $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
             $cant_fac = (isset($_REQUEST['cant_fac'])) ? $_REQUEST['cant_fac'] : 0;
+            $bultos = (isset($_REQUEST['bultos'])) ? $_REQUEST['bultos'] : 0;
             $precio_uni = (isset($_REQUEST['precio_uni'])) ? $_REQUEST['precio_uni'] : 0;
-            $precio_ven = (isset($_REQUEST['precio_ven'])) ? $_REQUEST['precio_ven'] : 0;
             $importe_fac = (isset($_REQUEST['importe_fac'])) ? $_REQUEST['importe_fac'] : 0;
 
-            $compra = Compra::buscar($cod_fac);
+            $venta = Venta::buscar($cod_fac);
 
             //echo "<br><br>";
             //var_dump($compra);
 
-            if (is_null($compra->cod_fac)){
-                Compra::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+            if (is_null($venta->cod_fac)){
+                Venta::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
             } else {
-                Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+                Venta::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
             }
 
             if ($cod_item != ''){
-                CompraAux::crear($cod_fac, $cod_item, $cant_fac, $precio_uni, $precio_ven, $importe_fac);
+                VentaAux::crear($cod_fac, $cod_item, $bultos, $cant_fac, $precio_uni, $importe_fac);
             } else {
 
                 if (isset($_REQUEST['cont'])){
@@ -66,7 +71,7 @@ class VentasController {
                         echo "<script>console.log('contador_: '+".$cont.")</script>";
                         for ($i=0; $i < $cont; $i++) {
                             //echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
-                            CompraAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['precio_ven'.$i], $_POST['importe_fac'.$i]);
+                            VentaAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['bultos'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['importe_fac'.$i]);
                         }
                     }
 
@@ -76,30 +81,25 @@ class VentasController {
             }
 
 
-            $compra = Compra::buscar($cod_fac);
-            $compraList = Compra::getListaProductos($cod_fac);
+            $venta = Venta::buscar($cod_fac);
+            $ventaList = Venta::getListaProductos($cod_fac);
             //redirect('./?controller=compras&action=lista');
         } else {
-            $lastId = Compra::getIdUltimacompra();
+            $lastId = Venta::getIdUltimaVenta();
         }
 
-        include_once "views/compras/crear.php";
+        include_once "views/ventas/crear.php";
 
-    }
-
-    public function borrar(){
-        $cod_fac = $_GET['cod_fac'];
-        Compra::borrar($cod_fac);
-        redirect('./?controller=compras&action=lista');
     }
 
     public function borrarItem(){
         $id = $_REQUEST['id'];
-        Compra::borrarItem($id);
+        Venta::borrarItem($id);
         //redirect('./?controller=compras&action=lista');
         //echo "Item ".$id." borrado !!!";
     }
 
+    /*
     public function editar(){
         $cod_fac = $_GET['cod_fac'];
         $compra = Compra::buscar($cod_fac);
