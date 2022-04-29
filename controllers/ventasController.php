@@ -28,18 +28,19 @@ class VentasController {
 
         if (isset($_REQUEST['cod_fac'])){
 
-            //echo "contenido POST: ";
-            //var_dump($_POST);
-
             $cod_fac = $_REQUEST['cod_fac'];
             $fecha_fac = $_REQUEST['fecha_fac'];
-            $cod_pro = $_REQUEST['cod_pro'];
-            $nom_pro = $_REQUEST['nom_pro'];
+            $cod_cli = $_REQUEST['cod_cli'];
+            $nom_cli = $_REQUEST['nom_cli'];
+            $dire_cli = $_REQUEST['dire_cli'];
+            $traspaso = $_REQUEST['traspaso'];
 
             if (isset($_REQUEST['total_fac'])){
                 $total_fac = $_REQUEST['total_fac'];
+                $tot_bul = $_REQUEST['tot_bul'];
             } else {
                 $total_fac = 0;
+                $tot_bul = 0;
             }
 
 
@@ -51,13 +52,10 @@ class VentasController {
 
             $venta = Venta::buscar($cod_fac);
 
-            //echo "<br><br>";
-            //var_dump($compra);
-
             if (is_null($venta->cod_fac)){
-                Venta::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+                Venta::crear($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul);
             } else {
-                Venta::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+                Venta::editar($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul);
             }
 
             if ($cod_item != ''){
@@ -68,9 +66,9 @@ class VentasController {
                     $cont = $_REQUEST['cont'];
 
                     if ($cont > 0){
-                        echo "<script>console.log('contador_: '+".$cont.")</script>";
+                        //echo "<script>console.log('contador: '+".$cont.")</script>";
                         for ($i=0; $i < $cont; $i++) {
-                            //echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
+                            //echo "<script>console.log('params: '+".$_POST['id'.$i]."+' precio_ven: '+".$_POST['precio_ven'.$i].")</script>";
                             VentaAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['bultos'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['importe_fac'.$i]);
                         }
                     }
@@ -99,26 +97,27 @@ class VentasController {
         //echo "Item ".$id." borrado !!!";
     }
 
-    /*
     public function editar(){
         $cod_fac = $_GET['cod_fac'];
-        $compra = Compra::buscar($cod_fac);
-        $compraList = Compra::getListaProductos($cod_fac);
+        $venta = Venta::buscar($cod_fac);
+        $ventaList = Venta::getListaProductos($cod_fac);
 
         if ($_POST){
             $codfac = $_POST['cod_item'];
             $fecha_fac = $_POST['fecha_fac'];
-            $cod_pro = $_POST['cod_pro'];
-            $nom_pro = $_POST['nom_pro'];
+            $cod_cli = $_POST['cod_cli'];
+            $nom_cli = $_POST['nom_cli'];
+            $dire_cli = $_POST['dire_cli'];
+            $traspaso = $_POST['traspaso'];
             $total_fac = $_POST['total_fac'];
+            $tot_bul = $_POST['tot_bul'];
 
-            Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
-            redirect('?controller=compras&action=lista');
+            Venta::editar($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul);
+            redirect('?controller=ventas&action=lista');
         }
 
         include_once "./views/compras/editar.php";
     }
-*/
 
     public function detalle(){
         $cod_fac = $_GET['cod_fac'];

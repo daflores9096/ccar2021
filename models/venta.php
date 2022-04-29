@@ -70,6 +70,7 @@ class Venta {
                 "cod_fac" => $venta['cod_fac'],
                 "cod_item" => $venta['cod_item'],
                 "producto" => $producto['nom_item'],
+                "ccaja" => $producto['caja_item'],
                 "bultos" => $venta["bultos"],
                 "cant_fac" => $venta['cant_fac'],
                 "precio_uni" => $venta['precio_uni'],

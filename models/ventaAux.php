@@ -34,8 +34,8 @@ class VentaAux {
 
     public static function editar($id, $cod_fac, $cod_item, $bultos, $cant_fac, $precio_uni, $importe_fac){
         $conexion = BD::crearInstancia();
-        echo "<script>console.log('editando...')</script>";
-        $sql = $conexion->prepare("UPDATE venta_aux SET cod_fac=?, cod_item=?, $bultos=?, cant_fac=?, precio_uni=?, importe_fac=? WHERE id=$id");
+        //echo "<script>console.log('editando...')</script>";
+        $sql = $conexion->prepare("UPDATE venta_aux SET cod_fac=?, cod_item=?, bultos=?, cant_fac=?, precio_uni=?, importe_fac=? WHERE Id=$id");
         $sql->execute(array($cod_fac, $cod_item, $bultos, $cant_fac, $precio_uni, $importe_fac));
     }
 

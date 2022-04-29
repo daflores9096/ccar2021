@@ -1,23 +1,37 @@
 <?php
-//var_dump($proveedorList);
-//var_dump($lastId);
 
-//var_dump($_POST);
+var_dump($_REQUEST);
 if (isset($ventaList)){
-
     $cont = count($ventaList);
-    //echo "<br>compraList (".$cont." items ): <br>";
-    //var_dump($compraList);
 }
 
 if (!isset($_REQUEST['cod_fac'])){
     $cod_fac = $lastId + 1;
     $cod_cli = "";
     $nom_cli = "";
+    $dire_cli = "";
+    $traspaso = "";
+    $total_compra = 0;
+    $tot_bul = 0;
 } else {
     $cod_fac = $_REQUEST['cod_fac'];
-    $cod_pro = $_REQUEST['cod_cli'];
-    $nom_pro = $_REQUEST['nom_cli'];
+    $cod_cli = $_REQUEST['cod_cli'];
+    $nom_cli = $_REQUEST['nom_cli'];
+    $dire_cli = $_REQUEST['dire_cli'];
+    $traspaso = $_REQUEST['traspaso'];
+
+    if (isset($_REQUEST['total_fac'])){
+        $total_compra = $_REQUEST['total_fac'];
+    } else {
+        $total_compra = 0;
+    }
+
+    if (isset($_REQUEST['tot_bul'])){
+        $tot_bul = $_REQUEST['tot_bul'];
+    } else {
+        $tot_bul = 0;
+    }
+
 }
 
 if (!isset($_REQUEST['fecha_fac'])){
@@ -26,7 +40,6 @@ if (!isset($_REQUEST['fecha_fac'])){
     $fecha_fac = $_REQUEST['fecha_fac'];
 }
 
-$total_compra = 0;
 ?>
 <div class="container-fluid">
     <div class="card mt-5">
@@ -66,6 +79,16 @@ $total_compra = 0;
                         <input type="text" id="nom_cli" name="nom_cli" value="<?php echo $nom_cli ?>" required>
                     </div>
 
+                    <div class="row mt-3">
+                        <div class="col-md-6 form-group">
+                            <label class="form-label" for="cod_item">Dirección Cliente:</label>
+                            <input class="form-control" type="text" id="dire_cli" name="dire_cli" value="<?php echo $dire_cli ?>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="form-label" for="traspaso">Traspaso:</label>
+                            <input class="form-control" type="text" id="traspaso" name="traspaso" value="<?php echo $traspaso; ?>">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row mt-3">
@@ -103,11 +126,9 @@ $total_compra = 0;
                             <tr>
                                 <td><input type="text" name="cod_item" id="cod_item"></td>
                                 <td><input type="text" name="nom_item" id="nom_item" size="45"></td>
-                                <td><input type="text" name="cant_item" id="cant_item" value="0" size="5"></td>
-                                <td><input type="text" name="cant_item" id="cant_item" value="0" size="5"></td>
-                                <td><input type="text" name="cant_item" id="cant_item" value="0" size="10"></td>
+                                <td><input type="text" name="bultos" id="bultos" value="0" size="5"></td>
+                                <td><input type="text" name="cant_fac" id="cant_fac" value="0" size="5"></td>
                                 <td><input type="text" name="precio_uni" id="precio_uni" value="0" size="10"></td>
-                                <td><input type="text" name="precio_ven" id="precio_ven" value="0" size="10"></td>
                                 <td><input type="text" name="importe_fac" id="importe_fac" value="0" size="10"></td>
                             </tr>
                         </table>
@@ -116,7 +137,7 @@ $total_compra = 0;
                 </div>
 
                 <?php
-                if (isset($compraList)) {
+                if (isset($ventaList)) {
                     ?>
                     <div class="row mt-3">
                         <table class="table">
@@ -124,42 +145,52 @@ $total_compra = 0;
                             <tr>
                                 <!--                        <th>ID</th>-->
                                 <th>Codigo</th>
-                                <th>Detalle</th>
+                                <th>Artículo</th>
+                                <th class="text-right" style="width: 20px">C. Caja</th>
+                                <th class="text-right" style="width: 20px">T. Bultos</th>
                                 <th class="text-right" style="width: 20px">Cantidad</th>
-                                <th class="text-right" style="width: 20px">P. Compra</th>
+                                <th class="text-right" style="width: 20px">P. Costo</th>
                                 <th class="text-right" style="width: 20px">P. Venta</th>
-                                <th class="text-right" style="width: 20px">Sub Total</th>
+                                <th class="text-right" style="width: 20px">Importe</th>
                                 <th>&nbsp;</th>
                             </tr>
                             </thead>
                             <?php
                             echo "<br>";
                             $indice = 0;
-                            $cantidad = count($compraList);
-                            foreach ($compraList as $row){
+                            $cantidad = count($ventaList);
+                            //var_dump($ventaList);
+                            foreach ($ventaList as $row){
+                                $precio_c = $row['precio_uni'] * 1.40;
                                 ?>
                                 <tr>
                                     <input type="hidden" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>">
                                     <td><?php echo $row['cod_item']; ?><input type="hidden" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
-                                    <td><?php echo $row['nom_item']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
-                                    <td class="text-right""><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>" onchange="subtotal(<?php echo $indice ?>); sumarTotalCompra(<?php echo $cantidad; ?>)"></td>
-                                    <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>"></td>
-                                    <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $row['precio_ven']; ?>"></td>
-                                    <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>"></td>
-                                    <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $cod_pro ?>,'<?php echo $nom_pro ?>','<?php echo $fecha_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><?php echo $row['producto']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['producto']; ?>"></td>
+                                    <td class="text-right""><input type="text" size="10" id="ccaja<?php echo $indice ?>" name="ccaja<?php echo $indice ?>" readonly value="<?php echo $row['ccaja']; ?>" style="text-align: right"></td>
+                                    <td class="text-right""><input type="text" size="10" id="bultos<?php echo $indice ?>" name="bultos<?php echo $indice ?>" readonly value="<?php echo $row['bultos']; ?>" style="text-align: right"></td>
+                                    <td class="text-right"><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>"  value="<?php echo $row['cant_fac']; ?>" style="text-align: right" onchange="calcBultos(<?php echo $indice; ?>); subtotal(<?php echo $indice; ?>); sumarTotalCompra(<?php echo $cantidad; ?>); sumarTotalBultos(<?php echo $cantidad; ?>)"></td>
+                                    <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $precio_c; ?>" style="text-align: right"></td>
+                                    <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>" style="text-align: right"></td>
+                                    <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>" style="text-align: right"></td>
+                                    <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $fecha_fac ?>,'<?php echo $cod_cli ?>','<?php echo $nom_cli ?>','<?php echo $dire_cli ?>','<?php echo $traspaso ?>',<?php echo $total_compra ?>,<?php echo $tot_bul ?>); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
                                 <?php
-                                $total_compra = $total_compra + $row['importe_fac'];
+                                //$total_compra = $total_compra + $row['importe_fac'];
                                 $indice++;
                             }
                             echo 'Cantidad de items: '.$indice;
                             ?>
 
-                            <input type="hidden" name="cont" value="<?php echo $cont; ?>">
+                            <input type="hidden" name="cont" value="<?php echo $indice; ?>">
                             <tfoot>
                             <tr>
-                                <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
+                                <td colspan="2">&nbsp;</td>
+                                <td class="text-left"><strong>Total Bultos: </strong></td>
+                                <td class="text-right"><input class="form-control" type="text" id="tot_bul" name="tot_bul" value="<?php echo $tot_bul; ?>"></td>
+                                <td colspan="2">&nbsp;</td>
+                                <td class="text-left"><strong>Total Compra: </strong></td>
                                 <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>"></td>
                             </tr>
                             </tfoot>
@@ -223,34 +254,53 @@ $total_compra = 0;
 
     });
 
+    function calcBultos(x){
+        let cant = $("#cant_fac"+x).val();
+        let ccaja = $("#ccaja"+x).val();
+        let t_bultos =  cant / ccaja;
+        $("#bultos"+x).val(t_bultos.toFixed(2));
+    }
+
     function subtotal(x){
 
-        let add_porcent = parseFloat($("#precio_uni"+x).val() * 0.40);
-        let precio_ven = parseFloat($("#precio_uni"+x).val()) + add_porcent;
-        //console.log('porcentaje: ' + add_porcent);
-        //console.log('precio venta: ' + precio_ven);
-        $("#precio_ven"+x).val(precio_ven.toFixed(2));
-        let imp = $("#cant_fac"+x).val() * precio_ven;
+        let indice = "#cant_fac"+x;
+        let precio_uni = parseFloat($("#precio_uni"+x).val());
+        let cant = $("#cant_fac"+x).val();
 
 
-        $("#importe_fac"+x).val(imp.toFixed(2));
+        console.log('indice: ' + indice);
+        console.log('precio uni: ' + precio_uni);
+        console.log('cantidad: ' + cant);
+        let importe = parseFloat($("#cant_fac"+x).val() * $("#precio_uni"+x).val());
+        $("#importe_fac"+x).val(importe.toFixed(2));
+    }
+
+    function sumarTotalBultos(x){
+        let total = 0;
+
+        for (i=0;i<x;i++){
+            subtot = $("#bultos"+i).val();
+            total = total + parseFloat(subtot);
+            //console.log('cantidad items: ' + x);
+            //console.log('total: ' + subtot + ' - ' + total);
+        }
+        $("#tot_bul").val(total);
     }
 
     function sumarTotalCompra(x){
         let total = 0;
 
-
         for (i=0;i<x;i++){
             subtot = $("#importe_fac"+i).val();
             total = total + parseFloat(subtot);
-            console.log('cantidad items: ' + x);
-            console.log('total: ' + subtot + ' - ' + total);
+            //console.log('cantidad items: ' + x);
+            //console.log('total: ' + subtot + ' - ' + total);
         }
         $("#total_fac").val(total);
 
     }
 
-    function eliminarItem(id, cod_fac, cod_cli, nom_cli, fecha_fac){
+    function eliminarItem(id, cod_fac, fecha_fac, cod_cli, nom_cli, dire_cli, traspaso, total_compra, tot_bul){
         swal("¿Está seguro que desea eliminar el Item "+id+"?", {
             buttons: {
                 aceptar: "Aceptar",
@@ -262,8 +312,7 @@ $total_compra = 0;
 
                     case "aceptar":
                         this.location.href = './?controller=ventas&action=borrarItem&id='+id;
-                        //sendData('./?controller=compras&action=borrarItem',{id:id});
-                        sendData('./?controller=ventas&action=crear', {cod_fac: cod_fac, cod_pro: cod_cli, nom_cli: ''+nom_cli+'', fecha_fac: ''+fecha_fac+'' });
+                        sendData('./?controller=ventas&action=crear', {cod_fac: cod_fac, fecha_fac: ''+fecha_fac+'', cod_cli: cod_cli, nom_cli: ''+nom_cli+'', dire_cli: ''+dire_cli+'', traspaso: ''+traspaso+'', total_fac: ''+total_compra+'', tot_bul: ''+tot_bul+''  });
                         break;
 
                     default:
