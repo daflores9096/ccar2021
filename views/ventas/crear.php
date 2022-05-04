@@ -1,6 +1,5 @@
 <?php
-
-var_dump($_REQUEST);
+//var_dump($_REQUEST);
 if (isset($ventaList)){
     $cont = count($ventaList);
 }
@@ -14,30 +13,20 @@ if (!isset($_REQUEST['cod_fac'])){
     $total_compra = 0;
     $tot_bul = 0;
 } else {
-    $cod_fac = $_REQUEST['cod_fac'];
-    $cod_cli = $_REQUEST['cod_cli'];
-    $nom_cli = $_REQUEST['nom_cli'];
-    $dire_cli = $_REQUEST['dire_cli'];
-    $traspaso = $_REQUEST['traspaso'];
-
-    if (isset($_REQUEST['total_fac'])){
-        $total_compra = $_REQUEST['total_fac'];
-    } else {
-        $total_compra = 0;
-    }
-
-    if (isset($_REQUEST['tot_bul'])){
-        $tot_bul = $_REQUEST['tot_bul'];
-    } else {
-        $tot_bul = 0;
-    }
+    $cod_fac = $venta->cod_fac;
+    $cod_cli = $venta->cod_cli;
+    $nom_cli = $venta->nom_cli;
+    $dire_cli = $venta->dire_cli;
+    $traspaso = $venta->traspaso;
+    $total_compra = $venta->total_fac;
+    $tot_bul = $venta->tot_bul;
 
 }
 
-if (!isset($_REQUEST['fecha_fac'])){
+if (!isset($venta->fecha_fac)){
     $fecha_fac = date("Y-m-d");
 } else {
-    $fecha_fac = $_REQUEST['fecha_fac'];
+    $fecha_fac = $venta->fecha_fac;
 }
 
 ?>
@@ -328,7 +317,7 @@ if (!isset($_REQUEST['fecha_fac'])){
         form.action = path;
         document.body.appendChild(form);
         //alert('formulario creado...');
-        esperar(250);
+        esperar(200);
 
         for (const key in parameters) {
             const formField = document.createElement('input');

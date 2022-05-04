@@ -22,7 +22,7 @@
             <h4><strong>VENTA NRO: <?php echo $venta->cod_fac ?></strong></h4>
         </div>
         <div class="text-right">
-            <a href="./?controller=ventas&action=crear&cod_fac=<?php echo $venta->cod_fac ?>&cod_cli=<?php echo  $venta->cod_cli ?>&nom_cli=<?php echo  $venta->nom_cli ?>&fecha_fac=<?php echo  $venta->fecha_fac ?>&dire_cli=<?php echo  $venta->dire_cli ?>&traspaso=<?php echo  $venta->traspaso ?>&total_fac=<?php echo $venta->total_fac ?>&tot_bul=<?php echo $venta->tot_bul ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
+            <a href="./?controller=ventas&action=crear&cod_fac=<?php echo $venta->cod_fac ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
         </div>
 
     </div>

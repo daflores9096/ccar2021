@@ -102,7 +102,7 @@ class Venta {
     public static function editar($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul){
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("UPDATE venta SET fecha_fac=?, cod_cli=?, nom_cli=?, dire_cli=?, traspaso=?, total_fac=?, tot_bul=? WHERE cod_fac=?");
-        $sql->execute(array($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul));
+        $sql->execute(array($fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul, $cod_fac));
     }
 
     public static function borrarItem($codigo){

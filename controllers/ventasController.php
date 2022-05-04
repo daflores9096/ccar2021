@@ -27,21 +27,19 @@ class VentasController {
         $productList = Producto::listar();
 
         if (isset($_REQUEST['cod_fac'])){
+            $venta = Venta::buscar($_REQUEST['cod_fac']);
+        }
 
-            $cod_fac = $_REQUEST['cod_fac'];
-            $fecha_fac = $_REQUEST['fecha_fac'];
-            $cod_cli = $_REQUEST['cod_cli'];
-            $nom_cli = $_REQUEST['nom_cli'];
-            $dire_cli = $_REQUEST['dire_cli'];
-            $traspaso = $_REQUEST['traspaso'];
+        if (isset($_REQUEST['cod_fac'])){
 
-            if (isset($_REQUEST['total_fac'])){
-                $total_fac = $_REQUEST['total_fac'];
-                $tot_bul = $_REQUEST['tot_bul'];
-            } else {
-                $total_fac = 0;
-                $tot_bul = 0;
-            }
+            $cod_fac = $venta->cod_fac;
+            $fecha_fac = $venta->fecha_fac;
+            $cod_cli = $venta->cod_cli;
+            $nom_cli = $venta->nom_cli;
+            $dire_cli = $venta->dire_cli;
+            $traspaso = $venta->traspaso;
+            $total_fac = $venta->total_fac;
+            $tot_bul = $venta->tot_bul;
 
 
             $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
@@ -50,16 +48,16 @@ class VentasController {
             $precio_uni = (isset($_REQUEST['precio_uni'])) ? $_REQUEST['precio_uni'] : 0;
             $importe_fac = (isset($_REQUEST['importe_fac'])) ? $_REQUEST['importe_fac'] : 0;
 
-            $venta = Venta::buscar($cod_fac);
+
 
             if (is_null($venta->cod_fac)){
-                Venta::crear($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul);
+                Venta::crear($_REQUEST['cod_fac'], $_REQUEST['fecha_fac'], $_REQUEST['cod_cli'], $_REQUEST['nom_cli'], $_REQUEST['dire_cli'], $_REQUEST['traspaso'], $_REQUEST['total_fac'], $_REQUEST['tot_bul']);
             } else {
                 Venta::editar($cod_fac, $fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul);
             }
 
             if ($cod_item != ''){
-                VentaAux::crear($cod_fac, $cod_item, $bultos, $cant_fac, $precio_uni, $importe_fac);
+                VentaAux::crear($_REQUEST['cod_fac'], $cod_item, $bultos, $cant_fac, $precio_uni, $importe_fac);
             } else {
 
                 if (isset($_REQUEST['cont'])){
