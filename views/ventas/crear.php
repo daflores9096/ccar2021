@@ -186,6 +186,13 @@ if (!isset($venta->fecha_fac)){
                         </table>
                     </div>
                     <?php
+                } else {
+                ?>
+                    <input type="hidden" name="cont" value="<?php echo $indice; ?>">
+                    <input type="hidden" id="tot_bul" name="tot_bul" value="<?php echo $tot_bul; ?>">
+                    <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
+
+                <?php
                 }
                 ?>
 

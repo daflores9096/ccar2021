@@ -77,9 +77,8 @@ class VentasController {
             }
 
 
-            $venta = Venta::buscar($cod_fac);
-            $ventaList = Venta::getListaProductos($cod_fac);
-            //redirect('./?controller=compras&action=lista');
+            $venta = Venta::buscar($_REQUEST['cod_fac']);
+            $ventaList = Venta::getListaProductos($_REQUEST['cod_fac']);
         } else {
             $lastId = Venta::getIdUltimaVenta();
         }
