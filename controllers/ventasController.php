@@ -28,10 +28,12 @@ class VentasController {
 
         if (isset($_REQUEST['cod_fac'])){
             $venta = Venta::buscar($_REQUEST['cod_fac']);
+            //var_dump($venta);
         }
 
-        if (isset($_REQUEST['cod_fac'])){
-
+        if (isset($_REQUEST['edit']) == 0 && isset($venta)){
+            //echo "guardando de VentaObj";
+            echo "<script>console.log('guardando de VentaObj')</script>";
             $cod_fac = $venta->cod_fac;
             $fecha_fac = $venta->fecha_fac;
             $cod_cli = $venta->cod_cli;
@@ -40,6 +42,30 @@ class VentasController {
             $traspaso = $venta->traspaso;
             $total_fac = $venta->total_fac;
             $tot_bul = $venta->tot_bul;
+        } else if (isset($_REQUEST['cod_fac'])) {
+            //echo "guardando de REQUEST";
+            echo "<script>console.log('guardando de REQUEST')</script>";
+            $cod_fac = $_REQUEST['cod_fac'];
+            $fecha_fac = $_REQUEST['fecha_fac'];
+            $cod_cli = $_REQUEST['cod_cli'];
+            $nom_cli = $_REQUEST['nom_cli'];
+            $dire_cli = $_REQUEST['dire_cli'];
+            $traspaso = $_REQUEST['traspaso'];
+            $total_fac = $_REQUEST['total_fac'];
+            $tot_bul = $_REQUEST['tot_bul'];
+        }
+
+
+        if (isset($_REQUEST['cod_fac'])){
+
+//            $cod_fac = $venta->cod_fac;
+//            $fecha_fac = $venta->fecha_fac;
+//            $cod_cli = $venta->cod_cli;
+//            $nom_cli = $venta->nom_cli;
+//            $dire_cli = $venta->dire_cli;
+//            $traspaso = $venta->traspaso;
+//            $total_fac = $venta->total_fac;
+//            $tot_bul = $venta->tot_bul;
 
 
             $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
@@ -75,7 +101,6 @@ class VentasController {
 
 
             }
-
 
             $venta = Venta::buscar($_REQUEST['cod_fac']);
             $ventaList = Venta::getListaProductos($_REQUEST['cod_fac']);
