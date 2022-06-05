@@ -105,25 +105,40 @@ class Venta {
         $sql->execute(array($fecha_fac, $cod_cli, $nom_cli, $dire_cli, $traspaso, $total_fac, $tot_bul, $cod_fac));
     }
 
-    public static function borrarItem($codigo){
+    public static function borrarItem($codigo, $cod_fac, $tot_bul, $total_venta){
         $conexion = BD::crearInstancia();
+        $itemUpdate = self::getItemVenta($codigo);
+
+        $t_bultos = $tot_bul - $itemUpdate['bultos'];
+        $t_venta = $total_venta - $itemUpdate['importe_fac'];
+//        echo $itemUpdate['importe_fac']."<br>";
+//        echo $itemUpdate['bultos']."<br>";
+//        var_dump($itemUpdate);
+//        exit();
+
+        $sql1 = $conexion->prepare("UPDATE venta SET total_fac = ".$t_venta.", tot_bul=".$t_bultos."  WHERE cod_fac=?");
+        $sql1->execute(array($cod_fac));
+
         $sql = $conexion->prepare("DELETE FROM venta_aux WHERE id=?");
         $sql->execute(array($codigo));
+
     }
 
-/*
-    public static function getIdUltimacompra(){
+    public static function getItemVenta($id){
+        //obtener info del item/producto
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT MAX(cod_fac) max_id FROM compra ORDER BY fecha_fac DESC LIMIT 1");
-        $res = $sql->fetchAll();
+        $itemVenta = [];
+        $sql1 = $conexion->prepare("SELECT * FROM venta_aux WHERE Id=? LIMIT 1");
+        $sql1->execute([$id]);
+        $producto = $sql1->fetch();
 
-        foreach ($res as $row){
-            $lastId = $row['max_id'];
-        }
-        return $lastId;
+        $itemVenta = array(
+            "bultos" => $producto["bultos"],
+            "importe_fac" => $producto['importe_fac']
+        );
+
+        return $itemVenta;
     }
-
-    */
 
 }
 

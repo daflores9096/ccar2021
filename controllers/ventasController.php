@@ -114,9 +114,12 @@ class VentasController {
 
     public function borrarItem(){
         $id = $_REQUEST['id'];
-        Venta::borrarItem($id);
-        //redirect('./?controller=compras&action=lista');
-        //echo "Item ".$id." borrado !!!";
+        $cod_fac = $_REQUEST['cod_fac'];
+        $tot_bul = $_REQUEST['tot_bul'];
+        $total_venta = $_REQUEST['total_venta'];
+        Venta::borrarItem($id, $cod_fac, $tot_bul, $total_venta);
+        //echo "borrando item: ".$id." - cod_fac: ".$cod_fac;
+        redirect('./?controller=ventas&action=crear&cod_fac='.$cod_fac);
     }
 
     public function editar(){

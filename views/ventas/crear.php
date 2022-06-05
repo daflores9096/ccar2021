@@ -10,7 +10,7 @@ if (!isset($_REQUEST['cod_fac'])){
     $nom_cli = "";
     $dire_cli = "";
     $traspaso = "";
-    $total_compra = 0;
+    $total_venta = 0;
     $tot_bul = 0;
 } else {
     $cod_fac = $venta->cod_fac;
@@ -18,7 +18,7 @@ if (!isset($_REQUEST['cod_fac'])){
     $nom_cli = $venta->nom_cli;
     $dire_cli = $venta->dire_cli;
     $traspaso = $venta->traspaso;
-    $total_compra = $venta->total_fac;
+    $total_venta = $venta->total_fac;
     $tot_bul = $venta->tot_bul;
 
 }
@@ -162,11 +162,10 @@ if (!isset($venta->fecha_fac)){
                                     <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $precio_c; ?>" style="text-align: right"></td>
                                     <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>" style="text-align: right"></td>
                                     <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>" style="text-align: right"></td>
-                                    <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $fecha_fac ?>,'<?php echo $cod_cli ?>','<?php echo $nom_cli ?>','<?php echo $dire_cli ?>','<?php echo $traspaso ?>',<?php echo $total_compra ?>,<?php echo $tot_bul ?>); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $tot_bul ?>,<?php echo $total_venta ?>); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
                                 <?php
-                                //$total_compra = $total_compra + $row['importe_fac'];
                                 $indice++;
                             }
                             echo 'Cantidad de items: '.$indice;
@@ -180,7 +179,7 @@ if (!isset($venta->fecha_fac)){
                                 <td class="text-right"><input class="form-control" type="text" id="tot_bul" name="tot_bul" value="<?php echo $tot_bul; ?>"></td>
                                 <td colspan="2">&nbsp;</td>
                                 <td class="text-left"><strong>Total Compra: </strong></td>
-                                <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>"></td>
+                                <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_venta; ?>"></td>
                                 <input type="hidden" id="edit" name="edit" value="1">
                             </tr>
                             </tfoot>
@@ -192,7 +191,7 @@ if (!isset($venta->fecha_fac)){
                 ?>
                     <input type="hidden" name="cont" value="<?php echo $indice; ?>">
                     <input type="hidden" id="tot_bul" name="tot_bul" value="<?php echo $tot_bul; ?>">
-                    <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
+                    <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_venta; ?>">
                     <input type="hidden" id="edit" name="edit" value="0">
 
                 <?php
@@ -299,7 +298,7 @@ if (!isset($venta->fecha_fac)){
 
     }
 
-    function eliminarItem(id, cod_fac, fecha_fac, cod_cli, nom_cli, dire_cli, traspaso, total_compra, tot_bul){
+    function eliminarItem(id, cod_fac, tot_bul, total_venta){
         swal("¿Está seguro que desea eliminar el Item "+id+"?", {
             buttons: {
                 aceptar: "Aceptar",
@@ -310,8 +309,8 @@ if (!isset($venta->fecha_fac)){
                 switch (value) {
 
                     case "aceptar":
-                        this.location.href = './?controller=ventas&action=borrarItem&id='+id;
-                        sendData('./?controller=ventas&action=crear', {cod_fac: cod_fac, fecha_fac: ''+fecha_fac+'', cod_cli: cod_cli, nom_cli: ''+nom_cli+'', dire_cli: ''+dire_cli+'', traspaso: ''+traspaso+'', total_fac: ''+total_compra+'', tot_bul: ''+tot_bul+''  });
+                        this.location.href = './?controller=ventas&action=borrarItem&id='+id+'&cod_fac='+cod_fac+'&tot_bul='+tot_bul+'&total_venta='+total_venta;
+                        //sendData('./?controller=ventas&action=crear', {cod_fac: cod_fac});
                         break;
 
                     default:
@@ -327,7 +326,7 @@ if (!isset($venta->fecha_fac)){
         form.action = path;
         document.body.appendChild(form);
         //alert('formulario creado...');
-        esperar(200);
+        esperar(100);
 
         for (const key in parameters) {
             const formField = document.createElement('input');

@@ -80,8 +80,12 @@
                         }
                         ?>
                         <tfoot>
-                        <tr>
-                            <td class="text-left" colspan="5"><strong>Total Venta: </strong></td>
+                        <tr style="background-color: #ededef">
+                            <td class="text-left">&nbsp;</td>
+                            <td class="text-right"><strong>Total Bultos: </strong></td>
+                            <td class="text-right"><strong><?php echo $venta->tot_bul ?></strong></td>
+                            <td class="text-left">&nbsp;</td>
+                            <td class="text-right"><strong>Total Venta: </strong></td>
                             <td class="text-right"><strong><?php echo $venta->total_fac ?></strong></td>
                         </tr>
                         </tfoot>
