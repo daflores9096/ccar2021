@@ -15,38 +15,49 @@ class ComprasController {
         include_once "views/compras/lista.php";
     }
 
+    public function borrar(){
+        $cod_fac = $_GET['cod_fac'];
+        Compra::borrar($cod_fac);
+        redirect('./?controller=compras&action=lista');
+    }
+
     public function crear(){
 
         $proveedorList = Proveedor::listar();
         $productList = Producto::listar();
 
         if (isset($_REQUEST['cod_fac'])){
+            $compra = Compra::buscar($_REQUEST['cod_fac']);
+            //var_dump($compra);
+        }
 
-            //echo "contenido POST: ";
-            //var_dump($_POST);
+        //echo "Edit: ".$_REQUEST['edit'];
 
+        if (isset($_REQUEST['edit']) == 0 && isset($compra)){
+            //echo "guardando de CompraObj";
+            echo "<script>console.log('guardando CompraObj')</script>";
+            $cod_fac = $compra->cod_fac;
+            $fecha_fac = $compra->fecha_fac;
+            $cod_pro = $compra->cod_pro;
+            $nom_pro = $compra->nom_pro;
+            $total_fac = $compra->total_fac;
+        } else if (isset($_REQUEST['cod_fac'])) {
+            //echo "guardando de REQUEST";
+            echo "<script>console.log('guardando REQUEST')</script>";
             $cod_fac = $_REQUEST['cod_fac'];
             $fecha_fac = $_REQUEST['fecha_fac'];
             $cod_pro = $_REQUEST['cod_pro'];
             $nom_pro = $_REQUEST['nom_pro'];
+            $total_fac = $_REQUEST['total_fac'];
+        }
 
-            if (isset($_REQUEST['total_fac'])){
-                $total_fac = $_REQUEST['total_fac'];
-            } else {
-                $total_fac = 0;
-            }
-
+        if (isset($_REQUEST['cod_fac'])) {
 
             $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
             $cant_fac = (isset($_REQUEST['cant_fac'])) ? $_REQUEST['cant_fac'] : 0;
             $precio_uni = (isset($_REQUEST['precio_uni'])) ? $_REQUEST['precio_uni'] : 0;
             $precio_ven = (isset($_REQUEST['precio_ven'])) ? $_REQUEST['precio_ven'] : 0;
             $importe_fac = (isset($_REQUEST['importe_fac'])) ? $_REQUEST['importe_fac'] : 0;
-
-            $compra = Compra::buscar($cod_fac);
-
-            //echo "<br><br>";
-            //var_dump($compra);
 
             if (is_null($compra->cod_fac)){
                 Compra::crear($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
@@ -74,29 +85,27 @@ class ComprasController {
 
             }
 
-
             $compra = Compra::buscar($cod_fac);
             $compraList = Compra::getListaProductos($cod_fac);
-            //redirect('./?controller=compras&action=lista');
+
         } else {
-            $lastId = Compra::getIdUltimacompra();
+            $lastId = Compra::getIdUltimaCompra();
         }
 
         include_once "views/compras/crear.php";
 
     }
 
-        public function borrar(){
-            $cod_fac = $_GET['cod_fac'];
-            Compra::borrar($cod_fac);
-            redirect('./?controller=compras&action=lista');
-        }
 
         public function borrarItem(){
             $id = $_REQUEST['id'];
-            Compra::borrarItem($id);
+            $cod_fac = $_REQUEST['cod_fac'];
+            $total_compra = $_REQUEST['total_compra'];
+
+            Compra::borrarItem($id, $cod_fac, $total_compra);
             //redirect('./?controller=compras&action=lista');
             //echo "Item ".$id." borrado !!!";
+            redirect('./?controller=compras&action=crear&cod_fac='.$cod_fac);
         }
 
         public function editar(){

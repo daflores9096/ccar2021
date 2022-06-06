@@ -1,32 +1,27 @@
 <?php
-//var_dump($proveedorList);
-//var_dump($lastId);
-
-//var_dump($_POST);
+//var_dump($_REQUEST);
 if (isset($compraList)){
-
     $cont = count($compraList);
-    //echo "<br>compraList (".$cont." items ): <br>";
-    //var_dump($compraList);
 }
 
 if (!isset($_REQUEST['cod_fac'])){
     $cod_fac = $lastId + 1;
     $cod_pro = "";
     $nom_pro = "";
+    $total_compra = 0;
 } else {
-    $cod_fac = $_REQUEST['cod_fac'];
-    $cod_pro = $_REQUEST['cod_pro'];
-    $nom_pro = $_REQUEST['nom_pro'];
+    $cod_fac = $compra->cod_fac;
+    $cod_pro = $compra->cod_pro;
+    $nom_pro = $compra->nom_pro;
+    $total_compra = $compra->total_fac;
 }
 
-if (!isset($_REQUEST['fecha_fac'])){
+if (!isset($compra->fecha_fac)){
     $fecha_fac = date("Y-m-d");
 } else {
-    $fecha_fac = $_REQUEST['fecha_fac'];
+    $fecha_fac = $compra->fecha_fac;
 }
 
-$total_compra = 0;
 ?>
 <div class="container-fluid">
 <div class="card mt-5">
@@ -62,8 +57,8 @@ $total_compra = 0;
                         ?>
                     </select>
                     <br>
-                    <input type="text" id="cod_pro" name="cod_pro" value="<?php echo $cod_pro ?>" required>
-                    <input type="text" id="nom_pro" name="nom_pro" value="<?php echo $nom_pro ?>" required>
+                    <input type="text" id="cod_pro" name="cod_pro" value="<?php echo $cod_pro ?>" required readonly style="background-color: #E9ECEF">
+                    <input type="text" id="nom_pro" name="nom_pro" value="<?php echo $nom_pro ?>" required readonly style="background-color: #E9ECEF">
                 </div>
 
             </div>
@@ -93,18 +88,18 @@ $total_compra = 0;
                         <tr>
                             <th>Codigo</th>
                             <th>Producto</th>
-                            <th>Cantidad</th>
+<!--                            <th>Cantidad</th>-->
                             <th>Precio Costo</th>
-                            <th>Precio Venta</th>
-                            <th>Importe</th>
+<!--                            <th>Precio Venta</th>-->
+<!--                            <th>Importe</th>-->
                         </tr>
                         <tr>
-                            <td><input type="text" name="cod_item" id="cod_item"></td>
-                            <td><input type="text" name="nom_item" id="nom_item"></td>
-                            <td><input type="text" name="cant_item" id="cant_item" value="0"></td>
-                            <td><input type="text" name="precio_uni" id="precio_uni" value="0"></td>
-                            <td><input type="text" name="precio_ven" id="precio_ven" value="0"></td>
-                            <td><input type="text" name="importe_fac" id="importe_fac" value="0"></td>
+                            <td><input type="text" name="cod_item" id="cod_item" readonly style="background-color: #E9ECEF"></td>
+                            <td><input type="text" name="nom_item" id="nom_item" readonly style="background-color: #E9ECEF"></td>
+<!--                            <td><input type="text" name="cant_item" id="cant_item" value="0"></td>-->
+                            <td><input type="text" name="precio_uni" id="precio_uni" value="0" readonly style="background-color: #E9ECEF"></td>
+<!--                            <td><input type="text" name="precio_ven" id="precio_ven" value="0"></td>-->
+<!--                            <td><input type="text" name="importe_fac" id="importe_fac" value="0"></td>-->
                         </tr>
                     </table>
 
@@ -139,14 +134,14 @@ $total_compra = 0;
                             <td><?php echo $row['cod_item']; ?><input type="hidden" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
                             <td><?php echo $row['nom_item']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['nom_item']; ?>"></td>
                             <td class="text-right""><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>" value="<?php echo $row['cant_fac']; ?>" onchange="subtotal(<?php echo $indice ?>); sumarTotalCompra(<?php echo $cantidad; ?>)"></td>
-                            <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>"></td>
-                            <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $row['precio_ven']; ?>"></td>
-                            <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>"></td>
-                            <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $cod_pro ?>,'<?php echo $nom_pro ?>','<?php echo $fecha_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" value="<?php echo $row['precio_uni']; ?>" readonly style="background-color: #E9ECEF"></td>
+                            <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" value="<?php echo $row['precio_ven']; ?>" readonly style="background-color: #E9ECEF"></td>
+                            <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" value="<?php echo $row['importe_fac']; ?>" readonly style="background-color: #E9ECEF"></td>
+                            <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,'<?php echo $total_compra ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
                         </tr>
 
                         <?php
-                        $total_compra = $total_compra + $row['importe_fac'];
+                        //$total_compra = $total_compra + $row['importe_fac'];
                         $indice++;
                     }
                     echo 'Cantidad de items: '.$indice;
@@ -156,12 +151,21 @@ $total_compra = 0;
                     <tfoot>
                     <tr>
                         <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
-                        <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>"></td>
+                        <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>" readonly></td>
+                        <input type="hidden" id="edit" name="edit" value="1">
                     </tr>
                     </tfoot>
                 </table>
             </div>
             <?php
+            } else {
+                $indice = 0;
+                ?>
+                <input type="hidden" name="cont" value="<?php echo $indice; ?>">
+                <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
+                <input type="hidden" id="edit" name="edit" value="0">
+
+                <?php
             }
             ?>
 
@@ -246,7 +250,7 @@ $total_compra = 0;
 
     }
 
-    function eliminarItem(id, cod_fac, cod_pro, nom_pro, fecha_fac){
+    function eliminarItem(id, cod_fac, total_compra){
         swal("¿Está seguro que desea eliminar el Item "+id+"?", {
             buttons: {
                 aceptar: "Aceptar",
@@ -257,9 +261,9 @@ $total_compra = 0;
                 switch (value) {
 
                     case "aceptar":
-                        this.location.href = './?controller=compras&action=borrarItem&id='+id;
+                        this.location.href = './?controller=compras&action=borrarItem&id='+id+'&cod_fac='+cod_fac+'&total_compra='+total_compra;
                         //sendData('./?controller=compras&action=borrarItem',{id:id});
-                        sendData('./?controller=compras&action=crear', {cod_fac: cod_fac, cod_pro: cod_pro, nom_pro: ''+nom_pro+'', fecha_fac: ''+fecha_fac+'' });
+                        //sendData('./?controller=compras&action=crear', {cod_fac: cod_fac, cod_pro: cod_pro, nom_pro: ''+nom_pro+'', fecha_fac: ''+fecha_fac+'' });
                         break;
 
                     default:

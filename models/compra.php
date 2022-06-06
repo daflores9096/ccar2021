@@ -84,10 +84,31 @@ class Compra {
         $sql2->execute(array($codigo));
     }
 
-    public static function borrarItem($codigo){
+    public static function borrarItem($codigo, $cod_fac, $total_compra){
         $conexion = BD::crearInstancia();
+        $itemUpdate = self::getItemCompra($codigo);
+        $t_compra = $total_compra - $itemUpdate['importe_fac'];
+
+        $sql1 = $conexion->prepare("UPDATE compra SET total_fac = ".$t_compra." WHERE cod_fac=?");
+        $sql1->execute(array($cod_fac));
+
         $sql = $conexion->prepare("DELETE FROM compra_aux WHERE id=?");
         $sql->execute(array($codigo));
+    }
+
+    public static function getItemCompra($id){
+        //obtener info del item/producto
+        $conexion = BD::crearInstancia();
+        $itemCompra = [];
+        $sql1 = $conexion->prepare("SELECT * FROM compra_aux WHERE Id=? LIMIT 1");
+        $sql1->execute([$id]);
+        $producto = $sql1->fetch();
+
+        $itemCompra = array(
+            "importe_fac" => $producto['importe_fac']
+        );
+
+        return $itemCompra;
     }
 
     public static function buscar($codigo){

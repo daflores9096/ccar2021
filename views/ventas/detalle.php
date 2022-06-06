@@ -80,7 +80,7 @@
                         }
                         ?>
                         <tfoot>
-                        <tr style="background-color: #ededef">
+                        <tr style="background-color: #E9ECEF">
                             <td class="text-left">&nbsp;</td>
                             <td class="text-right"><strong>Total Bultos: </strong></td>
                             <td class="text-right"><strong><?php echo $venta->tot_bul ?></strong></td>

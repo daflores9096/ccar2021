@@ -64,8 +64,8 @@ if (!isset($venta->fecha_fac)){
                             ?>
                         </select>
                         <br>
-                        <input type="text" id="cod_cli" name="cod_cli" value="<?php echo $cod_cli ?>" required>
-                        <input type="text" id="nom_cli" name="nom_cli" value="<?php echo $nom_cli ?>" required>
+                        <input type="text" id="cod_cli" name="cod_cli" value="<?php echo $cod_cli ?>" required readonly style="background-color: #E9ECEF">
+                        <input type="text" id="nom_cli" name="nom_cli" value="<?php echo $nom_cli ?>" required readonly style="background-color: #E9ECEF">
                     </div>
 
                     <div class="row mt-3">
@@ -105,20 +105,20 @@ if (!isset($venta->fecha_fac)){
                             <tr>
                                 <th>Codigo</th>
                                 <th>Artículo</th>
-                                <th>C. Caja</th>
-                                <th>T. Bultos</th>
-                                <th>Cantidad</th>
-                                <th>Precio Costo</th>
+<!--                                <th>C. Caja</th>-->
+<!--                                <th>T. Bultos</th>-->
+<!--                                <th>Cantidad</th>-->
+<!--                                <th>Precio Costo</th>-->
                                 <th>Precio Venta</th>
-                                <th>Importe</th>
+<!--                                <th>Importe</th>-->
                             </tr>
                             <tr>
-                                <td><input type="text" name="cod_item" id="cod_item"></td>
-                                <td><input type="text" name="nom_item" id="nom_item" size="45"></td>
-                                <td><input type="text" name="bultos" id="bultos" value="0" size="5"></td>
-                                <td><input type="text" name="cant_fac" id="cant_fac" value="0" size="5"></td>
-                                <td><input type="text" name="precio_uni" id="precio_uni" value="0" size="10"></td>
-                                <td><input type="text" name="importe_fac" id="importe_fac" value="0" size="10"></td>
+                                <td><input type="text" name="cod_item" id="cod_item" readonly style="background-color: #E9ECEF"></td>
+                                <td><input type="text" name="nom_item" id="nom_item" size="45" readonly style="background-color: #E9ECEF"></td>
+<!--                                <td><input type="text" name="bultos" id="bultos" value="0" size="5"></td>-->
+<!--                                <td><input type="text" name="cant_fac" id="cant_fac" value="0" size="5"></td>-->
+                                <td><input type="text" name="precio_uni" id="precio_uni" value="0" size="10" readonly style="background-color: #E9ECEF"></td>
+<!--                                <td><input type="text" name="importe_fac" id="importe_fac" value="0" size="10"></td>-->
                             </tr>
                         </table>
 
@@ -156,12 +156,12 @@ if (!isset($venta->fecha_fac)){
                                     <input type="hidden" name="id<?php echo $indice ?>" value="<?php echo $row['id']; ?>">
                                     <td><?php echo $row['cod_item']; ?><input type="hidden" name="cod_item<?php echo $indice ?>" value="<?php echo $row['cod_item']; ?>"></td>
                                     <td><?php echo $row['producto']; ?><input type="hidden" name="nom_item<?php echo $indice ?>" value="<?php echo $row['producto']; ?>"></td>
-                                    <td class="text-right""><input type="text" size="10" id="ccaja<?php echo $indice ?>" name="ccaja<?php echo $indice ?>" readonly value="<?php echo $row['ccaja']; ?>" style="text-align: right"></td>
-                                    <td class="text-right""><input type="text" size="10" id="bultos<?php echo $indice ?>" name="bultos<?php echo $indice ?>" readonly value="<?php echo $row['bultos']; ?>" style="text-align: right"></td>
+                                    <td class="text-right""><input type="text" size="10" id="ccaja<?php echo $indice ?>" name="ccaja<?php echo $indice ?>" readonly value="<?php echo $row['ccaja']; ?>" style="text-align: right; background-color: #E9ECEF"></td>
+                                    <td class="text-right""><input type="text" size="10" id="bultos<?php echo $indice ?>" name="bultos<?php echo $indice ?>" readonly value="<?php echo $row['bultos']; ?>" style="text-align: right; background-color: #E9ECEF"></td>
                                     <td class="text-right"><input type="text" size="10" id="cant_fac<?php echo $indice ?>" name="cant_fac<?php echo $indice ?>"  value="<?php echo $row['cant_fac']; ?>" style="text-align: right" onchange="calcBultos(<?php echo $indice; ?>); subtotal(<?php echo $indice; ?>); sumarTotalCompra(<?php echo $cantidad; ?>); sumarTotalBultos(<?php echo $cantidad; ?>)"></td>
-                                    <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $precio_c; ?>" style="text-align: right"></td>
-                                    <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>" style="text-align: right"></td>
-                                    <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>" style="text-align: right"></td>
+                                    <td class="text-right"><input type="text" size="10" id="precio_ven<?php echo $indice ?>" name="precio_ven<?php echo $indice ?>" readonly value="<?php echo $precio_c; ?>" style="text-align: right; background-color: #E9ECEF"></td>
+                                    <td class="text-right"><input type="text" size="10" id="precio_uni<?php echo $indice ?>" name="precio_uni<?php echo $indice ?>" readonly value="<?php echo $row['precio_uni']; ?>" style="text-align: right; background-color: #E9ECEF"></td>
+                                    <td class="text-right"><input type="text" size="10" id="importe_fac<?php echo $indice ?>" name="importe_fac<?php echo $indice ?>" readonly value="<?php echo $row['importe_fac']; ?>" style="text-align: right; background-color: #E9ECEF"></td>
                                     <td><a href="javascript:void(0)" onclick="eliminarItem(<?php echo $row['id'] ?>,<?php echo $cod_fac ?>,<?php echo $tot_bul ?>,<?php echo $total_venta ?>); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 

@@ -58,16 +58,6 @@ class VentasController {
 
         if (isset($_REQUEST['cod_fac'])){
 
-//            $cod_fac = $venta->cod_fac;
-//            $fecha_fac = $venta->fecha_fac;
-//            $cod_cli = $venta->cod_cli;
-//            $nom_cli = $venta->nom_cli;
-//            $dire_cli = $venta->dire_cli;
-//            $traspaso = $venta->traspaso;
-//            $total_fac = $venta->total_fac;
-//            $tot_bul = $venta->tot_bul;
-
-
             $cod_item = (isset($_REQUEST['cod_item'])) ? $_REQUEST['cod_item'] : '';
             $cant_fac = (isset($_REQUEST['cant_fac'])) ? $_REQUEST['cant_fac'] : 0;
             $bultos = (isset($_REQUEST['bultos'])) ? $_REQUEST['bultos'] : 0;
