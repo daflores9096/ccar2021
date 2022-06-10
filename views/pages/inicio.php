@@ -1,7 +1,7 @@
 <div class="jumbotron">
-    <h1 class="display-4">Pagina Inicio</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <h1 class="display-4">Control de Inventarios</h1>
+    <p class="lead">Herramienta de Control de Productos, Compras, Ventas, Clientes y Proveedores.</p>
     <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+    <p>CCAR9096 - Version 2.0.1</p>
+<!--    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
 </div>

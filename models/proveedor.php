@@ -38,6 +38,13 @@ class Proveedor {
         return $listaProveedores;
     }
 
+    public static function borrar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM proveedor WHERE cod_pro=?");
+        $sql->execute(array($codigo));
+    }
+
+
     /*
     public static function getListaProductos ($cod_fac) {
         $compraList = [];

@@ -86,6 +86,12 @@
                     <a class="nav-link active" aria-current="page" href="./?">Inicio</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="?controller=cliente&action=lista">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="?controller=proveedor&action=lista">Proveedores</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="?controller=products&action=lista">Productos</a>
                 </li>
                 <li class="nav-item">

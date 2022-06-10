@@ -40,6 +40,19 @@ class Cliente {
         return $listaClientes;
     }
 
+    public static function borrar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("DELETE FROM cliente WHERE cod_cli=?");
+        $sql->execute(array($codigo));
+    }
+
+    public static function crear($cod_cli, $nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli){
+
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("INSERT INTO cliente (cod_cli, nom_cli, contacto_sec, dire_cli, dire_sec, ciudad_cli, tel_cli, tel_sec, email_cli, desc_cli) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        $sql->execute(array($cod_cli, $nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli));
+    }
+
     /*
     public static function getListaProductos ($cod_fac) {
         $compraList = [];
