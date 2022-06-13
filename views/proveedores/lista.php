@@ -1,5 +1,5 @@
 <br>
-<h1 class="bd-title" id="content">Lista de Clientes</h1>
+<h1 class="bd-title" id="content">Lista de Proveedores</h1>
 <div class="mt-3">
     <a href="?controller=proveedor&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Proveedor</a>
 </div>
