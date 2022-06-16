@@ -28,7 +28,31 @@ class ClienteController {
             Cliente::crear($cod_cli, $nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli);
             redirect('./?controller=cliente&action=lista');
         }
+        $lastId = Cliente::getClienteLastId();
         include_once "views/clientes/crear.php";
+
+    }
+
+    public function editar(){
+        $cod_cli = $_REQUEST['cod_cli'];
+        $cliente = Cliente::buscar($cod_cli);
+        if ($_POST){
+            $cod_cli = $_POST['cod_cli'];
+            $nom_cli = $_POST['nom_cli'];
+            $contacto_sec = $_POST['contacto_sec'];
+            $dire_cli = $_POST['dire_cli'];
+            $dire_sec = $_POST['dire_sec'];
+            $ciudad_cli = $_POST['ciudad_cli'];
+            $tel_cli = $_POST['tel_cli'];
+            $tel_sec = $_POST['tel_sec'];
+            $email_cli = $_POST['email_cli'];
+            $desc_cli = $_POST['desc_cli'];
+
+            Cliente::editar($cod_cli, $nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli);
+            redirect('./?controller=cliente&action=lista');
+        }
+        $lastId = Cliente::getClienteLastId();
+        include_once "views/clientes/detalle.php";
 
     }
 
@@ -37,6 +61,36 @@ class ClienteController {
         Cliente::borrar($cod_cli);
         redirect('./?controller=cliente&action=lista');
     }
+
+
+    public function detalle(){
+        $cod_cli = $_GET['cod_cli'];
+        $cliente = Cliente::buscar($cod_cli);
+        include_once "./views/clientes/detalle.php";
+    }
+
+//    public function editar(){
+//        $cod_cli = $_GET['cod_cli'];
+//        $cliente = Producto::buscar($cod_cli);
+//
+//        if ($_POST){
+//            $cod_cli = $_POST['cod_cli'];
+//            $nom_cli = $_POST['nom_cli'];
+//            $contacto_sec = $_POST['contacto_sec'];
+//            $dire_cli = $_POST['dire_cli'];
+//            $dire_sec = $_POST['dire_sec'];
+//            $ciudad_cli = $_POST['ciudad_cli'];
+//            $tel_cli = $_POST['tel_cli'];
+//            $tel_sec = $_POST['tel_sec'];
+//            $email_cli = $_POST['email_cli'];
+//            $desc_cli = $_POST['desc_cli'];
+//
+//            Producto::editar($cod_cli, $nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli);
+//            redirect('./?controller=cliente&action=lista');
+//        }
+//
+//        include_once "views/products/editar.php";
+//    }
 
     /*
     public function editar(){

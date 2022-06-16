@@ -38,12 +38,43 @@ class Proveedor {
         return $listaProveedores;
     }
 
+    public static function crear($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro){
+
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("INSERT INTO proveedor (cod_pro, nom_pro, contacto_sec, dire_pro, ciudad_pro, tel_pro, tel_sec, email_pro, desc_pro) VALUES (?,?,?,?,?,?,?,?,?)");
+        $sql->execute(array($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro));
+    }
+
     public static function borrar($codigo){
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("DELETE FROM proveedor WHERE cod_pro=?");
         $sql->execute(array($codigo));
     }
 
+    public static function getProveedorLastId(){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT MAX(cod_pro) max_id FROM proveedor ORDER BY cod_pro DESC LIMIT 1");
+        $res = $sql->fetchAll();
+
+        foreach ($res as $row){
+            $lastId = $row['max_id'];
+        }
+        return $lastId;
+    }
+
+    public static function buscar($codigo){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("SELECT * FROM proveedor WHERE cod_pro=?");
+        $sql->execute(array($codigo));
+        $proveedor = $sql->fetch();
+        return new Proveedor($proveedor['cod_pro'],$proveedor['nom_pro'],$proveedor['contacto_sec'],$proveedor['dire_pro'],$proveedor['ciudad_pro'],$proveedor['tel_pro'],$proveedor['tel_sec'],$proveedor['email_pro'],$proveedor['desc_pro']);
+    }
+
+    public static function editar($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE proveedor SET nom_pro=?, contacto_sec=?, dire_pro=?, ciudad_pro=?, tel_pro=?, tel_sec=?, email_pro=?, desc_pro=? WHERE cod_pro=?");
+        $sql->execute(array($nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro, $cod_pro));
+    }
 
     /*
     public static function getListaProductos ($cod_fac) {

@@ -41,7 +41,7 @@ if (!isset($venta->fecha_fac)){
                 <div class="row mt-3">
                     <div class="col-md-6 form-group">
                         <label class="form-label" for="cod_item">Nro. Venta <span style="color: red">(*)</span>:</label>
-                        <input class="form-control" type="text" id="cod_fac" name="cod_fac" required value="<?php echo $cod_fac ?>">
+                        <input class="form-control" type="text" id="cod_fac" name="cod_fac" required readonly value="<?php echo $cod_fac ?>">
                     </div>
                     <div class="col-md-6 form-group">
                         <label class="form-label" for="nom_item">Fecha <span style="color: red">(*):</label>

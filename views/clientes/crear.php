@@ -1,3 +1,7 @@
+<?php
+//var_dump($lastId);
+$cod_cli_new = $lastId + 1;
+?>
 <div class="card mt-5">
     <div class="card-header">
         <h4><strong>AGREGAR NUEVO CLIENTE</strong></h4>
@@ -8,7 +12,7 @@
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="cod_item">Código Cliente <span style="color: red">(*)</span>:</label>
-                    <input class="form-control" type="text" id="cod_cli" name="cod_cli" required placeholder="Ingrese el código del Cliente">
+                    <input class="form-control" type="text" id="cod_cli" name="cod_cli" value="<?php echo $cod_cli_new ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="nom_item">Nombre Cliente<span style="color: red">(*)</span>:</label>

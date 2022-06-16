@@ -27,6 +27,7 @@ class ProveedorController {
             Proveedor::crear($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro);
             redirect('./?controller=proveedor&action=lista');
         }
+        $lastId = Proveedor::getProveedorLastId();
         include_once "views/proveedores/crear.php";
 
     }
@@ -37,6 +38,27 @@ class ProveedorController {
         redirect('./?controller=proveedor&action=lista');
     }
 
+    public function editar(){
+        $cod_pro = $_REQUEST['cod_pro'];
+        $proveedor = Proveedor::buscar($cod_pro);
+        if ($_POST){
+            $cod_pro = $_POST['cod_pro'];
+            $nom_pro = $_POST['nom_pro'];
+            $contacto_sec = $_POST['contacto_sec'];
+            $dire_pro = $_POST['dire_pro'];
+            $ciudad_pro = $_POST['ciudad_pro'];
+            $tel_pro = $_POST['tel_pro'];
+            $tel_sec = $_POST['tel_sec'];
+            $email_pro = $_POST['email_pro'];
+            $desc_pro = $_POST['desc_pro'];
+
+            Proveedor::editar($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro);
+            redirect('./?controller=proveedor&action=lista');
+        }
+        $lastId = Proveedor::getProveedorLastId();
+        include_once "views/proveedores/detalle.php";
+
+    }
     /*
     public function editar(){
         $cod_fac = $_GET['cod_fac'];
