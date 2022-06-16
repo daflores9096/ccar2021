@@ -1,18 +1,20 @@
+<?php
+//var_dump($movimientoCliente);
+//var_dump($infoCliente);
+?>
+
 <br>
-<h1 class="bd-title" id="content">Lista de Clientes</h1>
-<div class="mt-3">
-    <a href="?controller=cliente&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Cliente</a>
-</div>
+<h1 class="bd-title" id="content">Movimiento Cliente <?php echo $infoCliente->nom_cli ?></h1>
 <br>
-<table class="display compact" id="listaClientes">
+<table class="display compact" id="movimientoCliente">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Codigo</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Ciudad</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Email</th>
+        <th scope="col">Nro.Venta</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Traspaso</th>
+        <th scope="col">Total Bultos</th>
+        <th scope="col">Total Venta</th>
         <th scope="col">Acciones</th>
     </tr>
     </thead>
@@ -20,33 +22,47 @@
     <?php
 
     $cont = 1;
-    foreach ($cliente as $row){//$productos viene de productController
+    $total_Ventas = 0;
+    foreach ($movimientoCliente as $row){//$productos viene de productController
         ?>
         <tr>
             <th><?php echo $cont ?></th>
-            <td><?php echo $row->cod_cli ?></td>
-            <td><?php echo $row->nom_cli ?></td>
-            <td><?php echo $row->ciudad_cli ?></td>
-            <td><?php echo $row->tel_cli ?></td>
-            <td><?php echo $row->email_cli ?></td>
+            <td><?php echo $row['cod_fac'] ?></td>
+            <td><?php echo $row['fecha_fac'] ?></td>
+            <td><?php echo $row['traspaso'] ?></td>
+            <td style="text-align: right"><?php echo $row['tot_bul'] ?></td>
+            <td style="text-align: right"><?php echo $row['total_fac'] ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=cliente&action=detalle&cod_cli=<?php echo $row->cod_cli; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="eliminarCliente('<?php echo $row->cod_cli ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-                    <a href="?controller=cliente&action=movimiento&cod_cli=<?php echo $row->cod_cli; ?>" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>
+                    <a href="?controller=ventas&action=detalle&cod_fac=<?php echo $row['cod_fac']; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
                 </div>
             </td>
         </tr>
         <?php
         $cont++;
+        $total_Ventas = $total_Ventas + $row['total_fac'];
     }
     ?>
     </tbody>
 </table>
+<br>
+<div class="container" style="background-color: #ededef; padding: 5px 20px 5px 20px">
+    <div class="row">
+        <div class="col-md-6"><h3>Total Ventas:</h3></div>
+        <div class="col-md-6" style="text-align: right"><h3><?php echo $total_Ventas; ?></h3></div>
+    </div>
+</div>
+
+
+
+<div class="text-center mt-3">
+    <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
+    <a class="btn btn-danger" onclick="history.back()" >Volver</a>
+</div>
 
 <script>
     $(document).ready(function() {
-        $('#listaClientes').DataTable({
+        $('#movimientoCliente').DataTable({
             stateSave: true,
             stripeClasses:[],
             "language": {

@@ -69,6 +69,13 @@ class ClienteController {
         include_once "./views/clientes/detalle.php";
     }
 
+    public function movimiento(){
+        $cod_cli = $_REQUEST['cod_cli'];
+        $infoCliente = Cliente::buscar($cod_cli);
+        $movimientoCliente = Cliente::getMovimientoCliente($cod_cli);
+        include_once "views/clientes/movimiento.php";
+    }
+
 //    public function editar(){
 //        $cod_cli = $_GET['cod_cli'];
 //        $cliente = Producto::buscar($cod_cli);

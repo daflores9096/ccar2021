@@ -78,6 +78,13 @@ class Cliente {
         $sql->execute(array($nom_cli, $contacto_sec, $dire_cli, $dire_sec, $ciudad_cli, $tel_cli, $tel_sec, $email_cli, $desc_cli, $cod_cli));
     }
 
+    public static function getMovimientoCliente($cod_cli){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT * FROM venta WHERE cod_cli=$cod_cli ORDER BY fecha_fac DESC");
+        $res = $sql->fetchAll();
+        return $res;
+    }
+
     /*
     public static function getListaProductos ($cod_fac) {
         $compraList = [];
