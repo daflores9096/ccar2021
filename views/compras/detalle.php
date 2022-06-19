@@ -13,8 +13,7 @@
 </style>
 
 <?php
-//$path = '/?controller=compras&action=crear';
-//$params = '{cod_fac:'.$compra->cod_fac.', cod_pro:'. $compra->cod_pro.', nom_pro:'.$compra->nom_pro.', fecha_fac:'.$compra->fecha_fac.' }';
+//var_dump($compraList);
 ?>
 <div class="card mt-5">
     <div class="card-header">
@@ -57,7 +56,8 @@
                         <thead class="table-light">
                         <tr>
                             <th>Codigo</th>
-                            <th>Detalle</th>
+                            <th>Artículo</th>
+                            <th>Unidad</th>
                             <th class="text-right">Cantidad</th>
                             <th class="text-right">P. Compra</th>
                             <th class="text-right">P. Venta</th>
@@ -71,6 +71,7 @@
                             <tr>
                                 <td><?php echo $row['cod_item']; ?></td>
                                 <td><?php echo $row['nom_item']; ?></td>
+                                <td><?php echo $row['unid_item']; ?></td>
                                 <td class="text-right"><?php echo $row['cant_fac']; ?></td>
                                 <td class="text-right"><?php echo $row['precio_uni']; ?></td>
                                 <td class="text-right"><?php echo $row['precio_ven']; ?></td>
@@ -81,7 +82,7 @@
                         ?>
                         <tfoot>
                         <tr style="background-color: #E9ECEF">
-                            <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
+                            <td class="text-left" colspan="6"><strong>Total Compra: </strong></td>
                             <td class="text-right"><strong><?php echo $compra->total_fac ?></strong></td>
                         </tr>
                         </tfoot>

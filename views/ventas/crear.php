@@ -1,5 +1,5 @@
 <?php
-//var_dump($_REQUEST);
+//var_dump($productList);
 if (isset($ventaList)){
     $cont = count($ventaList);
 }
@@ -89,7 +89,7 @@ if (!isset($venta->fecha_fac)){
                             <?php
                             foreach ($productList as $row){
                                 ?>
-                                <option value="<?php echo $row->codigo ?>" data-precio="<?php echo $row->precio; ?>"><?php echo $row->producto ?></option>
+                                <option value="<?php echo $row->codigo ?>" data-precio="<?php echo $row->precio; ?>"><?php echo $row->codigo.' - '.$row->producto ?></option>
                                 <?php
                             }
                             ?>
@@ -105,20 +105,12 @@ if (!isset($venta->fecha_fac)){
                             <tr>
                                 <th>Codigo</th>
                                 <th>Artículo</th>
-<!--                                <th>C. Caja</th>-->
-<!--                                <th>T. Bultos</th>-->
-<!--                                <th>Cantidad</th>-->
-<!--                                <th>Precio Costo</th>-->
                                 <th>Precio Venta</th>
-<!--                                <th>Importe</th>-->
                             </tr>
                             <tr>
                                 <td><input type="text" name="cod_item" id="cod_item" readonly style="background-color: #E9ECEF"></td>
                                 <td><input type="text" name="nom_item" id="nom_item" size="45" readonly style="background-color: #E9ECEF"></td>
-<!--                                <td><input type="text" name="bultos" id="bultos" value="0" size="5"></td>-->
-<!--                                <td><input type="text" name="cant_fac" id="cant_fac" value="0" size="5"></td>-->
                                 <td><input type="text" name="precio_uni" id="precio_uni" value="0" size="10" readonly style="background-color: #E9ECEF"></td>
-<!--                                <td><input type="text" name="importe_fac" id="importe_fac" value="0" size="10"></td>-->
                             </tr>
                         </table>
 

@@ -33,7 +33,10 @@ class Compra {
     public static function getListaProductos ($cod_fac) {
         $compraList = [];
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT * FROM compra_aux WHERE cod_fac=$cod_fac");
+        $sql = $conexion->query("SELECT ca.*, it.unid_item 
+                                          FROM compra_aux ca 
+                                              INNER JOIN item it ON ca.cod_item=it.cod_item
+                                          WHERE ca.cod_fac=$cod_fac");
         $res = $sql->fetchAll();
 
         foreach ($res as $compra){
@@ -49,6 +52,7 @@ class Compra {
                                 "cod_fac" => $compra['cod_fac'],
                                 "cod_item" => $compra['cod_item'],
                                 "nom_item" => $producto["nom_item"],
+                                "unid_item" => $producto["unid_item"],
                                 "cant_fac" => $compra['cant_fac'],
                                 "precio_uni" => $compra['precio_uni'],
                                 "precio_ven" => $compra['precio_ven'],
