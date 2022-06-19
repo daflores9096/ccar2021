@@ -1,52 +1,64 @@
+<?php
+//var_dump($movimientoCliente);
+//var_dump($infoCliente);
+?>
+
 <br>
-<h1 class="bd-title" id="content">Lista de Proveedores</h1>
-<div class="mt-3">
-    <a href="?controller=proveedor&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Proveedor</a>
-</div>
+<h1 class="bd-title" id="content">Movimiento Proveedor <?php echo $infoProveedor->nom_pro ?></h1>
 <br>
-<table class="display compact" id="listaProveedores">
+<table class="display compact" id="movimientoProveedor">
     <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">Codigo</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Ciudad</th>
-        <th scope="col">Telefono</th>
-        <th scope="col">Email</th>
-        <th scope="col">Acciones</th>
+        <th scope="col">Nro.Compra</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Total Venta</th>
+        <th scope="col" width="30">&nbsp;</th>
     </tr>
     </thead>
     <tbody>
     <?php
 
     $cont = 1;
-    foreach ($proveedor as $row){//$productos viene de productController
+    $total_compras = 0;
+    foreach ($movimientoProveedor as $row){//$productos viene de productController
         ?>
         <tr>
             <th><?php echo $cont ?></th>
-            <td><?php echo $row->cod_pro ?></td>
-            <td><?php echo $row->nom_pro ?></td>
-            <td><?php echo $row->ciudad_pro ?></td>
-            <td><?php echo $row->tel_pro ?></td>
-            <td><?php echo $row->email_pro ?></td>
+            <td><?php echo $row['cod_fac'] ?></td>
+            <td><?php echo $row['fecha_fac'] ?></td>
+            <td style="text-align: right"><?php echo $row['total_fac'] ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=proveedor&action=editar&cod_pro=<?php echo $row->cod_pro; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="eliminarProveedor('<?php echo $row->cod_pro ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-                    <a href="?controller=proveedor&action=movimiento&cod_pro=<?php echo $row->cod_pro; ?>" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>
+                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row['cod_fac']; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
                 </div>
             </td>
         </tr>
         <?php
         $cont++;
+        $total_compras = $total_compras + $row['total_fac'];
     }
     ?>
     </tbody>
 </table>
+<br>
+<div class="container" style="background-color: #ededef; padding: 5px 20px 5px 20px">
+    <div class="row">
+        <div class="col-md-6"><h3>Total Compras Realizadas:</h3></div>
+        <div class="col-md-6" style="text-align: right; padding-right: 50px"><h3><?php echo $total_compras; ?></h3></div>
+    </div>
+</div>
+
+
+
+<div class="text-center mt-3">
+    <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
+    <a class="btn btn-danger" onclick="history.back()" >Volver</a>
+</div>
 
 <script>
     $(document).ready(function() {
-        $('#listaProveedores').DataTable({
+        $('#movimientoProveedor').DataTable({
             stateSave: true,
             stripeClasses:[],
             "language": {

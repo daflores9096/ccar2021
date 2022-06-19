@@ -76,6 +76,13 @@ class Proveedor {
         $sql->execute(array($nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro, $cod_pro));
     }
 
+    public static function getMovimientoProveedor($cod_pro){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT * FROM compra WHERE cod_pro=$cod_pro ORDER BY fecha_fac DESC");
+        $res = $sql->fetchAll();
+        return $res;
+    }
+
     /*
     public static function getListaProductos ($cod_fac) {
         $compraList = [];

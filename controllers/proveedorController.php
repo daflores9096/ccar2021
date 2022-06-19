@@ -59,6 +59,14 @@ class ProveedorController {
         include_once "views/proveedores/detalle.php";
 
     }
+
+    public function movimiento(){
+        $cod_pro = $_REQUEST['cod_pro'];
+        $infoProveedor = Proveedor::buscar($cod_pro);
+        $movimientoProveedor = Proveedor::getMovimientoProveedor($cod_pro);
+        include_once "views/proveedores/movimiento.php";
+    }
+
     /*
     public function editar(){
         $cod_fac = $_GET['cod_fac'];

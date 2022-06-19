@@ -15,7 +15,7 @@
         <th scope="col">Traspaso</th>
         <th scope="col">Total Bultos</th>
         <th scope="col">Total Venta</th>
-        <th scope="col">Acciones</th>
+        <th scope="col" width="30">&nbsp;</th>
     </tr>
     </thead>
     <tbody>
@@ -48,8 +48,8 @@
 <br>
 <div class="container" style="background-color: #ededef; padding: 5px 20px 5px 20px">
     <div class="row">
-        <div class="col-md-6"><h3>Total Ventas:</h3></div>
-        <div class="col-md-6" style="text-align: right"><h3><?php echo $total_Ventas; ?></h3></div>
+        <div class="col-md-6"><h3>Total Ventas Realizadas:</h3></div>
+        <div class="col-md-6" style="text-align: right; padding-right: 50px"><h3><?php echo $total_Ventas; ?></h3></div>
     </div>
 </div>
 
