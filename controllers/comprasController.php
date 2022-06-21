@@ -97,42 +97,50 @@ class ComprasController {
     }
 
 
-        public function borrarItem(){
-            $id = $_REQUEST['id'];
-            $cod_fac = $_REQUEST['cod_fac'];
-            $total_compra = $_REQUEST['total_compra'];
+    public function borrarItem(){
+        $id = $_REQUEST['id'];
+        $cod_fac = $_REQUEST['cod_fac'];
+        $total_compra = $_REQUEST['total_compra'];
 
-            Compra::borrarItem($id, $cod_fac, $total_compra);
-            //redirect('./?controller=compras&action=lista');
-            //echo "Item ".$id." borrado !!!";
-            redirect('./?controller=compras&action=crear&cod_fac='.$cod_fac);
+        Compra::borrarItem($id, $cod_fac, $total_compra);
+        //redirect('./?controller=compras&action=lista');
+        //echo "Item ".$id." borrado !!!";
+        redirect('./?controller=compras&action=crear&cod_fac='.$cod_fac);
+    }
+
+    public function editar(){
+        $cod_fac = $_GET['cod_fac'];
+        $compra = Compra::buscar($cod_fac);
+        $compraList = Compra::getListaProductos($cod_fac);
+
+        if ($_POST){
+            $codfac = $_POST['cod_item'];
+            $fecha_fac = $_POST['fecha_fac'];
+            $cod_pro = $_POST['cod_pro'];
+            $nom_pro = $_POST['nom_pro'];
+            $total_fac = $_POST['total_fac'];
+
+            Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
+            redirect('?controller=compras&action=lista');
         }
 
-        public function editar(){
-            $cod_fac = $_GET['cod_fac'];
-            $compra = Compra::buscar($cod_fac);
-            $compraList = Compra::getListaProductos($cod_fac);
+        include_once "./views/compras/editar.php";
+    }
 
-            if ($_POST){
-                $codfac = $_POST['cod_item'];
-                $fecha_fac = $_POST['fecha_fac'];
-                $cod_pro = $_POST['cod_pro'];
-                $nom_pro = $_POST['nom_pro'];
-                $total_fac = $_POST['total_fac'];
+    public function detalle(){
+        $cod_fac = $_GET['cod_fac'];
+        $compra = Compra::buscar($cod_fac);
+        $compraList = Compra::getListaProductos($cod_fac);
 
-                Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
-                redirect('?controller=compras&action=lista');
-            }
+        include_once "./views/compras/detalle.php";
+    }
 
-            include_once "./views/compras/editar.php";
-        }
+    public function nota(){
+        $cod_fac = $_GET['cod_fac'];
+        $compra = Compra::buscar($cod_fac);
+        $compraList = Compra::getListaProductos($cod_fac);
 
-        public function detalle(){
-            $cod_fac = $_GET['cod_fac'];
-            $compra = Compra::buscar($cod_fac);
-            $compraList = Compra::getListaProductos($cod_fac);
-
-            include_once "./views/compras/detalle.php";
+        include_once "./views/compras/nota.php";
     }
 
 
