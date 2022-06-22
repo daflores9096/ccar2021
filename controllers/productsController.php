@@ -64,4 +64,10 @@ class ProductsController {
         include_once "views/products/editar.php";
     }
 
+    public function detalle(){
+        $cod_prod = $_GET['cod_prod'];
+        $producto = Producto::buscar($cod_prod);
+        include_once "./views/products/detalle.php";
+    }
+
 }
