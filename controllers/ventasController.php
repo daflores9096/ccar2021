@@ -142,5 +142,12 @@ class VentasController {
         include_once "./views/ventas/detalle.php";
     }
 
+    public function nota(){
+        $cod_fac = $_GET['cod_fac'];
+        $venta = Venta::buscar($cod_fac);
+        $ventaList = Venta::getListaProductos($cod_fac);
+
+        include_once "./views/ventas/nota.php";
+    }
 
 }

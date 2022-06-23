@@ -34,7 +34,7 @@
             <td style="text-align: right"><?php echo $row['total_fac'] ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=ventas&action=detalle&cod_fac=<?php echo $row['cod_fac']; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=ventas&action=nota&cod_fac=<?php echo $row['cod_fac']; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
                 </div>
             </td>
         </tr>
