@@ -143,5 +143,13 @@ class ComprasController {
         include_once "./views/compras/nota.php";
     }
 
+    public function print_nota(){
+        $cod_fac = $_GET['cod_fac'];
+        $compra = Compra::buscar($cod_fac);
+        $compraList = Compra::getListaProductos($cod_fac);
+
+        include_once "./views/compras/print_nota.php";
+    }
+
 
 }
