@@ -53,6 +53,7 @@
 
             <div class="row mt-3">
                 <div class="container">
+                    <div style="background-color: #ededef; margin-bottom: -24px; padding: 5px 5px 5px 10px;width: 200px"><b><?php echo count($ventaList); ?> artículos</b></div>
                     <table class="table">
                         <thead class="table-light">
                         <tr>

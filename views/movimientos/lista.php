@@ -6,7 +6,7 @@
     <div class="card-header">
         <div class="row">
             <div class="col-md-6 text-left" >
-                <h4><strong>Movimientos del producto: "<?php echo $producto->producto; ?>" </strong></h4>
+                <h4><strong>Movimiento: <?php echo '['.$producto->codigo.'] '.$producto->producto; ?> </strong></h4>
             </div>
             <div class="col-md-6 text-right">
                 <a href="./?controller=movimientos&action=imprimir&cod_prod=<?php echo $producto->codigo ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-print"></i> Imprimir Movimiento</a>

@@ -21,7 +21,7 @@
             <h4><strong>COMPRA NRO: <?php echo $compra->cod_fac ?></strong></h4>
         </div>
         <div class="text-right">
-            <a href="./?controller=compras&action=crear&cod_fac=<?php echo $compra->cod_fac ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir</a>
+            <a href="./?controller=compras&action=crear&cod_fac=<?php echo $compra->cod_fac ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=compras&action=print_nota&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra</a> <a href="./?controller=compras&action=print_nota2&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra (MOD)</a>
         </div>
 
     </div>
