@@ -1,5 +1,14 @@
 <?php
 //var_dump($_REQUEST);
+
+if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1){
+    echo "
+    <script>
+        $(location).attr('href','./?controller=compras&action=lista');
+    </script>
+    ";
+}
+
 if (isset($compraList)){
     $cont = count($compraList);
 }
@@ -88,18 +97,12 @@ if (!isset($compra->fecha_fac)){
                         <tr>
                             <th>Codigo</th>
                             <th>Producto</th>
-<!--                            <th>Cantidad</th>-->
                             <th>Precio Costo</th>
-<!--                            <th>Precio Venta</th>-->
-<!--                            <th>Importe</th>-->
                         </tr>
                         <tr>
                             <td><input type="text" name="cod_item" id="cod_item" readonly style="background-color: #E9ECEF"></td>
                             <td><input type="text" name="nom_item" id="nom_item" readonly style="background-color: #E9ECEF"></td>
-<!--                            <td><input type="text" name="cant_item" id="cant_item" value="0"></td>-->
                             <td><input type="text" name="precio_uni" id="precio_uni" value="0" readonly style="background-color: #E9ECEF"></td>
-<!--                            <td><input type="text" name="precio_ven" id="precio_ven" value="0"></td>-->
-<!--                            <td><input type="text" name="importe_fac" id="importe_fac" value="0"></td>-->
                         </tr>
                     </table>
 
@@ -153,6 +156,7 @@ if (!isset($compra->fecha_fac)){
                         <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
                         <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>" readonly></td>
                         <input type="hidden" id="edit" name="edit" value="1">
+                        <input type="hidden" id="terminar" name="terminar" value="0">
                     </tr>
                     </tfoot>
                 </table>
@@ -164,6 +168,7 @@ if (!isset($compra->fecha_fac)){
                 <input type="hidden" name="cont" value="<?php echo $indice; ?>">
                 <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>">
                 <input type="hidden" id="edit" name="edit" value="0">
+                <input type="hidden" id="terminar" name="terminar" value="0">
 
                 <?php
             }
@@ -171,6 +176,7 @@ if (!isset($compra->fecha_fac)){
 
             <div class="text-center mt-3">
                 <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
+                <input type="button" id="btnGT" name="btnGT" class="btn btn-success"  value="Guardar y Terminar">
                 <a class="btn btn-danger" href="?controller=compras&action=lista" >Cancelar</a>
             </div>
 
@@ -219,6 +225,11 @@ if (!isset($compra->fecha_fac)){
             $("#nom_item").val(textSelected);
             $("#precio_uni").val(dataSelected);
 
+        });
+
+        $("#btnGT").click(function() {
+            $('#terminar').val(1);
+            $('#crearCompra').submit();
         });
 
     });

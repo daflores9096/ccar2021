@@ -89,6 +89,9 @@
                     <a class="nav-link" href="?controller=products&action=lista">Productos</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="?controller=inventarios&action=lista">Inventarios</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="?controller=compras&action=lista">Compras</a>
                 </li>
                 <li class="nav-item">

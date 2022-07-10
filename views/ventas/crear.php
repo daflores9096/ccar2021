@@ -1,5 +1,14 @@
 <?php
 //var_dump($productList);
+//var_dump($_REQUEST);
+if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1){
+    echo "
+    <script>
+        $(location).attr('href','./?controller=ventas&action=lista');
+    </script>
+    ";
+}
+
 if (isset($ventaList)){
     $cont = count($ventaList);
 }
@@ -173,6 +182,7 @@ if (!isset($venta->fecha_fac)){
                                 <td class="text-left"><strong>Total Compra: </strong></td>
                                 <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_venta; ?>"></td>
                                 <input type="hidden" id="edit" name="edit" value="1">
+                                <input type="hidden" id="terminar" name="terminar" value="0">
                             </tr>
                             </tfoot>
                         </table>
@@ -185,6 +195,7 @@ if (!isset($venta->fecha_fac)){
                     <input type="hidden" id="tot_bul" name="tot_bul" value="<?php echo $tot_bul; ?>">
                     <input type="hidden" id="total_fac" name="total_fac" value="<?php echo $total_venta; ?>">
                     <input type="hidden" id="edit" name="edit" value="0">
+                    <input type="hidden" id="terminar" name="terminar" value="0">
 
                 <?php
                 }
@@ -192,6 +203,7 @@ if (!isset($venta->fecha_fac)){
 
                 <div class="text-center mt-3">
                     <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
+                    <input type="button" id="btnGT" name="btnGT" class="btn btn-success"  value="Guardar y Terminar">
                     <a class="btn btn-danger" href="?controller=ventas&action=lista" >Cancelar</a>
                 </div>
 
@@ -240,6 +252,11 @@ if (!isset($venta->fecha_fac)){
             $("#nom_item").val(textSelected);
             $("#precio_uni").val(dataSelected);
 
+        });
+
+        $("#btnGT").click(function() {
+            $('#terminar').val(1);
+            $('#crearVenta').submit();
         });
 
     });
