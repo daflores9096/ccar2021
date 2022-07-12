@@ -131,4 +131,21 @@ class InventariosController {
         redirect('./?controller=inventarios&action=crear&id_inv='.$id_inv);
     }
 
+    public function aplicar(){
+        $id_inv = $_REQUEST['id_inv'];
+        $inventario = Inventario::buscar($id_inv);
+        $inventarioList = Inventario::getListaInventario($id_inv);
+
+        //var_dump($inventario);
+        //exit();
+
+        Inventario::editar($inventario->id_inv, $inventario->fecha_lev, $inventario->descripcion, date("Y-m-d"), 'Aplicado');
+
+        foreach ($inventarioList as $row){
+            Inventario::aplicarInventarioItem($row['cod_item'], $row['existencia_inv']);
+        }
+        redirect('./?controller=inventarios&action=lista');
+
+    }
+
 }

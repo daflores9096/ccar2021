@@ -103,6 +103,12 @@ class Inventario {
         $sql->execute(array($codigo));
     }
 
+    public static function aplicarInventarioItem($cod_item, $existencia){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET existencia=? WHERE cod_item=?");
+        $sql->execute(array($existencia, $cod_item));
+    }
+
 }
 
 ?>
