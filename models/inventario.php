@@ -21,7 +21,7 @@ class Inventario {
 
         $listaInventarios = [];
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT * FROM inventario ORDER BY fecha_lev DESC");
+        $sql = $conexion->query("SELECT * FROM inventario ORDER BY id_inv DESC");
 
         foreach ($sql->fetchAll() as $inventario){
             $listaInventarios[] = new Inventario($inventario['id_inv'],$inventario['fecha_lev'],$inventario['descripcion'],$inventario['fecha_ap'],$inventario['estado']);
@@ -33,7 +33,7 @@ class Inventario {
     public static function getListaInventario ($id_inv) {
         $inventarioList = [];
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT ia.*, it.nom_item, it.unid_item 
+        $sql = $conexion->query("SELECT ia.*, it.* 
                                           FROM inventario_aux ia 
                                           INNER JOIN item it ON ia.cod_item=it.cod_item
                                           WHERE ia.id_inv=$id_inv");
@@ -48,24 +48,38 @@ class Inventario {
                 "nom_item" => $inventario['nom_item'],
                 "unid_item" => $inventario['unid_item'],
                 "existencia_inv" => $inventario["existencia_inv"],
-                "existencia_sis" => $inventario["existencia_sis"],
+                "existencia" => $inventario["existencia"],
                 "diferencia" => $inventario['diferencia']);
         }
 
         return $inventarioList;
     }
 
-    public static function crear($codigo, $producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle){
+    public static function getIdUltimoInventario(){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->query("SELECT MAX(id_inv) max_id FROM inventario ORDER BY fecha_lev DESC LIMIT 1");
+        $res = $sql->fetchAll();
+
+        foreach ($res as $row){
+            $lastId = $row['max_id'];
+        }
+        return $lastId;
+    }
+
+    public static function crear($id_inv, $fecha_lev, $descripcion, $fecha_ap, $estado){
 
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("INSERT INTO item (cod_item, nom_item, unid_item, precio_item, caja_item, exi_max, existencia, exi_min, deta_item) VALUES (?,?,?,?,?,?,?,?,?)");
-        $sql->execute(array($codigo, $producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle));
+        $sql = $conexion->prepare("INSERT INTO inventario (id_inv, fecha_lev, descripcion, fecha_ap, estado) VALUES (?,?,?,?,?)");
+        $sql->execute(array($id_inv, $fecha_lev, $descripcion, $fecha_ap, $estado));
     }
 
     public static function borrar($codigo){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("DELETE FROM item WHERE cod_item=?");
+        $sql = $conexion->prepare("DELETE FROM inventario WHERE id_inv=?");
         $sql->execute(array($codigo));
+
+        $sql1 = $conexion->prepare("DELETE FROM inventario_aux WHERE id_inv=?");
+        $sql1->execute(array($codigo));
     }
 
     public static function buscar($codigo){
@@ -76,11 +90,19 @@ class Inventario {
         return new Inventario($inventario['id_inv'],$inventario['fecha_lev'],$inventario['descripcion'],$inventario['fecha_ap'], $inventario['estado']);
     }
 
-    public static function editar($codigo, $producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle){
+    public static function editar($id_inv, $fecha_lev, $descripcion, $fecha_ap, $estado){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("UPDATE item SET nom_item=?, unid_item=?, precio_item=?, caja_item=?, exi_max=?, existencia=?, exi_min=?, deta_item=? WHERE cod_item=?");
-        $sql->execute(array($producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle, $codigo));
+        $sql = $conexion->prepare("UPDATE inventario SET fecha_lev=?, descripcion=?, fecha_ap=?, estado=? WHERE id_inv=?");
+        $sql->execute(array($fecha_lev, $descripcion, $fecha_ap, $estado, $id_inv));
     }
+
+    public static function borrarItem($codigo){
+        $conexion = BD::crearInstancia();
+
+        $sql = $conexion->prepare("DELETE FROM inventario_aux WHERE id=?");
+        $sql->execute(array($codigo));
+    }
+
 }
 
 ?>

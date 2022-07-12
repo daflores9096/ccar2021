@@ -21,7 +21,7 @@
             <h4><strong>INVENTARIO NRO: <?php echo $inventario->id_inv ?></strong></h4>
         </div>
         <div class="text-right">
-            <a href="./?controller=inventarios&action=editar&id_inv=<?php echo $inventario->id_inv ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=inventarios&action=aplicar&id_inv=<?php echo $inventario->id_inv ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Aplicar Inventario</a>
+            <a href="./?controller=inventarios&action=crear&id_inv=<?php echo $inventario->id_inv ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=inventarios&action=aplicar&id_inv=<?php echo $inventario->id_inv ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Aplicar Inventario</a>
         </div>
 
     </div>
