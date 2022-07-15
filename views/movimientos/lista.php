@@ -18,7 +18,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tipo</th>
+                <th scope="col" class="text-center">Tipo</th>
                 <th scope="col">Fecha</th>
                 <th scope="col">Nro. Nota</th>
                 <th scope="col">Cliente/Proveedor</th>
@@ -38,10 +38,12 @@
                 } else {
                     $controlador = 'compras';
                 }
+
+                $tipoMov = ($row->tipo_mov == 'V') ? 'Venta' : 'Compra';
                 ?>
                 <tr>
                     <th><?php echo $cont ?></th>
-                    <td><?php echo $row->tipo_mov ?></td>
+                    <td class="text-center"><?php echo $tipoMov ?></td>
                     <td><?php echo $row->fecha_mov ?></td>
                     <td><?php echo $row->cod_mov ?></td>
                     <td><?php echo $row->nom_cli_pro ?></td>
@@ -49,7 +51,7 @@
                     <td><?php echo $row->salida ?></td>
                     <td align="center">
                         <div class="btn-group" role="group" aria-label>
-                            <a href="?controller=<?php echo $controlador ?>&action=nota&cod_fac=<?php echo $row->cod_mov; ?>" type="button" class="btn btn-warning">Ver detalle</a>
+                            <a href="?controller=<?php echo $controlador ?>&action=nota&cod_fac=<?php echo $row->cod_mov; ?>" title="Ver detalle" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="far fa-file-alt"></i> Detalle</a>
                         </div>
                     </td>
                 </tr>
