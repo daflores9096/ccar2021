@@ -104,6 +104,9 @@
                     <a class="nav-link" href="?controller=cliente&action=lista">Clientes</a>
                 </li>
             </ul>
+            <div class="nav-item" style="text-align: right">
+                <a class="nav-link" href="./logout.php">Salir <?php //echo $_SESSION['username'] ?></a>
+            </div>
         </div>
     </div>
 </nav>
