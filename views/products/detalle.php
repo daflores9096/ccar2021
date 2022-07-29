@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="row" style="background: #E7E7E7">
+<div class="row" style="background: #F8F8F8; border: 1px solid #ededef">
     <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
         <?php echo  $producto->codigo.' - '.$producto->producto ?>
     </div>
@@ -23,8 +23,9 @@
 
         <div class="row">
             <div class="col-md-12">
+                <br>
                 <table class="table table-responsive">
-                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+<!--                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>-->
                     <tr>
                         <th style="width: 50%"><p>Código</p></th>
                         <td style="width: 50%"><?php echo $producto->codigo ?></td>
