@@ -44,14 +44,14 @@
                     <input class="form-control" type="text" id="tel_pro" name="tel_pro" value="<?php echo $proveedor->tel_pro ?>">
                 </div>
                 <div class="col-md-6 form-group">
-                    <label class="form-label" for="exi_min">Teléfono Secundario:</label>
+                    <label class="form-label" for="tel_sec">Teléfono Secundario:</label>
                     <input class="form-control" type="text" id="tel_sec" name="tel_sec" value="<?php echo $proveedor->tel_sec ?>">
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="form-group">
-                    <label for="deta_item">Descripción:</label>
+                    <label class="form-label" for="desc_pro">Descripción:</label>
                     <textarea class="form-control" name="desc_pro" id="desc_pro" rows="3"> <?php echo $proveedor->desc_pro ?></textarea>
                 </div>
             </div>

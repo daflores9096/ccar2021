@@ -52,18 +52,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                 // Store data in session variables
                 $_SESSION["loggedin"] = true;
-                $_SESSION["id"] = $usuario['id'];
+                $_SESSION["id"] = $usuario['usuario_id'];
                 $_SESSION["username"] = $usuario['usuario_nombre'];
+                $_SESSION["usermail"] = $usuario['usuario_email'];
+                $_SESSION["access"] = $usuario['nivel_acceso'];
 
                 // Redirect user to welcome page
                 header("location: index.php?controller=pages&action=inicio");
             } else{
                 // Password is not valid, display a generic error message
-                $login_err = "Invalid username or password.1111";
+                $login_err = "Usuario o contraseña incorrectos.";
             }
         } else {
             // Username doesn't exist, display a generic error message
-            $login_err = "Invalid username or password.2222";
+            $login_err = "Usuario o contraseña incorrectos.";
         }
     }
 
@@ -87,16 +89,19 @@ function verificar_password($passdb, $passhash){
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <style>
         body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
+        .wrapper{ width: 460px; padding: 20px; }
     </style>
 </head>
 <body>
 <link href="assets/login.css" rel="stylesheet" id="bootstrap-css">
 <div class="container">
-    <div class="card card-container">
+    <div class="card card-container" style="max-width: 380px">
         <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <p id="profile-name" class="profile-name-card"></p>
@@ -104,6 +109,20 @@ function verificar_password($passdb, $passhash){
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required autofocus>
             <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+            <?php
+            if ($login_err){
+            ?>
+            <div id="err_msg" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $login_err ?>
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $("#err_msg").delay(3000).fadeOut(500);
+                });
+            </script>
+            <?php
+            }
+            ?>
             <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Iniciar sesión</button>
         </form><!-- /form -->
         <a href="#" class="forgot-password">
@@ -111,5 +130,6 @@ function verificar_password($passdb, $passhash){
         </a>
     </div><!-- /card-container -->
 </div>
+
 </body>
 </html>

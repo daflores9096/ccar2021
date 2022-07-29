@@ -1,7 +1,10 @@
-<div class="card mt-5">
-    <div class="card-header">
-        <h4><strong>AGREGAR NUEVO PRODUCTO</strong></h4>
-    </div>
+<br>
+<h3>AGREGAR NUEVO PRODUCTO</h3>
+
+<div class="card mt-3">
+<!--    <div class="card-header">-->
+<!--        <h4><strong>AGREGAR NUEVO PRODUCTO</strong></h4>-->
+<!--    </div>-->
     <div class="card-body">
 
         <form action="" method="post" id="crearProd" name="crearProd">

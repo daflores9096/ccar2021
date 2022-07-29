@@ -1,22 +1,28 @@
 <?php
 //var_dump($producto);
 ?>
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-6 text-left">
-                <h4><strong>PRODUCTO: <?php echo  $producto->codigo.' - '.$producto->producto ?></strong></h4>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="./?controller=products&action=editar&codigo=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=movimientos&action=lista&cod_prod=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; margin-right: 10px; float: right"><i class="fas fa-book"></i> Movimiento</a>
-            </div>
-        </div>
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">Detalle Producto</h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a href="./?controller=products&action=editar&codigo=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=movimientos&action=lista&cod_prod=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; margin-right: 10px; float: right"><i class="fas fa-book"></i> Movimiento</a>
+    </div>
+</div>
+
+<div class="row" style="background: #E7E7E7">
+    <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
+        <?php echo  $producto->codigo.' - '.$producto->producto ?>
+    </div>
+</div>
+
+<div class="card mt-5">
+
     <div class="card-body">
 
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <table class="table table-responsive">
                     <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
                     <tr>
@@ -57,7 +63,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-md-1"></div>
+
         </div>
         <div class="text-center mt-3">
             <a class="btn btn-danger" onclick="history.back()" >Volver</a>
@@ -66,3 +72,5 @@
     </div>
 
 </div>
+
+
