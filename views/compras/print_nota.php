@@ -84,6 +84,6 @@
 
 <script>
     $(document).ready(function() {
-        $("nav.navbar.navbar-expand-lg").hide();
+        $(".navbar").hide();
     });
 </script>

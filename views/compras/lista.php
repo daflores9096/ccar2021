@@ -1,7 +1,7 @@
 <br>
 <h1 class="bd-title" id="content">Lista de Compras</h1>
 <div class="mt-3">
-    <a href="?controller=compras&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Compra</a>
+    <a href="?controller=compras&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Compra</a>
 </div>
 <br>
 <table class="display compact" id="listaCompras">
@@ -29,7 +29,7 @@
             <td><?php echo $row->total_fac ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Ver detalle" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Ver detalle" style="margin-right: 7px"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
                     <a href="javascript:void(0)" onclick="eliminarCompra('<?php echo $row->cod_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
                 </div>
             </td>

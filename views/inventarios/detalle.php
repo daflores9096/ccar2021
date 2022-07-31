@@ -15,16 +15,39 @@
 <?php
 //var_dump($inventarioList);
 ?>
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="text-left">
-            <h4><strong>INVENTARIO NRO: <?php echo $inventario->id_inv ?></strong></h4>
-        </div>
-        <div class="text-right">
-            <a href="./?controller=inventarios&action=crear&id_inv=<?php echo $inventario->id_inv ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=inventarios&action=aplicar&id_inv=<?php echo $inventario->id_inv ?>" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Aplicar Inventario</a>
-        </div>
-
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">INVENTARIO NRO: <?php echo $inventario->id_inv ?></h2>
     </div>
+    <?php
+    if ($inventario->estado == "Aplicado"){
+    ?>
+        <div class="col-md-6 text-right" style="padding-top: 10px">
+            <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>
+        </div>
+    <?php
+    } else {
+    ?>
+        <div class="col-md-6 text-right" style="padding-top: 10px">
+            <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;<a href="./?controller=inventarios&action=crear&id_inv=<?php echo $inventario->id_inv ?>&ed=1" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=inventarios&action=aplicar&id_inv=<?php echo $inventario->id_inv ?>" class="btn btn-primary"><i class="fas fa-print"></i> Aplicar Inventario</a>
+        </div>
+    <?php
+    }
+    ?>
+
+</div>
+<br>
+<div class="card mt-5">
+<!--    <div class="card-header">-->
+<!--        <div class="text-left">-->
+<!--            <h4><strong>INVENTARIO NRO: --><?php //echo $inventario->id_inv ?><!--</strong></h4>-->
+<!--        </div>-->
+<!--        <div class="text-right">-->
+<!--            <a href="./?controller=inventarios&action=crear&id_inv=--><?php //echo $inventario->id_inv ?><!--" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=inventarios&action=aplicar&id_inv=--><?php //echo $inventario->id_inv ?><!--" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Aplicar Inventario</a>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
     <div class="card-body">
 
         <form action="" method="post" id="detalleInventario" name="detalleInventario">
@@ -89,10 +112,9 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
-                <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
-                <a class="btn btn-danger" onclick="history.back()" >Volver</a>
-            </div>
+<!--            <div class="text-center mt-3">-->
+<!--                <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
+<!--            </div>-->
 
         </form>
     </div>

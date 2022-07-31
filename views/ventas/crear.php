@@ -1,6 +1,13 @@
 <?php
 //var_dump($productList);
 //var_dump($_REQUEST);
+if (isset($_REQUEST['ed']) && $_REQUEST['ed'] == 1){
+    $btnEdit = $_REQUEST['ed'];
+    $titulo = "EDITAR VENTA";
+} else {
+    $titulo = "CREAR NUEVA VENTA";
+}
+
 if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1){
     echo "
     <script>
@@ -40,10 +47,17 @@ if (!isset($venta->fecha_fac)){
 
 ?>
 <div class="container-fluid">
-    <div class="card mt-5">
-        <div class="card-header">
-            <h4><strong>AGREGAR NUEVA VENTA</strong></h4>
+    <br>
+    <div class="row">
+        <div class="col-md-12 text-left">
+            <h2 class="bd-title"><?php echo $titulo; ?></h2>
         </div>
+    </div>
+    <br>
+    <div class="card mt-5">
+<!--        <div class="card-header">-->
+<!--            <h4><strong>--><?php //echo $titulo; ?><!--</strong></h4>-->
+<!--        </div>-->
         <div class="card-body">
 
             <form action="" method="post" id="crearVenta" name="crearVenta">
@@ -202,9 +216,9 @@ if (!isset($venta->fecha_fac)){
                 ?>
 
                 <div class="text-center mt-3">
-                    <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                    <input type="button" id="btnGT" name="btnGT" class="btn btn-success"  value="Guardar y Terminar">
-                    <a class="btn btn-danger" href="?controller=ventas&action=lista" >Cancelar</a>
+                    <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-primary" value="Guardar">
+                    <input type="button" id="btnGT" name="btnGT" class="btn btn-primary"  value="Guardar y Terminar">
+                    <a class="btn btn-warning" href="?controller=ventas&action=lista" >Cancelar</a>
                 </div>
 
             </form>

@@ -15,16 +15,31 @@
 <?php
 //var_dump($compraList);
 ?>
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="text-left">
-            <h4><strong>COMPRA NRO: <?php echo $compra->cod_fac ?></strong></h4>
-        </div>
-        <div class="text-right">
-            <a href="./?controller=compras&action=crear&cod_fac=<?php echo $compra->cod_fac ?>" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=compras&action=print_nota&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra</a> <a href="./?controller=compras&action=print_nota2&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra (MOD)</a>
-        </div>
-
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">Detalle Compra</h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;&nbsp;<a href="./?controller=compras&action=crear&cod_fac=<?php echo $compra->cod_fac ?>&ed=1" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=compras&action=print_nota&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra</a> <a href="./?controller=compras&action=print_nota2&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra (MOD)</a>
+    </div>
+</div>
+<div class="row" style="background: #F8F8F8; border: 1px solid #ededef">
+    <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
+        Compra Nro: <?php echo $compra->cod_fac ?>
+    </div>
+</div>
+<div class="card mt-5">
+<!--    <div class="card-header">-->
+<!--        <div class="text-left">-->
+<!--            <h4><strong>COMPRA NRO: --><?php //echo $compra->cod_fac ?><!--</strong></h4>-->
+<!--        </div>-->
+<!--        <div class="text-right">-->
+<!--            <a href="./?controller=compras&action=crear&cod_fac=--><?php //echo $compra->cod_fac ?><!--" class="btn btn-primary" style="background-color: steelblue""><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=compras&action=print_nota&cod_fac=--><?php //echo $compra->cod_fac ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra</a> <a href="./?controller=compras&action=print_nota2&cod_fac=--><?php //echo $compra->cod_fac ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Compra (MOD)</a>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+    <br>
     <div class="card-body">
 
         <form action="" method="post" id="crearCompra" name="crearCompra">
@@ -90,10 +105,9 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
-                <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
-                <a class="btn btn-danger" onclick="history.back()" >Volver</a>
-            </div>
+<!--            <div class="text-center mt-3">-->
+<!--                <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
+<!--            </div>-->
 
         </form>
     </div>

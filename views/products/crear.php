@@ -1,6 +1,10 @@
 <br>
-<h3>AGREGAR NUEVO PRODUCTO</h3>
-
+<div class="row">
+    <div class="col-md-12 text-left">
+        <h2 class="bd-title">Crear Producto</h2>
+    </div>
+</div>
+<br>
 <div class="card mt-3">
 <!--    <div class="card-header">-->
 <!--        <h4><strong>AGREGAR NUEVO PRODUCTO</strong></h4>-->
@@ -52,7 +56,7 @@
                 </div>
             </div>
 
-            <div class="row mt-3">
+            <div class="row mt-3" style="padding-left: 15px">
                 <div class="form-group">
                     <label for="deta_item">Descripción:</label>
                     <textarea class="form-control" name="deta_item" id="deta_item" rows="3"></textarea>
@@ -60,8 +64,8 @@
             </div>
 
             <div class="text-center mt-3">
-                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                <a class="btn btn-danger" onclick="history.back()" >Cancelar</a>
+                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-primary" value="Guardar">
+                <a class="btn btn-warning" onclick="history.back()" >Cancelar</a>
             </div>
 
         </form>

@@ -88,6 +88,6 @@
 
 <script>
     $(document).ready(function() {
-        $("body > div.container > div.navbar.yamm.navbar-default.navbar-fixed-top").hide();
+        $(".navbar").hide();
     });
 </script>

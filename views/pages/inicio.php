@@ -1,3 +1,4 @@
+<br><br>
 <div class="jumbotron">
     <h1 class="display-4">Control de Inventarios</h1>
     <p class="lead">Herramienta de Control de Productos, Compras, Ventas, Clientes y Proveedores.</p>

@@ -15,17 +15,27 @@
 <?php
 //var_dump($compraList);
 ?>
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-6 text-left">
-                <h4><strong>NOTA DE COMPRA NRO: <?php echo $compra->cod_fac ?></strong></h4>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="./?controller=compras&action=print_nota&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Compra</a>
-            </div>
-        </div>
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">NOTA DE COMPRA NRO: <?php echo $compra->cod_fac ?></h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;<a href="./?controller=compras&action=print_nota&cod_fac=<?php echo $compra->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Compra</a>
+    </div>
+</div>
+<br>
+<div class="card mt-5">
+<!--    <div class="card-header">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-left">-->
+<!--                <h4><strong>NOTA DE COMPRA NRO: --><?php //echo $compra->cod_fac ?><!--</strong></h4>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 text-right">-->
+<!--                <a href="./?controller=compras&action=print_nota&cod_fac=--><?php //echo $compra->cod_fac ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Compra</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="card-body">
 
         <form action="" method="post" id="crearCompra" name="crearCompra">
@@ -55,7 +65,7 @@
                 <div class="container">
                     <table class="table">
                         <thead class="table-light">
-                        <tr>
+                        <tr style="background-color: #ededef">
                             <th>Codigo</th>
                             <th>Artículo</th>
                             <th>Unidad</th>
@@ -91,10 +101,9 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
-                <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
-                <a class="btn btn-danger" onclick="history.back()" >Volver</a>
-            </div>
+<!--            <div class="text-center mt-3">-->
+<!--                <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
+<!--            </div>-->
 
         </form>
     </div>

@@ -2,17 +2,31 @@
 //var_dump($producto);
 ?>
 <br>
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-6 text-left" >
-                <h4><strong>Movimiento: <?php echo '['.$producto->codigo.'] '.$producto->producto; ?> </strong></h4>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="./?controller=movimientos&action=imprimir&cod_prod=<?php echo $producto->codigo ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-print"></i> Imprimir Movimiento</a>
-            </div>
-        </div>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">Movimiento Producto</h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;&nbsp;<a href="./?controller=movimientos&action=imprimir&cod_prod=<?php echo $producto->codigo ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-print"></i> Imprimir Movimiento</a>
+    </div>
+</div>
+<div class="row" style="background: #F8F8F8; border: 1px solid #ededef">
+    <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
+        <?php echo '['.$producto->codigo.'] '.$producto->producto; ?>
+    </div>
+</div>
+<br>
+<div class="card mt-5">
+<!--    <div class="card-header">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-left" >-->
+<!--                <h4><strong>Movimiento: --><?php //echo '['.$producto->codigo.'] '.$producto->producto; ?><!-- </strong></h4>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 text-right">-->
+<!--                <a href="./?controller=movimientos&action=imprimir&cod_prod=--><?php //echo $producto->codigo ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-print"></i> Imprimir Movimiento</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div class="card-body">
         <table class="display compact" id="listaMovimientos">
             <thead>
@@ -62,9 +76,9 @@
             </tbody>
         </table>
 
-        <div class="text-center mt-3">
-            <a class="btn btn-danger" onclick="history.back()" >Volver</a>
-        </div>
+<!--        <div class="text-center mt-3">-->
+<!--            <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
+<!--        </div>-->
     </div>
 </div>
 

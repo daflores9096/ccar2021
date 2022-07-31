@@ -1,7 +1,7 @@
 <br>
 <h1 class="bd-title" id="content">Lista Inventarios</h1>
 <div class="mt-3">
-    <a href="?controller=inventarios&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Inventario</a>
+    <a href="?controller=inventarios&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Inventario</a>
 </div>
 <br>
 <table class="display compact" id="listaInventarios">
@@ -31,8 +31,15 @@
             <td><?php echo $row->estado ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=inventarios&action=detalle&id_inv=<?php echo $row->id_inv; ?>" type="button" class="btn btn-primary" title="Detalle" style="background-color: steelblue"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="eliminarInventario('<?php echo $row->id_inv ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=inventarios&action=detalle&id_inv=<?php echo $row->id_inv; ?>" type="button" class="btn btn-primary" title="Detalle" style="margin-right: 7px"><i class="fas fa-eye"></i></a>
+                    <?php
+                    if ($row->estado != 'Aplicado'){
+                    ?>
+                        <a href="javascript:void(0)" onclick="eliminarInventario('<?php echo $row->id_inv ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+                    <?php
+                    }
+                    ?>
+
                 </div>
             </td>
         </tr>

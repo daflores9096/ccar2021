@@ -1,7 +1,11 @@
-<div class="card mt-5">
-    <div class="card-header">
-        <h4><strong>EDITAR PRODUCTO</strong></h4>
+<br>
+<div class="row">
+    <div class="col-md-12 text-left">
+        <h2 class="bd-title">Editar Producto</h2>
     </div>
+</div>
+<br>
+<div class="card mt-5">
     <div class="card-body">
 
         <form action="" method="post">
@@ -64,8 +68,8 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                <a class="btn btn-danger" onclick="history.back()" >Cancelar</a>
+                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-primary" value="Guardar">
+                <a type="button" class="btn btn-warning" onclick="history.back()" >Cancelar</a>
             </div>
 
         </form>

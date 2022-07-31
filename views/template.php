@@ -84,7 +84,7 @@
 </div>
 <!-- Fixed navbar -->
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -92,7 +92,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="./">CARIOCA</a>
+            <a class="navbar-brand" href="./"><img src="./assets/img/carioca_logo_bn.jpg" alt="Carioca" style="width: 85px; margin-top: -13px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -124,9 +124,9 @@
             <ul class="nav navbar-nav navbar-right">
 <!--                <li><a href="../navbar/">Default</a></li>-->
                 <li><span class="navbar-text">
-                    Bienvenido <?php echo $_SESSION['username'] ?>
+                    <strong>Bienvenido <?php echo $_SESSION['username'] ?></strong>
                 </span></li>
-                <li class="active"><a href="./logout.php">Salir <span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="./logout.php">Cerrar sesi&oacute;n <span class="sr-only">(current)</span></a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

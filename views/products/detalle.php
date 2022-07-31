@@ -7,7 +7,7 @@
         <h2 class="bd-title">Detalle Producto</h2>
     </div>
     <div class="col-md-6 text-right" style="padding-top: 10px">
-        <a href="./?controller=products&action=editar&codigo=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=movimientos&action=lista&cod_prod=<?php echo $producto->codigo ?>" class="btn btn-primary" style="background-color: steelblue; margin-right: 10px; float: right"><i class="fas fa-book"></i> Movimiento</a>
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;&nbsp;<a href="./?controller=products&action=editar&codigo=<?php echo $producto->codigo ?>" class="btn btn-primary" style=" float: right"><i class="fas fa-edit"></i> Editar</a> <a href="./?controller=movimientos&action=lista&cod_prod=<?php echo $producto->codigo ?>" class="btn btn-primary" style="margin-right: 10px; float: right"><i class="fas fa-book"></i> Movimiento</a>
     </div>
 </div>
 
@@ -67,7 +67,7 @@
 
         </div>
         <div class="text-center mt-3">
-            <a class="btn btn-danger" onclick="history.back()" >Volver</a>
+<!--            <a class="btn btn-primary" onclick="history.back()" >Volver</a>-->
         </div>
 
     </div>

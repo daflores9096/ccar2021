@@ -11,21 +11,30 @@
         text-align: left;
     }
 </style>
-
-<div class="card mt-5">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-md-6 text-left" >
-                <h4><strong>NOTA DE VENTA NRO: <?php echo $venta->cod_fac ?></strong></h4>
-            </div>
-            <div class="col-md-6 text-right">
-                <a href="./?controller=ventas&action=print_nota&cod_fac=<?php echo $venta->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Venta</a>
-            </div>
-        </div>
-
-
-
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">NOTA DE VENTA NRO: <?php echo $venta->cod_fac ?></h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;<a href="./?controller=ventas&action=print_nota&cod_fac=<?php echo $venta->cod_fac ?>" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Venta</a>
+    </div>
+</div>
+<br>
+<div class="card mt-5">
+<!--    <div class="card-header">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-6 text-left" >-->
+<!--                <h4><strong>NOTA DE VENTA NRO: --><?php //echo $venta->cod_fac ?><!--</strong></h4>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 text-right">-->
+<!--                <a href="./?controller=ventas&action=print_nota&cod_fac=--><?php //echo $venta->cod_fac ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue"><i class="fas fa-print"></i> Imprimir Nota Venta</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!---->
+<!---->
+<!--    </div>-->
     <div class="card-body">
 
         <form action="" method="post" id="crearCompra" name="crearCompra">
@@ -55,8 +64,8 @@
                 <div class="container">
                     <div style="background-color: #ededef; margin-bottom: -24px; padding: 5px 5px 5px 10px;width: 200px"><b><?php echo count($ventaList); ?> artículos</b></div>
                     <table class="table">
-                        <thead class="table-light">
-                        <tr>
+                        <thead>
+                        <tr style="background-color: #ededef">
                             <th>Codigo</th>
                             <th>Detalle</th>
                             <th class="text-right">Bultos</th>
@@ -94,10 +103,9 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3">
-                <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
-                <a class="btn btn-danger" onclick="history.back()" >Volver</a>
-            </div>
+<!--            <div class="text-center mt-3">-->
+<!--                <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
+<!--            </div>-->
 
         </form>
     </div>
