@@ -31,9 +31,8 @@
         <td><?php echo $row->existencia ?></td>
         <td>
             <div class="btn-group" role="group" aria-label>
-                <a href="?controller=products&action=detalle&cod_prod=<?php echo $row->codigo; ?>" type="button" class="btn btn-primary" title="Editar" style="margin-right: 7px"><i class="fas fa-eye"></i></a>&nbsp;
+                <a href="?controller=products&action=detalle&cod_prod=<?php echo $row->codigo; ?>" type="button" class="btn btn-primary" title="Detalle" style="margin-right: 3px"><i class="fas fa-eye"></i></a>&nbsp;
                 <a href="javascript:void(0)" onclick="eliminarProducto('<?php echo $row->codigo ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-<!--                <a href="?controller=movimientos&action=lista&cod_prod=--><?php //echo $row->codigo; ?><!--" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>-->
             </div>
         </td>
     </tr>

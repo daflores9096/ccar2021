@@ -2,9 +2,21 @@
 //var_dump($movimientoCliente);
 //var_dump($infoCliente);
 ?>
-
 <br>
-<h1 class="bd-title" id="content">Movimiento Cliente <?php echo $infoCliente->nom_cli ?></h1>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">Movimiento Cliente</h2>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>
+    </div>
+</div>
+<br>
+<div class="row" style="background: #F8F8F8; border: 1px solid #ededef">
+    <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
+        <?php echo $infoCliente->nom_cli ?>
+    </div>
+</div>
 <br>
 <table class="display compact" id="movimientoCliente">
     <thead>
@@ -57,7 +69,7 @@
 
 <div class="text-center mt-3">
     <!--                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">-->
-    <a class="btn btn-danger" onclick="history.back()" >Volver</a>
+<!--    <a class="btn btn-danger" onclick="history.back()" >Volver</a>-->
 </div>
 
 <script>

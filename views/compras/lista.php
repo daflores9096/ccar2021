@@ -7,12 +7,12 @@
 <table class="display compact" id="listaCompras">
     <thead>
     <tr>
-        <th scope="col">#</th>
+<!--        <th scope="col">#</th>-->
         <th scope="col">Nro.Compra</th>
         <th scope="col">Fecha</th>
         <th scope="col">Proveedor</th>
         <th scope="col">Total</th>
-        <th scope="col">Acciones</th>
+        <th scope="col" class="text-center">Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -20,22 +20,22 @@
 
     $cont = 1;
     foreach ($compras as $row){//$productos viene de productController
-        ?>
-        <tr>
-            <th><?php echo $cont ?></th>
-            <td><?php echo $row->cod_fac ?></td>
-            <td><?php echo $row->fecha_fac ?></td>
-            <td><?php echo $row->nom_pro ?></td>
-            <td><?php echo $row->total_fac ?></td>
-            <td>
-                <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Ver detalle" style="margin-right: 7px"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
-                    <a href="javascript:void(0)" onclick="eliminarCompra('<?php echo $row->cod_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-                </div>
-            </td>
-        </tr>
-        <?php
-        $cont++;
+    ?>
+    <tr>
+<!--        <th>--><?php //echo $cont ?><!--</th>-->
+        <td><?php echo $row->cod_fac ?></td>
+        <td><?php echo $row->fecha_fac ?></td>
+        <td><?php echo $row->nom_pro ?></td>
+        <td><?php echo $row->total_fac ?></td>
+        <td class="text-center">
+            <div class="btn-group" role="group" aria-label>
+                <a href="?controller=compras&action=detalle&cod_fac=<?php echo $row->cod_fac; ?>" type="button" class="btn btn-primary" title="Detalle" style="margin-right: 3px"><i class="fas fa-eye"></i></a>&nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="eliminarCompra('<?php echo $row->cod_fac ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+            </div>
+        </td>
+    </tr>
+    <?php
+    $cont++;
     }
     ?>
     </tbody>

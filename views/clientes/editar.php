@@ -1,69 +1,68 @@
 <?php
-//var_dump($lastId);
-$cod_cli_new = $lastId + 1;
+//var_dump($cliente);
 ?>
 <br>
 <div class="row">
     <div class="col-md-12 text-left">
-        <h2 class="bd-title">Crear Cliente</h2>
+        <h2 class="bd-title">Editar Cliente</h2>
     </div>
 </div>
 <br>
 <div class="card mt-5">
 <!--    <div class="card-header">-->
-<!--        <h4><strong>AGREGAR NUEVO CLIENTE</strong></h4>-->
+<!--        <h4><strong>--><?php //echo $cliente->nom_cli ?><!--</strong></h4>-->
 <!--    </div>-->
     <div class="card-body">
 
-        <form action="" method="post" id="crearCli" name="crearCli">
+        <form action="./?controller=cliente&action=editar" method="post" id="editCli" name="editCli">
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="cod_item">Código Cliente <span style="color: red">(*)</span>:</label>
-                    <input class="form-control" type="text" id="cod_cli" name="cod_cli" value="<?php echo $cod_cli_new ?>">
+                    <input class="form-control" type="text" id="cod_cli" name="cod_cli" readonly value="<?php echo $cliente->cod_cli ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="nom_item">Nombre Cliente<span style="color: red">(*)</span>:</label>
-                    <input class="form-control" type="text" id="nom_cli" name="nom_cli" required placeholder="Ingrese el nombre del Cliente">
+                    <input class="form-control" type="text" id="nom_cli" name="nom_cli" value="<?php echo $cliente->nom_cli ?>">
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="unid_item">Contacto Secundario:</label>
-                    <input class="form-control" type="text" id="contacto_sec" name="contacto_sec" placeholder="Ingrese el Contacto Secundario">
+                    <input class="form-control" type="text" id="contacto_sec" name="contacto_sec" value="<?php echo $cliente->contacto_sec ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="precio_item">Dirección Principal:</label>
-                    <input class="form-control" type="text" id="dire_cli" name="dire_cli" placeholder="Ingrese la Dirección">
+                    <input class="form-control" type="text" id="dire_cli" name="dire_cli" value="<?php echo $cliente->dire_cli ?>">
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="caja_item">Dirección Secundaria:</label>
-                    <input class="form-control" type="text" id="dire_sec" name="dire_sec" placeholder="Ingrese la dirección secundaria">
+                    <input class="form-control" type="text" id="dire_sec" name="dire_sec" value="<?php echo $cliente->dire_sec ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="existencia">Ciudad:</label>
-                    <input class="form-control" type="text" id="ciudad_cli" name="ciudad_cli" placeholder="Ingrese la ciudad">
+                    <input class="form-control" type="text" id="ciudad_cli" name="ciudad_cli" value="<?php echo $cliente->ciudad_cli ?>">
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="exi_max">Teléfono Principal:</label>
-                    <input class="form-control" type="text" id="tel_cli" name="tel_cli" placeholder="Ingrese el teléfono principal">
+                    <input class="form-control" type="text" id="tel_cli" name="tel_cli" value="<?php echo $cliente->tel_cli ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="exi_min">Teléfono Secundario:</label>
-                    <input class="form-control" type="text" id="tel_sec" name="tel_sec" placeholder="Ingrese el teléfono secundario">
+                    <input class="form-control" type="text" id="tel_sec" name="tel_sec" value="<?php echo $cliente->tel_sec ?>">
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="exi_max">Correo Electrónico:</label>
-                    <input class="form-control" type="text" id="email_cli" name="email_cli" placeholder="Ingrese el correo electrónico">
+                    <input class="form-control" type="text" id="email_cli" name="email_cli" value="<?php echo $cliente->email_cli ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     &nbsp;
@@ -73,7 +72,7 @@ $cod_cli_new = $lastId + 1;
             <div class="row mt-3">
                 <div class="form-group">
                     <label for="deta_item">Descripción:</label>
-                    <textarea class="form-control" name="desc_cli" id="desc_cli" rows="3"></textarea>
+                    <textarea class="form-control" name="desc_cli" id="desc_cli" rows="3"><?php echo $cliente->desc_cli ?></textarea>
                 </div>
             </div>
 

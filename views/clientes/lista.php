@@ -1,7 +1,7 @@
 <br>
 <h1 class="bd-title" id="content">Lista de Clientes</h1>
 <div class="mt-3">
-    <a href="?controller=cliente&action=crear" type="button" class="btn btn-success"><i class="fas fa-plus-square"></i> Agregar Cliente</a>
+    <a href="?controller=cliente&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Cliente</a>
 </div>
 <br>
 <table class="display compact" id="listaClientes">
@@ -31,9 +31,9 @@
             <td><?php echo $row->email_cli ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=cliente&action=detalle&cod_cli=<?php echo $row->cod_cli; ?>" type="button" class="btn btn-primary" title="Editar" style="background-color: steelblue"><i class="fas fa-edit"></i></a>&nbsp;&nbsp;
+                    <a href="?controller=cliente&action=detalle&cod_cli=<?php echo $row->cod_cli; ?>" type="button" class="btn btn-primary" title="Ver detalle" style="margin-right: 7px"><i class="fas fa-eye"></i></a>
                     <a href="javascript:void(0)" onclick="eliminarCliente('<?php echo $row->cod_cli ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-                    <a href="?controller=cliente&action=movimiento&cod_cli=<?php echo $row->cod_cli; ?>" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>
+<!--                    <a href="?controller=cliente&action=movimiento&cod_cli=--><?php //echo $row->cod_cli; ?><!--" type="button" class="btn btn-warning"><i class="fas fa-book"  title="Ver Movimientos"></i></a>-->
                 </div>
             </td>
         </tr>

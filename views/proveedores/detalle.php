@@ -1,82 +1,72 @@
-<div class="card mt-5">
-    <div class="card-header">
-        <h4><strong><?php echo $proveedor->nom_pro ?></strong></h4>
+<br>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h2 class="bd-title">Detalle Proveedor</h2>
     </div>
+    <div class="col-md-6 text-right" style="padding-top: 10px">
+        <a class="btn btn-warning" onclick="history.back()" ><i class="fas fa-angle-double-left"></i> Volver</a>&nbsp;&nbsp;<a href="./?controller=proveedor&action=editar&cod_pro=<?php echo $proveedor->cod_pro ?>" class="btn btn-primary"><i class="fas fa-edit"></i> Editar</a>&nbsp;&nbsp;<a href="./?controller=proveedor&action=movimiento&cod_pro=<?php echo $proveedor->cod_pro ?>" class="btn btn-primary"><i class="fas fa-book"></i> Movimiento</a>
+    </div>
+</div>
+
+<div class="row" style="background: #F8F8F8; border: 1px solid #ededef">
+    <div class="col-md-12 text-left" style="margin-bottom: 10px; margin-top: 10px; font-size: 20px">
+        <?php echo $proveedor->nom_pro ?>
+    </div>
+</div>
+
+<div class="card mt-5">
+
     <div class="card-body">
 
-        <form action="./?controller=proveedor&action=editar" method="post" id="crearPro" name="crearPro">
-            <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="cod_item">Código Proveedor <span style="color: red">(*)</span>:</label>
-                    <input class="form-control" type="text" id="cod_pro" name="cod_pro" value="<?php echo $proveedor->cod_pro ?>">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="nom_item">Nombre Proveedor<span style="color: red">(*)</span>:</label>
-                    <input class="form-control" type="text" id="nom_pro" name="nom_pro" required  value="<?php echo $proveedor->nom_pro ?>">
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br>
+                <table class="table table-responsive">
+                    <!--                    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>-->
+                    <tr>
+                        <th style="width: 50%"><p>Código</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->cod_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Nombre</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->nom_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Contacto Secundario</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->contacto_sec ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Dirección</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->dire_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Email</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->email_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Ciudad</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->ciudad_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Teléfono</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->tel_pro ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Teléfono Secundario</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->tel_sec ?></td>
+                    </tr>
+                    <tr>
+                        <th style="width: 50%"><p>Descripción</p></th>
+                        <td style="width: 50%"><?php echo $proveedor->desc_pro ?></td>
+                    </tr>
+                </table>
             </div>
 
-            <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="unid_item">Contacto Secundario:</label>
-                    <input class="form-control" type="text" id="contacto_sec" name="contacto_sec"  value="<?php echo $proveedor->contacto_sec ?>">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="precio_item">Dirección Principal:</label>
-                    <input class="form-control" type="text" id="dire_pro" name="dire_pro" value="<?php echo $proveedor->dire_pro ?>">
-                </div>
-            </div>
+        </div>
+        <div class="text-center mt-3">
+            <!--            <a class="btn btn-primary" onclick="history.back()" >Volver</a>-->
+        </div>
 
-            <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="exi_max">Correo Electrónico:</label>
-                    <input class="form-control" type="text" id="email_pro" name="email_pro" value="<?php echo $proveedor->email_pro ?>">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="existencia">Ciudad:</label>
-                    <input class="form-control" type="text" id="ciudad_pro" name="ciudad_pro" value="<?php echo $proveedor->ciudad_pro ?>">
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="exi_max">Teléfono Principal:</label>
-                    <input class="form-control" type="text" id="tel_pro" name="tel_pro" value="<?php echo $proveedor->tel_pro ?>">
-                </div>
-                <div class="col-md-6 form-group">
-                    <label class="form-label" for="tel_sec">Teléfono Secundario:</label>
-                    <input class="form-control" type="text" id="tel_sec" name="tel_sec" value="<?php echo $proveedor->tel_sec ?>">
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="form-group">
-                    <label class="form-label" for="desc_pro">Descripción:</label>
-                    <textarea class="form-control" name="desc_pro" id="desc_pro" rows="3"> <?php echo $proveedor->desc_pro ?></textarea>
-                </div>
-            </div>
-
-            <div class="text-center mt-3">
-                <input type="submit" id="btnAgregar" name="btnAgregar" class="btn btn-success" value="Guardar">
-                <a class="btn btn-danger" onclick="history.back()" >Cancelar</a>
-            </div>
-
-        </form>
     </div>
 
 </div>
-
-<script>
-    $(document).ready(function() {
-        $("#crearPro").validate({
-            messages : {
-                cod_item: {
-                    required: "Ingrese el Código"
-                },
-                nom_item: {
-                    required: "Ingrese el nombre del Proveedor"
-                }
-            }
-        });
-    });
-</script>

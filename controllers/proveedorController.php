@@ -56,7 +56,7 @@ class ProveedorController {
             redirect('./?controller=proveedor&action=lista');
         }
         $lastId = Proveedor::getProveedorLastId();
-        include_once "views/proveedores/detalle.php";
+        include_once "views/proveedores/editar.php";
 
     }
 
@@ -65,6 +65,12 @@ class ProveedorController {
         $infoProveedor = Proveedor::buscar($cod_pro);
         $movimientoProveedor = Proveedor::getMovimientoProveedor($cod_pro);
         include_once "views/proveedores/movimiento.php";
+    }
+
+    public function detalle(){
+        $cod_pro = $_GET['cod_pro'];
+        $proveedor = Proveedor::buscar($cod_pro);
+        include_once "./views/proveedores/detalle.php";
     }
 
     /*

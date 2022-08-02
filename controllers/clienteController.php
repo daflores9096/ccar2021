@@ -52,7 +52,7 @@ class ClienteController {
             redirect('./?controller=cliente&action=lista');
         }
         $lastId = Cliente::getClienteLastId();
-        include_once "views/clientes/detalle.php";
+        include_once "views/clientes/editar.php";
 
     }
 

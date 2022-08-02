@@ -31,9 +31,9 @@
             <td><?php echo $row->email_pro ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=proveedor&action=editar&cod_pro=<?php echo $row->cod_pro; ?>" type="button" class="btn btn-primary" title="Editar" style="margin-right: 7px"><i class="fas fa-edit"></i></a>
-                    <a href="javascript:void(0)" onclick="eliminarProveedor('<?php echo $row->cod_pro ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar" style="margin-right: 7px"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
-                    <a href="?controller=proveedor&action=movimiento&cod_pro=<?php echo $row->cod_pro; ?>" type="button" class="btn btn-warning"><i class="fas fa-book" title="Ver Movimientos"></i></a>
+                    <a href="?controller=proveedor&action=detalle&cod_pro=<?php echo $row->cod_pro; ?>" type="button" class="btn btn-primary" title="Ver Detalle" style="margin-right: 0px"><i class="fas fa-eye"></i></a>
+                    <a href="javascript:void(0)" onclick="eliminarProveedor('<?php echo $row->cod_pro ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+<!--                    <a href="?controller=proveedor&action=movimiento&cod_pro=--><?php //echo $row->cod_pro; ?><!--" type="button" class="btn btn-warning"><i class="fas fa-book" title="Ver Movimientos"></i></a>-->
                 </div>
             </td>
         </tr>
