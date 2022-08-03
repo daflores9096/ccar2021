@@ -21,7 +21,7 @@ class Compra {
 
         $listaCompras = [];
         $conexion = BD::crearInstancia();
-        $sql = $conexion->query("SELECT * FROM compra ORDER BY cod_fac DESC");
+        $sql = $conexion->query("SELECT * FROM compra ORDER BY fecha_fac DESC");
 
         foreach ($sql->fetchAll() as $compra){
             $listaCompras[] = new Compra($compra['cod_fac'],$compra['fecha_fac'],$compra['cod_pro'],$compra['nom_pro'],$compra['total_fac']);

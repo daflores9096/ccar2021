@@ -2,9 +2,9 @@
 //var_dump($_REQUEST);
 if (isset($_REQUEST['ed']) && $_REQUEST['ed'] == 1){
     $btnEdit = $_REQUEST['ed'];
-    $titulo = "EDITAR COMPRA";
+    $titulo = "Editar Compra";
 } else {
-    $titulo = "CREAR NUEVA COMPRA";
+    $titulo = "Crear Nueva Compra";
 }
 
 if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1){

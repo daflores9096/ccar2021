@@ -64,6 +64,41 @@ class Producto {
         $sql = $conexion->prepare("UPDATE item SET nom_item=?, unid_item=?, precio_item=?, caja_item=?, exi_max=?, existencia=?, exi_min=?, deta_item=? WHERE cod_item=?");
         $sql->execute(array($producto, $unidad, $precio, $caja, $exi_max, $existencia, $exi_min, $detalle, $codigo));
     }
+
+    public static function imprimir($tipo){
+
+        $listaProductos = [];
+        $conexion = BD::crearInstancia();
+
+        if (!empty($tipo)){
+
+            switch ($tipo){
+                case "existencia":
+                    $sql = $conexion->query("SELECT * FROM item ORDER BY cod_item ASC");
+                    break;
+                case "precios":
+                    $sql = $conexion->query("SELECT * FROM item ORDER BY cod_item ASC");
+                    break;
+                case "disponibles":
+                    $sql = $conexion->query("SELECT * FROM item WHERE existencia>0 ORDER BY cod_item ASC");
+                    break;
+                case "sinprecio":
+                    $sql = $conexion->query("SELECT * FROM item WHERE existencia>0 ORDER BY cod_item ASC");
+                    break;
+            }
+        } else {
+            $sql = $conexion->query("SELECT * FROM item ORDER BY cod_item ASC");
+        }
+
+
+            //$sql = $conexion->query("SELECT * FROM item ORDER BY cod_item ASC");
+
+        foreach ($sql->fetchAll() as $producto){
+            $listaProductos[] = new Producto($producto['cod_item'],$producto['nom_item'],$producto['unid_item'],$producto['precio_item'],$producto['caja_item'],$producto['exi_max'],$producto['existencia'],$producto['exi_min'],$producto['deta_item']);
+        }
+
+        return $listaProductos;
+    }
 }
 
 ?>

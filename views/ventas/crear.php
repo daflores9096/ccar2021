@@ -3,9 +3,9 @@
 //var_dump($_REQUEST);
 if (isset($_REQUEST['ed']) && $_REQUEST['ed'] == 1){
     $btnEdit = $_REQUEST['ed'];
-    $titulo = "EDITAR VENTA";
+    $titulo = "Editar Venta";
 } else {
-    $titulo = "CREAR NUEVA VENTA";
+    $titulo = "Crear Nueva Venta";
 }
 
 if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1){

@@ -1,9 +1,14 @@
 <br>
-<h1 class="bd-title" id="content">Lista Inventarios</h1>
-<div class="mt-3">
-    <a href="?controller=inventarios&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Inventario</a>
+<div class="row">
+    <div class="col-md-6 text-left" style="padding-bottom: 5px">
+        <h1 class="bd-title">Lista Inventarios</h1>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 20px">
+        <a href="?controller=inventarios&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Inventario</a>
+    </div>
 </div>
 <br>
+
 <table class="display compact" id="listaInventarios">
     <thead>
     <tr>

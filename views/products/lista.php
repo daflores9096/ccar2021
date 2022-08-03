@@ -1,19 +1,38 @@
 <br>
-<h1 class="bd-title" id="content">Lista de Productos</h1>
-<div class="mt-3">
-    <a href="?controller=products&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Producto</a>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h1 class="bd-title">Lista de Productos</h1>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 20px">
+        <a href="?controller=products&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Producto</a>
+        <div class="dropdown" style="width: 105px; float: right; padding-left: 3px">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <i class="fas fa-print"></i> Imprimir
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="./?controller=products&action=imprimir&tipo=existencia" target="_blank">Lista Existencia</a></li>
+                <li><a href="./?controller=products&action=imprimir&tipo=precios" target="_blank">Lista Precios</a></li>
+                <li><a href="./?controller=products&action=imprimir&tipo=disponibles" target="_blank">Lista Disponibles</a></li>
+                <li><a href="./?controller=products&action=imprimir&tipo=sinprecio" target="_blank">Lista Sin Precio</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
 </div>
 <br>
 <table class="display compact" id="listaProductos">
     <thead>
     <tr>
-        <th scope="col">#</th>
-        <th scope="col">Codigo</th>
-        <th scope="col">Producto</th>
-        <th scope="col">Unidad</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Existencia</th>
-        <th scope="col">Acciones</th>
+        <th>#</th>
+        <th>Codigo</th>
+        <th>Producto</th>
+        <th>Unidad</th>
+        <th>Precio</th>
+        <th>Existencia</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -47,6 +66,7 @@
     $(document).ready(function() {
         $('#listaProductos').DataTable({
             stateSave: true,
+            order: [[2, 'asc']],
             stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",

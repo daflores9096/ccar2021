@@ -70,4 +70,14 @@ class ProductsController {
         include_once "./views/products/detalle.php";
     }
 
+    public function imprimir(){
+        if (isset($_REQUEST['tipo'])){
+            $productos = Producto::imprimir($_REQUEST['tipo']);
+        } else {
+            $productos = Producto::imprimir("existencia");
+        }
+
+        include_once "views/products/imprimir.php";
+    }
+
 }

@@ -1,9 +1,14 @@
 <br>
-<h1 class="bd-title" id="content">Lista de Clientes</h1>
-<div class="mt-3">
-    <a href="?controller=cliente&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Cliente</a>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h1 class="bd-title">Lista de Clientes</h1>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 20px">
+        <a href="?controller=cliente&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Cliente</a>
+    </div>
 </div>
 <br>
+
 <table class="display compact" id="listaClientes">
     <thead>
     <tr>

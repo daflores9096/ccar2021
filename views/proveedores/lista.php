@@ -1,9 +1,14 @@
 <br>
-<h1 class="bd-title" id="content">Lista de Proveedores</h1>
-<div class="mt-3">
-    <a href="?controller=proveedor&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Proveedor</a>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h1 class="bd-title">Lista de Proveedores</h1>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 20px">
+        <a href="?controller=proveedor&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Proveedor</a>
+    </div>
 </div>
 <br>
+
 <table class="display compact" id="listaProveedores">
     <thead>
     <tr>
@@ -48,6 +53,7 @@
     $(document).ready(function() {
         $('#listaProveedores').DataTable({
             stateSave: true,
+            order: [[2, 'asc']],
             stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",

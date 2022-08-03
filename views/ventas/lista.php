@@ -1,9 +1,14 @@
 <br>
-<h1 class="bd-title" id="content">Lista de Ventas</h1>
-<div class="mt-3">
-    <a href="?controller=ventas&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Venta</a>
+<div class="row">
+    <div class="col-md-6 text-left">
+        <h1 class="bd-title">Lista de Ventas</h1>
+    </div>
+    <div class="col-md-6 text-right" style="padding-top: 20px">
+        <a href="?controller=ventas&action=crear" type="button" class="btn btn-primary"><i class="fas fa-plus-square"></i> Agregar Venta</a>
+    </div>
 </div>
 <br>
+
 <table class="display compact" id="listaVentas">
     <thead>
     <tr>
@@ -45,6 +50,7 @@
     $(document).ready(function() {
         $('#listaVentas').DataTable({
             stateSave: true,
+            order: [[1, 'desc']],
             stripeClasses:[],
             "language": {
                 "emptyTable": "No hay registros que mostrar",
