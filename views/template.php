@@ -97,8 +97,6 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="./">Inicio</a></li>
-<!--                <li><a href="#">About</a></li>-->
-<!--                <li><a href="#">Contact</a></li>-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventarios <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -120,6 +118,19 @@
                         <li><a href="./?controller=cliente&action=lista">Clientes</a></li>
                     </ul>
                 </li>
+                <?php
+                if ($_SESSION['access'] == 1){
+                ?>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacute;n<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="./?controller=usuario&action=lista">Usuarios</a></li>
+                        </ul>
+                    </li>
+                <?php
+                }
+                ?>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 <!--                <li><a href="../navbar/">Default</a></li>-->
@@ -133,6 +144,9 @@
 </nav>
 
 <div class="container">
+    <br>
+    <br>
+    <?php var_dump($_SESSION); ?>
     <div class="row">
         <div class="col-12">
         <?php
