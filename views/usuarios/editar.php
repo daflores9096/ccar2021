@@ -23,7 +23,7 @@
             <div class="row mt-3">
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="unid_item">Clave:</label>
-                    <input class="form-control" type="text" id="usuario_clave" name="usuario_clave" value="<?php echo $usuario->usuario_clave ?>">
+                    <input class="form-control" type="password" id="usuario_clave" name="usuario_clave" value="<?php echo $usuario->usuario_clave ?>">
                 </div>
                 <div class="col-md-6 form-group">
                     <label class="form-label" for="precio_item">Email:</label>

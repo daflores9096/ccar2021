@@ -14,12 +14,12 @@ class UsuarioController {
 
     public function crear(){
         if ($_POST){
-            $usuario_id = $_POST['usuario_id'];
-            $usuario_nombre = $_POST['usuario_nombre'];
-            $usuario_clave = md5($_POST['usuario_clave']);
-            $usuario_email = $_POST['usuario_email'];
-            $usuario_freg = $_POST['usuario_freg'];
-            $nivel_acceso = $_POST['nivel_acceso'];
+            $usuario_id = trim($_POST['usuario_id']);
+            $usuario_nombre = trim($_POST['usuario_nombre']);
+            $usuario_clave = md5(trim($_POST['usuario_clave']));
+            $usuario_email = trim($_POST['usuario_email']);
+            $usuario_freg = trim($_POST['usuario_freg']);
+            $nivel_acceso = trim($_POST['nivel_acceso']);
 
             Usuario::crear($usuario_id, $usuario_nombre, $usuario_clave, $usuario_email, $usuario_freg, $nivel_acceso);
             redirect('./?controller=usuario&action=lista');
@@ -39,12 +39,12 @@ class UsuarioController {
         $usuario_id = $_REQUEST['usuario_id'];
         $usuario = Usuario::buscar($usuario_id);
         if ($_POST){
-            $usuario_id = $_POST['usuario_id'];
-            $usuario_nombre = $_POST['usuario_nombre'];
-            $usuario_clave = $_POST['usuario_clave'];
-            $usuario_email = $_POST['usuario_email'];
-            $usuario_freg = $_POST['usuario_freg'];
-            $nivel_acceso = $_POST['nivel_acceso'];
+            $usuario_id = trim($_POST['usuario_id']);
+            $usuario_nombre = trim($_POST['usuario_nombre']);
+            $usuario_clave = md5(trim($_POST['usuario_clave']));
+            $usuario_email = trim($_POST['usuario_email']);
+            $usuario_freg = trim($_POST['usuario_freg']);
+            $nivel_acceso = trim($_POST['nivel_acceso']);
 
             Usuario::editar($usuario_id, $usuario_nombre, $usuario_clave, $usuario_email, $usuario_freg, $nivel_acceso);
             redirect('./?controller=usuario&action=lista');

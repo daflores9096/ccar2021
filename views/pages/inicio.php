@@ -1,21 +1,43 @@
-<br><br>
+<br>
 <div class="jumbotron">
-    <h1 class="display-4">Control de Inventarios</h1>
-    <p class="lead">Herramienta de Control de Productos, Compras, Ventas, Clientes y Proveedores.</p>
+    <h2 class="display-4">Sistema de Control</h2>
     <hr class="my-4">
     <?php
     //var_dump($_SESSION);
     ?>
 
-    <ul>
-        <li><a href="./?controller=products&action=lista">Lista productos</a></li>
-        <li><a href="./?controller=inventarios&action=lista">Lista Inventarios</a></li>
-        <li><a href="./?controller=ventas&action=lista">Ventas</a></li>
-        <li><a href="./?controller=compras&action=lista">Compras</a></li>
-        <li><a href="./?controller=cliente&action=lista">Clientes</a></li>
-        <li><a href="./?controller=proveedor&action=lista">Proveedores</a></li>
-    </ul>
+    <table>
+        <tr>
+            <td><h3><i class="fas fa-boxes"></i> Productos</h3></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 34px"><a href="./?controller=products&action=lista">Lista de Productos</a> - <a href="./?controller=inventarios&action=lista">Inventario F&iacute;sico</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><h3><i class="fas fa-coins"></i> Movimientos</h3></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 33px"><a href="./?controller=compras&action=lista">Compras</a> - <a href="./?controller=ventas&action=lista">Ventas</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><h3><i class="fas fa-address-book"></i> Contactos</h3></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 33px"><a href="./?controller=proveedor&action=lista">Proveedores</a> - <a href="./?controller=cliente&action=lista">Clientes</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td><h3><i class="fas fa-tools"></i> Configuraci&oacute;n</h3></td>
+        </tr>
+        <tr>
+            <td style="padding-left: 34px"><a href="./?controller=usuario&action=lista">Usuarios</a></td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+    </table>
+
     <hr class="my-4">
-    <h4>ccar9096 - Ver. 2.0.1</h4>
-<!--    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>-->
+    <span style="float: right">ccar9096 - Ver. 2.0</span>
+
 </div>

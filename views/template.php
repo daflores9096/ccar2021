@@ -98,9 +98,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="./">Inicio</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Inventarios <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="./?controller=products&action=lista"> Lista de Artículos</a></li>
+                        <li><a href="./?controller=products&action=lista"> Lista de Productos</a></li>
                         <li><a href="./?controller=inventarios&action=lista"> Inventario Físico</a></li>
                     </ul>
                 </li>
@@ -112,7 +112,7 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="./?controller=proveedor&action=lista">Proveedores</a></li>
                         <li><a href="./?controller=cliente&action=lista">Clientes</a></li>
@@ -122,7 +122,7 @@
                 if ($_SESSION['access'] == 1){
                 ?>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacute;n<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuraci&oacute;n <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="./?controller=usuario&action=lista">Usuarios</a></li>
                         </ul>
@@ -146,7 +146,7 @@
 <div class="container">
     <br>
     <br>
-    <?php var_dump($_SESSION); ?>
+    <?php //var_dump($_SESSION); ?>
     <div class="row">
         <div class="col-12">
         <?php

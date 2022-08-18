@@ -13,12 +13,11 @@
     <thead>
     <tr>
 <!--        <th scope="col">#</th>-->
-        <th scope="col">Codigo</th>
-        <th scope="col">Nombre</th>
-        <th scope="col">Clave</th>
-        <th scope="col">Email</th>
-        <th scope="col">Fecha Registro</th>
-        <th scope="col">Acciones</th>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Fecha Registro</th>
+        <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -31,12 +30,12 @@
 <!--            <th>--><?php //echo $cont ?><!--</th>-->
             <td><?php echo $row->usuario_id ?></td>
             <td><?php echo $row->usuario_nombre ?></td>
-            <td><?php echo $row->usuario_clave ?></td>
+<!--            <td>--><?php //echo $row->usuario_clave ?><!--</td>-->
             <td><?php echo $row->usuario_email ?></td>
             <td><?php echo $row->usuario_freg ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=usuario&action=detalle&usuario_id=<?php echo $row->usuario_id; ?>" type="button" class="btn btn-primary" title="Ver Detalle" style="margin-right: 5px"><i class="fas fa-eye"></i></a>
+                    <a href="?controller=usuario&action=detalle&usuario_id=<?php echo $row->usuario_id; ?>" type="button" class="btn btn-primary" title="Ver Detalle" style="margin-right: 4px"><i class="fas fa-eye"></i></a>
                     <a href="javascript:void(0)" onclick="eliminarUsuario('<?php echo $row->usuario_id ?>'); return false;" type="button" class="btn btn-danger" title="Eliminar"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
                     <!--                    <a href="?controller=proveedor&action=movimiento&cod_pro=--><?php //echo $row->cod_pro; ?><!--" type="button" class="btn btn-warning"><i class="fas fa-book" title="Ver Movimientos"></i></a>-->
                 </div>

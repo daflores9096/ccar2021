@@ -36,7 +36,7 @@
             <td><?php echo $row->estado ?></td>
             <td>
                 <div class="btn-group" role="group" aria-label>
-                    <a href="?controller=inventarios&action=detalle&id_inv=<?php echo $row->id_inv; ?>" type="button" class="btn btn-primary" title="Detalle" style="margin-right: 7px"><i class="fas fa-eye"></i></a>
+                    <a href="?controller=inventarios&action=detalle&id_inv=<?php echo $row->id_inv; ?>" type="button" class="btn btn-primary" title="Detalle" style="margin-right: 4px"><i class="fas fa-eye"></i></a>
                     <?php
                     if ($row->estado != 'Aplicado'){
                     ?>

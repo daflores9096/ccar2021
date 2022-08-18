@@ -17,16 +17,6 @@
 </div>
 <br>
 <div class="card mt-5">
-<!--    <div class="card-header">-->
-<!--        <div class="row">-->
-<!--            <div class="col-md-6 text-left" >-->
-<!--                <h4><strong>Movimiento: --><?php //echo '['.$producto->codigo.'] '.$producto->producto; ?><!-- </strong></h4>-->
-<!--            </div>-->
-<!--            <div class="col-md-6 text-right">-->
-<!--                <a href="./?controller=movimientos&action=imprimir&cod_prod=--><?php //echo $producto->codigo ?><!--" target="_blank" class="btn btn-primary" style="background-color: steelblue; float: right"><i class="fas fa-print"></i> Imprimir Movimiento</a>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
     <div class="card-body">
         <table class="display compact" id="listaMovimientos">
             <thead>

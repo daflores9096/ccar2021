@@ -14,15 +14,15 @@ class ProveedorController {
 
     public function crear(){
         if ($_POST){
-            $cod_pro = $_POST['cod_pro'];
-            $nom_pro = $_POST['nom_pro'];
-            $contacto_sec = $_POST['contacto_sec'];
-            $dire_pro = $_POST['dire_pro'];
-            $ciudad_pro = $_POST['ciudad_pro'];
-            $tel_pro = $_POST['tel_pro'];
-            $tel_sec = $_POST['tel_sec'];
-            $email_pro = $_POST['email_pro'];
-            $desc_pro = $_POST['desc_pro'];
+            $cod_pro = trim($_POST['cod_pro']);
+            $nom_pro = trim($_POST['nom_pro']);
+            $contacto_sec = trim($_POST['contacto_sec']);
+            $dire_pro = trim($_POST['dire_pro']);
+            $ciudad_pro = trim($_POST['ciudad_pro']);
+            $tel_pro = trim($_POST['tel_pro']);
+            $tel_sec = trim($_POST['tel_sec']);
+            $email_pro = trim($_POST['email_pro']);
+            $desc_pro = trim($_POST['desc_pro']);
 
             Proveedor::crear($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro);
             redirect('./?controller=proveedor&action=lista');
@@ -42,15 +42,15 @@ class ProveedorController {
         $cod_pro = $_REQUEST['cod_pro'];
         $proveedor = Proveedor::buscar($cod_pro);
         if ($_POST){
-            $cod_pro = $_POST['cod_pro'];
-            $nom_pro = $_POST['nom_pro'];
-            $contacto_sec = $_POST['contacto_sec'];
-            $dire_pro = $_POST['dire_pro'];
-            $ciudad_pro = $_POST['ciudad_pro'];
-            $tel_pro = $_POST['tel_pro'];
-            $tel_sec = $_POST['tel_sec'];
-            $email_pro = $_POST['email_pro'];
-            $desc_pro = $_POST['desc_pro'];
+            $cod_pro = trim($_POST['cod_pro']);
+            $nom_pro = trim($_POST['nom_pro']);
+            $contacto_sec = trim($_POST['contacto_sec']);
+            $dire_pro = trim($_POST['dire_pro']);
+            $ciudad_pro = trim($_POST['ciudad_pro']);
+            $tel_pro = trim($_POST['tel_pro']);
+            $tel_sec = trim($_POST['tel_sec']);
+            $email_pro = trim($_POST['email_pro']);
+            $desc_pro = trim($_POST['desc_pro']);
 
             Proveedor::editar($cod_pro, $nom_pro, $contacto_sec, $dire_pro, $ciudad_pro, $tel_pro, $tel_sec, $email_pro, $desc_pro);
             redirect('./?controller=proveedor&action=lista');
@@ -72,34 +72,5 @@ class ProveedorController {
         $proveedor = Proveedor::buscar($cod_pro);
         include_once "./views/proveedores/detalle.php";
     }
-
-    /*
-    public function editar(){
-        $cod_fac = $_GET['cod_fac'];
-        $compra = Compra::buscar($cod_fac);
-        $compraList = Compra::getListaProductos($cod_fac);
-
-        if ($_POST){
-            $codfac = $_POST['cod_item'];
-            $fecha_fac = $_POST['fecha_fac'];
-            $cod_pro = $_POST['cod_pro'];
-            $nom_pro = $_POST['nom_pro'];
-            $total_fac = $_POST['total_fac'];
-
-            Compra::editar($cod_fac, $fecha_fac, $cod_pro, $nom_pro, $total_fac);
-            redirect('?controller=compras&action=lista');
-        }
-
-        include_once "./views/compras/editar.php";
-    }
-
-    public function detalle(){
-        $cod_fac = $_GET['cod_fac'];
-        $compra = Compra::buscar($cod_fac);
-        $compraList = Compra::getListaProductos($cod_fac);
-
-        include_once "./views/compras/detalle.php";
-    }
-*/
 
 }
