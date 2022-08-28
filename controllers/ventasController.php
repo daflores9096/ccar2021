@@ -17,6 +17,12 @@ class VentasController {
 
     public function borrar(){
         $cod_fac = $_GET['cod_fac'];
+        $ventaList = Venta::getListaProductos($cod_fac);
+
+        foreach ($ventaList as $row){
+            Producto::restaurarInventarioVenta($row['cod_item'], $row['cant_fac']);
+        }
+
         Venta::borrar($cod_fac);
         redirect('./?controller=ventas&action=lista');
     }
@@ -84,6 +90,11 @@ class VentasController {
                         for ($i=0; $i < $cont; $i++) {
                             //echo "<script>console.log('params: '+".$_POST['id'.$i]."+' precio_ven: '+".$_POST['precio_ven'.$i].")</script>";
                             VentaAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['bultos'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['importe_fac'.$i]);
+
+                            if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1) {
+                                Producto::actualizarInventarioVenta($_POST['cod_item' . $i], $_POST['cant_fac' . $i]);
+                            }
+
                         }
                     }
 

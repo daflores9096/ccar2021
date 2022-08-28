@@ -99,6 +99,30 @@ class Producto {
 
         return $listaProductos;
     }
+
+    public static function actualizarInventarioVenta ($cod_item, $cantidad){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET existencia=existencia - ? WHERE cod_item=?");
+        $sql->execute(array($cantidad, $cod_item));
+    }
+
+    public static function restaurarInventarioVenta ($cod_item, $cantidad){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET existencia=existencia + ? WHERE cod_item=?");
+        $sql->execute(array($cantidad, $cod_item));
+    }
+
+    public static function actualizarInventarioCompra ($cod_item, $cantidad){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET existencia=existencia + ? WHERE cod_item=?");
+        $sql->execute(array($cantidad, $cod_item));
+    }
+
+    public static function restaurarInventarioCompra ($cod_item, $cantidad){
+        $conexion = BD::crearInstancia();
+        $sql = $conexion->prepare("UPDATE item SET existencia=existencia - ? WHERE cod_item=?");
+        $sql->execute(array($cantidad, $cod_item));
+    }
 }
 
 ?>
