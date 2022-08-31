@@ -9,9 +9,7 @@ class MovimientosController {
 
     public function lista(){
         $cod_prod = $_GET['cod_prod'];
-
         $producto = Producto::buscar($cod_prod);
-
         $movimientos = Movimiento::listar($cod_prod);
         include_once "views/movimientos/lista.php";
     }

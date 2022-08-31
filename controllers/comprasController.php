@@ -4,6 +4,7 @@ include_once "models/compra.php";
 include_once "models/compraAux.php";
 include_once "models/proveedor.php";
 include_once "models/producto.php";
+include_once "models/movimiento.php";
 include_once "conexion.php";
 
 BD::crearInstancia();
@@ -17,7 +18,13 @@ class ComprasController {
 
     public function borrar(){
         $cod_fac = $_GET['cod_fac'];
+        $compraList = Compra::getListaProductos($cod_fac);
+
+        foreach ($compraList as $row){
+            Producto::restaurarInventariocompra($row['cod_item'], $row['cant_fac']);
+        }
         Compra::borrar($cod_fac);
+        Movimiento::borrar($cod_fac);
         redirect('./?controller=compras&action=lista');
     }
 
@@ -77,6 +84,11 @@ class ComprasController {
                         for ($i=0; $i < $cont; $i++) {
                             //echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
                             CompraAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['precio_ven'.$i], $_POST['importe_fac'.$i]);
+
+                            if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1) {
+                                Producto::actualizarInventarioCompra($_POST['cod_item' . $i], $_POST['cant_fac' . $i]);
+                                Movimiento::crear('C', $_REQUEST['cod_fac'], $_REQUEST['cod_item'.$i], date("Y-m-d"), $_REQUEST['cod_pro'], $_REQUEST['nom_pro'], $_REQUEST['cant_fac'.$i], 0 );
+                            }
                         }
                     }
 

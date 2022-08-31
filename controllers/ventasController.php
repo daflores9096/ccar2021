@@ -4,6 +4,7 @@ include_once "models/venta.php";
 include_once "models/ventaAux.php";
 include_once "models/cliente.php";
 include_once "models/producto.php";
+include_once "models/movimiento.php";
 include_once "conexion.php";
 
 BD::crearInstancia();
@@ -24,6 +25,7 @@ class VentasController {
         }
 
         Venta::borrar($cod_fac);
+        Movimiento::borrar($cod_fac);
         redirect('./?controller=ventas&action=lista');
     }
 
@@ -93,6 +95,7 @@ class VentasController {
 
                             if (isset($_REQUEST['terminar']) && $_REQUEST['terminar'] == 1) {
                                 Producto::actualizarInventarioVenta($_POST['cod_item' . $i], $_POST['cant_fac' . $i]);
+                                Movimiento::crear('V', $_REQUEST['cod_fac'], $_REQUEST['cod_item'.$i], date("Y-m-d"), $_REQUEST['cod_cli'], $_REQUEST['nom_cli'], 0, $_REQUEST['cant_fac'.$i] );
                             }
 
                         }

@@ -13,7 +13,6 @@ class Movimiento {
 
     public function __construct($id_mov, $tipo_mov, $cod_mov, $cod_item, $fecha_mov, $cod_cli_pro, $nom_cli_pro, $entrada, $salida){
 
-        $this->id_mov = $id_mov;
         $this->tipo_mov = $tipo_mov;
         $this->cod_mov = $cod_mov;
         $this->cod_item = $cod_item;
@@ -26,7 +25,6 @@ class Movimiento {
     }
 
     public static function listar($codigo){
-
         $listaMovimientos = [];
         $conexion = BD::crearInstancia();
         $sql = $conexion->query("SELECT * FROM movimiento WHERE cod_item='".$codigo."' ORDER BY fecha_mov DESC");
@@ -38,11 +36,10 @@ class Movimiento {
         return $listaMovimientos;
     }
 
-    public static function crear($id_mov, $tipo_mov, $cod_mov, $cod_item, $fecha_mov, $cod_cli_pro, $nom_cli_pro, $entrada, $salida){
-
+    public static function crear($tipo_mov, $cod_mov, $cod_item, $fecha_mov, $cod_cli_pro, $nom_cli_pro, $entrada, $salida){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("INSERT INTO movimiento (id_mov, tipo_mov, cod_mov, cod_item, fecha_mov, cod_cli_pro, nom_cli_pro, entrada, salida) VALUES (?,?,?,?,?,?,?,?,?)");
-        $sql->execute(array($id_mov, $tipo_mov, $cod_mov, $cod_item, $fecha_mov, $cod_cli_pro, $nom_cli_pro, $entrada, $salida));
+        $sql = $conexion->prepare("INSERT INTO movimiento (tipo_mov, cod_mov, cod_item, fecha_mov, cod_cli_pro, nom_cli_pro, entrada, salida) VALUES (?,?,?,?,?,?,?,?)");
+        $sql->execute(array($tipo_mov, $cod_mov, $cod_item, $fecha_mov, $cod_cli_pro, $nom_cli_pro, $entrada, $salida));
     }
 
     public static function getNombreProducto($codigo) {
@@ -52,13 +49,14 @@ class Movimiento {
         $producto = $sql->fetch();
         return new Producto($producto['cod_item'],$producto['nom_item'],$producto['unid_item'],$producto['precio_item'], $producto['caja_item'],$producto['exi_max'],$producto['existencia'],$producto['exi_min'],$producto['deta_item']);
     }
-/*
+
     public static function borrar($codigo){
         $conexion = BD::crearInstancia();
-        $sql = $conexion->prepare("DELETE FROM item WHERE cod_item=?");
+        $sql = $conexion->prepare("DELETE FROM movimiento WHERE cod_mov=?");
         $sql->execute(array($codigo));
     }
 
+    /*
     public static function buscar($codigo){
         $conexion = BD::crearInstancia();
         $sql = $conexion->prepare("SELECT * FROM item WHERE cod_item=?");
