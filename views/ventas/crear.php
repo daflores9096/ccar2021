@@ -55,9 +55,6 @@ if (!isset($venta->fecha_fac)){
     </div>
     <br>
     <div class="card mt-5">
-<!--        <div class="card-header">-->
-<!--            <h4><strong>--><?php //echo $titulo; ?><!--</strong></h4>-->
-<!--        </div>-->
         <div class="card-body">
 
             <form action="" method="post" id="crearVenta" name="crearVenta">
@@ -147,7 +144,6 @@ if (!isset($venta->fecha_fac)){
                         <table class="table">
                             <thead class="table-light">
                             <tr>
-                                <!--                        <th>ID</th>-->
                                 <th>Codigo</th>
                                 <th>Artículo</th>
                                 <th class="text-right" style="width: 20px">C. Caja</th>
@@ -195,7 +191,7 @@ if (!isset($venta->fecha_fac)){
                                 <td colspan="2">&nbsp;</td>
                                 <td class="text-left"><strong>Total Compra: </strong></td>
                                 <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_venta; ?>"></td>
-                                <input type="hidden" id="edit" name="edit" value="1">
+                                <input type="hidden" id="edit" name="edit" value="0">
                                 <input type="hidden" id="terminar" name="terminar" value="0">
                             </tr>
                             </tfoot>

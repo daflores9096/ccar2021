@@ -41,7 +41,7 @@
     $cont = 1;
     foreach ($productos as $row){//$productos viene de productController
     ?>
-    <tr>
+    <tr <?php if ($row->existencia <= $row->exi_min){ ?>style="color: red"<?php } ?> >
         <th><?php echo $cont ?></th>
         <td><?php echo $row->codigo ?></td>
         <td><?php echo $row->producto ?></td>

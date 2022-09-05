@@ -47,9 +47,6 @@ if (!isset($compra->fecha_fac)){
     </div>
     <br>
 <div class="card mt-5">
-<!--    <div class="card-header">-->
-<!--        <h4><strong>AGREGAR NUEVA COMPRA</strong></h4>-->
-<!--    </div>-->
     <div class="card-body">
 
         <form action="" method="post" id="crearCompra" name="crearCompra">
@@ -168,7 +165,7 @@ if (!isset($compra->fecha_fac)){
                     <tr>
                         <td class="text-left" colspan="5"><strong>Total Compra: </strong></td>
                         <td class="text-right"><input class="form-control" type="text" id="total_fac" name="total_fac" value="<?php echo $total_compra; ?>" readonly></td>
-                        <input type="hidden" id="edit" name="edit" value="1">
+                        <input type="hidden" id="edit" name="edit" value="0">
                         <input type="hidden" id="terminar" name="terminar" value="0">
                     </tr>
                     </tfoot>
@@ -286,8 +283,6 @@ if (!isset($compra->fecha_fac)){
 
                     case "aceptar":
                         this.location.href = './?controller=compras&action=borrarItem&id='+id+'&cod_fac='+cod_fac+'&total_compra='+total_compra;
-                        //sendData('./?controller=compras&action=borrarItem',{id:id});
-                        //sendData('./?controller=compras&action=crear', {cod_fac: cod_fac, cod_pro: cod_pro, nom_pro: ''+nom_pro+'', fecha_fac: ''+fecha_fac+'' });
                         break;
 
                     default:

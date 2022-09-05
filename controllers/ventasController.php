@@ -29,6 +29,14 @@ class VentasController {
         redirect('./?controller=ventas&action=lista');
     }
 
+    public function resetVenta($cod_fac){
+        $movimientoList = Movimiento::buscar($cod_fac);
+
+        foreach ($movimientoList as $row){
+            Producto::restaurarInventarioVenta($row->cod_item, $row->salida);
+        }
+    }
+
     public function crear(){
 
         $clienteList = Cliente::listar();
@@ -89,6 +97,13 @@ class VentasController {
 
                     if ($cont > 0){
                         //echo "<script>console.log('contador: '+".$cont.")</script>";
+
+                        if (isset($_REQUEST['terminar']) == 1 && isset($_REQUEST['ed']) == 1){
+                            //reset venta
+                            $this->resetVenta($_REQUEST['cod_fac']);
+                            Movimiento::borrar($_REQUEST['cod_fac']);
+                        }
+
                         for ($i=0; $i < $cont; $i++) {
                             //echo "<script>console.log('params: '+".$_POST['id'.$i]."+' precio_ven: '+".$_POST['precio_ven'.$i].")</script>";
                             VentaAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['bultos'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['importe_fac'.$i]);
@@ -123,7 +138,7 @@ class VentasController {
         $total_venta = $_REQUEST['total_venta'];
         Venta::borrarItem($id, $cod_fac, $tot_bul, $total_venta);
         //echo "borrando item: ".$id." - cod_fac: ".$cod_fac;
-        redirect('./?controller=ventas&action=crear&cod_fac='.$cod_fac);
+        redirect('./?controller=ventas&action=crear&cod_fac='.$cod_fac.'&ed=1');
     }
 
     public function editar(){

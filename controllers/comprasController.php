@@ -21,11 +21,20 @@ class ComprasController {
         $compraList = Compra::getListaProductos($cod_fac);
 
         foreach ($compraList as $row){
-            Producto::restaurarInventariocompra($row['cod_item'], $row['cant_fac']);
+            Producto::restaurarInventarioCompra($row['cod_item'], $row['cant_fac']);
         }
         Compra::borrar($cod_fac);
         Movimiento::borrar($cod_fac);
         redirect('./?controller=compras&action=lista');
+    }
+
+    public function resetCompra($cod_fac){
+        $movimientoList = Movimiento::buscar($cod_fac);
+        //var_dump($movimientoList);
+        //exit();
+        foreach ($movimientoList as $row){
+            Producto::restaurarInventarioCompra($row->cod_item, $row->entrada);
+        }
     }
 
     public function crear(){
@@ -80,7 +89,13 @@ class ComprasController {
                     $cont = $_REQUEST['cont'];
 
                     if ($cont > 0){
-                        echo "<script>console.log('contador_: '+".$cont.")</script>";
+                        //echo "<script>console.log('contador_: '+".$cont.")</script>";
+                        if (isset($_REQUEST['terminar']) == 1 && isset($_REQUEST['ed']) == 1){
+                            //reset venta
+                            $this->resetCompra($_REQUEST['cod_fac']);
+                            Movimiento::borrar($_REQUEST['cod_fac']);
+                        }
+
                         for ($i=0; $i < $cont; $i++) {
                             //echo "<script>console.log('params: '+".$_POST['id'.$i].")</script>";
                             CompraAux::editar($_POST['id'.$i], $cod_fac, $_POST['cod_item'.$i], $_POST['cant_fac'.$i], $_POST['precio_uni'.$i], $_POST['precio_ven'.$i], $_POST['importe_fac'.$i]);
@@ -113,11 +128,8 @@ class ComprasController {
         $id = $_REQUEST['id'];
         $cod_fac = $_REQUEST['cod_fac'];
         $total_compra = $_REQUEST['total_compra'];
-
         Compra::borrarItem($id, $cod_fac, $total_compra);
-        //redirect('./?controller=compras&action=lista');
-        //echo "Item ".$id." borrado !!!";
-        redirect('./?controller=compras&action=crear&cod_fac='.$cod_fac);
+        redirect('./?controller=compras&action=crear&cod_fac='.$cod_fac.'&ed=1');
     }
 
     public function editar(){
